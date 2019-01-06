@@ -1,0 +1,16 @@
+match_id,team_id,cross_line,auton_ci_switch,auton_ci_scale,auton_cube_count,cube_count,cube_switch,cube_scale,cube_vault,fouls,tech_fouls,endgame_action,helping_robot,comments
+60,3547,True,False,False,1,5,1,4,0,0,0,0,False,
+61,910,False,False,False,1,0,0,0,0,0,0,1,False,
+62,6861,False,True,False,1,7,3,0,0,0,0,1,False,
+63,6852,False,False,False,1,6,0,3,3,0,0,1,False,
+64,5498,True,False,False,1,6,0,6,0,0,0,1,False,
+65,6618,True,False,False,1,10,1,0,9,0,0,0,False,
+66,3604,False,True,False,1,7,5,2,0,0,0,0,False,
+67,5567,True,False,False,1,10,6,0,3,0,0,1,False,
+68,5530,False,False,False,1,3,0,1,1,0,0,1,False,
+69,470,False,False,False,1,8,1,5,0,0,0,1,False,
+70,6861,True,True,False,1,4,0,2,2,0,0,1,False,Was fighting other robots
+71,7147,False,False,False,1,0,1,0,0,0,0,1,False,played defence
+72,6538,True,False,False,0,11,2,0,9,0,0,1,False,Good vault boi
+73,470,True,False,False,1,7,0,6,0,0,0,1,False,Almost got scale in Auton
+74,6081,True,True,False,1,6,0,0,5,0,0,1,False,"May of gotten more, mostly was watching our team"

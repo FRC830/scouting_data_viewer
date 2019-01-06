@@ -1,0 +1,403 @@
+Timestamp,Team Number,Match Number,Crosses the auto line (auto-run),Switch capabilities,Scale capabilities,Number of cubes in auton,Number of Cubes on Own Switch,Number of Cubes on Scale,Number of Cubes in Exchange,Climb,Played Good Defense,Extra Notes,Number of Cubes on Opponent's Switch
+3/17/2018 10:42,66,71,Yes,From center,No,1,0,1,6,Parked,,,0
+3/16/2018 11:28,66,3,No,No,No,0,1,0,6,No,No,,0
+3/16/2018 16:00,66,27,Yes,Same side,Yes,0,0,4,0,Parked,No,,0
+3/16/2018 18:51,66,46,Yes,No,Yes,1,0,4,0,Parked,No,Put on scale when they should've put on switch,1
+3/17/2018 9:36,66,61,Yes,No,Yes,0,2,3,0,Failed to climb,No,,0
+3/16/2018 12:23,66,9,No,Same side,No,0,0,4,0,No,No,Bad mechanism,0
+3/16/2018 17:07,66,34,Yes,No,No,0,0,4,0,Parked,No,Autos not seen,0
+3/16/2018 20:14,66,58,Yes,Same side,No,1,1,2,0,Parked,No,,0
+3/16/2018 15:00,66,20,Yes,No,No,0,0,0,0,No,Yes,,0
+3/16/2018 19:10,66,49,Yes,No,Intended but failed,0,0,2,0,Parked,No,Grabber stopped half way through,0
+3/16/2018 14:29,66,17,Yes,No,Failed,0,0,2,0,Parked,No,,2
+3/16/2018 17:14,453,35,Yes,No,No,0,0,0,9,No,No,Very efficient exchange bot,2
+3/17/2018 10:09,453,66,Yes,No,No,0,1,0,9,No,No,,0
+3/16/2018 19:44,453,54,Yes,No,No,0,0,0,8,Yes,Yes,,0
+3/17/2018 9:40,453,62,Yes,No,No,0,2,0,8,No,No,Didn’t move for half of game after auton,0
+3/16/2018 16:32,453,30,Yes,No,No,0,4,0,3,Parked,Yes,,0
+3/16/2018 18:04,453,40,No,No,No,0,1,0,3,Parked,No,None,0
+3/16/2018 11:12,453,2,Yes,Same side,No,0,0,0,0,Parked,No,,3
+3/16/2018 19:10,453,49,No,No,No,0,2,0,0,No,No,bad. they should feel bad,2
+3/16/2018 15:54,454,26,Yes,No,No,0,1,0,10,Parked,No,,0
+3/16/2018 11:28,470,3,Yes,No,Yes,1,0,4,3,Parked,No,Good scale capacity,0
+3/16/2018 15:07,470,21,No,No,No,0,1,1,3,No,No,,0
+3/17/2018 9:48,470,62,Yes,No,Yes,1,2,3,0,No,No,,1
+3/17/2018 10:29,470,69,Yes,No,No,0,1,5,0,Parked,No,,0
+3/16/2018 18:19,470,42,Yes,Same side,No,1,0,4,0,No,No,Knocked cube off own scale,0
+3/16/2018 17:35,470,37,Yes,Same side,No,1,1,3,0,Parked,No,Robot was good,3
+3/16/2018 12:12,470,8,No,No,No,0,0,2,0,Parked,No,Many failed attempts on the scale,3
+3/16/2018 16:42,470,31,Yes,No,No,1,2,1,0,No,Yes,,0
+3/16/2018 18:57,470,47,No,No,No,0,0,0,0,No,No,No movement ,0
+3/16/2018 19:52,470,55,Yes,Can do scale so probably di switch,"Missed, but yes can do scale",0,0,5,0,Parked,No,,0
+3/16/2018 13:05,470,14,Yes,No,Almost but no,0,0,6,0,No,No,,0
+3/16/2018 16:59,830,33,Yes,No,Yes,0,0,0,9,Parked,No,,0
+3/16/2018 15:17,830,22,No,Same side,Yes,1,1,0,4,Parked,No,,0
+3/16/2018 20:16,830,58,No,"Can do it, but didn’t.","Can do it, but didn’t",0,0,2,4,Parked,No,,0
+3/16/2018 11:45,830,5,No,No,No,0,1,0,3,Parked,No,Auton basically did a donut and knocked down the pile of cubes,0
+3/16/2018 12:13,830,8,Yes,No,No,0,1,0,3,Parked,Yes,Good mech but they need more driver practice,0
+3/16/2018 14:43,830,18,Yes,No,No,0,0,0,3,No,No,"Almost tipped, cube elevator system broken",0
+3/16/2018 19:04,830,48,Yes,Same side,No,2,2,0,3,Parked,No,,2
+3/17/2018 9:49,830,63,No,No,No,0,0,2,0,Parked,Yes,"grabbing mechanizm not working properly
+no auton",3
+3/17/2018 10:09,830,66,Yes,No,No,0,1,0,0,Parked,Yes,,2
+3/16/2018 13:05,910,14,No,No,No,0,1,0,4,Parked,No,,0
+3/16/2018 19:31,910,52,Yes,From center,No,1,1,2,2,No,No,,0
+3/16/2018 17:13,910,35,Yes,Same side,Yes,1,1,4,0,Parked,No,,0
+3/16/2018 18:27,910,43,Yes,From center,No,1,0,4,0,Got lifted by 5066,No,Better than 3322 at moving cubes,0
+3/16/2018 15:34,910,24,Yes,From center,No,1,0,3,0,No,No,pretty dank robot,0
+3/17/2018 10:15,910,67,Yes,No,No,0,1,3,0,No,No,,5
+3/16/2018 12:33,910,10,Yes,Tried and dropped,No,0,0,2,0,No,Yes,"Defense was just preventing other team from moving.
+Stopped moving after certain time
+Unreliable scale placer-- too complicated and overshoots",0
+3/16/2018 20:07,910,57,Yes,From center,No,1,0,2,0,"Tried to park, too late",Yes,,3
+3/16/2018 16:43,910,31,Yes,From center,No,0,1,1,0,No,No,,0
+3/16/2018 11:36,910,4,No,No,No,0,0,0,0,No,No,"Did nothing entire game, broken?",0
+3/17/2018 9:33,910,61,Yes,No,No,0,0,0,0,No,No,cube not released from robot,0
+3/16/2018 17:42,1023,38,No,From center,No,1,0,5,2,Parked,No,,0
+3/16/2018 12:40,1023,11,Yes,Same side,Yes,1,1,5,0,Yes,Yes,,0
+3/16/2018 20:22,1023,59,Yes,No,Yes,1,0,4,0,Parked,No,,0
+3/16/2018 19:52,1023,55,No,Placed in middle of switch,No,0,0,7,0,Yes,No,Mentor bot,0
+3/16/2018 19:16,1023,50,Yes,From center,No,1,0,6,0,Yes,No,Great robot and driver,0
+3/17/2018 10:23,1023,68,No,No,No,0,0,5,0,Parked,Yes,,0
+3/16/2018 14:43,1023,18,No,No,No,0,1,4,0,Yes,No,,0
+3/16/2018 15:34,1023,24,Yes,Same side,No,1,0,3,0,Yes,No,Driver looked lost when he constantly tried to put a cube on the scale that was too high,0
+3/16/2018 18:43,1023,45,Yes,From center,No,1,0,3,0,Yes,No,,0
+3/16/2018 11:14,1023,2,yes,Same side,Yes,1,4,5,0,No,Yes,,0
+3/16/2018 15:18,1052,22,No,No,No,0,0,0,0,No,No,No show,0
+3/16/2018 17:13,1502,35,No,No,No,0,0,0,3,No,No,,0
+3/16/2018 12:39,1502,11,No,Wasnt in the match,Wasnt in the match,0,0,0,0,Wasnt in the match,No,Wasnt in the match,0
+3/16/2018 18:58,1502,47,Yes,No,No,0,2,4,0,Yes,Yes,,2
+3/16/2018 14:52,1502,19,Yes,No,No,0,0,0,0,No,No,Broken,0
+3/16/2018 15:16,1502,22,No,No,No,0,0,0,0,No,No,Didn't show up...,0
+3/16/2018 16:49,1502,32,Yes,No,No,0,0,0,0,"Parked, No",No,seemed to be falling apart,0
+3/16/2018 18:37,1502,44,Yes,No,No,0,0,0,0,No,Yes,,9
+3/16/2018 19:44,1502,54,Yes,No,No,0,0,0,0,No,Yes,,0
+3/17/2018 10:36,1502,70,Yes,No,No,0,0,0,0,Attached but didn’t climb,Yes,,0
+3/17/2018 9:36,1502,61,No,unknown playing defender ,failed to climb,0,2,3,0,falure to climb in time,Yes,This team only played defense and climber,3
+3/17/2018 10:36,2832,70,Yes,No,No,0,0,1,2,Yes,Yes,Good robot,3
+3/16/2018 18:57,2832,47,Yes,Same side,Yes,1,2,4,0,Parked,No,,0
+3/16/2018 12:49,2832,12,Yes,Same side,Yes,0,0,3,0,Yes,No,,0
+3/16/2018 15:34,2832,24,Yes,Same side,Yes,0,0,3,0,Yes,Yes,Side climbed!,1
+3/16/2018 19:39,2832,53,Yes,From center,No,1,0,4,0,"Yes, Parked",No,Interesting climber,0
+3/17/2018 9:56,2832,64,Yes,From center,No,1,1,3,0,Yes,Yes,,0
+3/16/2018 11:44,2832,5,Yes,Same side,No,1,1,2,0,Parked,No,Arms slow at gathering cubes,0
+3/16/2018 17:27,2832,36,Yes,From center,No,1,0,1,0,"Parked, Fired climbing mechansim and missed",No,Overall I think this team has pretty good robot and pretty good strat,3
+3/16/2018 18:26,2832,43,Yes,In position,No,0,1,0,0,Yes,No,,2
+3/17/2018 9:26,3322,60,Yes,Same side,No,1,1,0,5,Yes,No,,0
+3/16/2018 11:04,3322,1,no,No,No,0,2,0,4,Yes,No,We're pretty bad,0
+3/16/2018 15:44,3322,25,Yes,No,No,0,0,0,4,Parked,No,,0
+3/16/2018 15:00,3322,20,Yes,No,No,0,0,0,3,Parked,No,,0
+3/16/2018 16:59,3322,33,No,Same side,Attemped and close twice,0,2,0,1,"Parked, Close to climbing, 3414? Got in the way",No,,0
+3/16/2018 12:12,3322,8,Yes,No,No,0,1,3,0,Parked,No,,0
+3/16/2018 17:34,3322,37,Yes,No,No,0,0,3,0,No,No,,0
+3/16/2018 18:26,3322,42,Yes,Failed,No,0,0,3,0,Parked,No,,0
+3/16/2018 19:24,3322,51,Yes,No,No,0,1,3,0,No,No,,0
+3/16/2018 19:45,3322,54,Yes,Same side,No,1,0,3,0,Parked,No,climber failed ,0
+3/17/2018 10:10,3322,66,Yes,No,No,0,3,3,0,Parked,Yes,,0
+3/17/2018 10:50,3322,72,Yes,No,No,0,0,2,0,Parked,Yes,Broke partway through,0
+3/16/2018 16:59,3414,33,Yes,No,No,0,0,2,3,No,No,,0
+3/16/2018 16:19,3414,29,Yes,No,No,0,0,3,2,No,No,Dropped cube twice.,0
+3/16/2018 11:14,3414,2,Yes,No,No,0,1,1,1,"Parked, Broken wings",No,Broken side lifting mechanism,0
+3/16/2018 15:00,3414,20,No,Same side,No,1,1,3,0,Yes,No,,0
+3/16/2018 12:33,3414,10,Yes,No,No,0,0,2,0,Parked,No,A cube got stuck in the robot,0
+3/16/2018 13:05,3414,14,Yes,Same side,No,0,1,2,0,No,No,,1
+3/16/2018 18:05,3414,40,Yes,No,No,0,0,2,0,Parked,No,They put all cubes on the wrong side of the scale.,0
+3/16/2018 19:03,3414,48,Yes,No,No,0,1,2,0,Parked,No,,0
+3/16/2018 20:22,3414,59,Yes,No,No,0,2,1,0,No,No,,0
+3/17/2018 10:29,3414,69,Yes,Same side,No,1,1,0,0,No,No,,0
+3/17/2018 10:22,3542,68,Yes,Same side,Yes,1,1,5,1,Yes,No,,0
+3/16/2018 17:42,3542,38,Yes,No,Yes,0,0,7,0,Parked,Yes,,0
+3/16/2018 11:04,3542,1,Yes,Same side,Yes,1,0,6,0,No,No,,0
+3/16/2018 16:41,3542,31,Yes,Same side,Yes,1,1,5,0,Yes,Yes,,0
+3/16/2018 16:41,3542,31,Yes,Same side,Yes,1,0,5,0,Yes,No,,0
+3/17/2018 10:02,3542,65,Yes,Same side,Yes,1,0,5,0,"Parked, No",No,,0
+3/16/2018 12:23,3542,9,Yes,In the middle,No,1,0,7,0,No,No,Basically won the whole game for their team,0
+3/16/2018 19:31,3542,52,Yes,No,No,0,0,7,0,Parked,No,,0
+3/16/2018 15:01,3542,20,Yes,Same side,No,1,0,3,0,No,No,Dropped 4 cubes.,0
+3/16/2018 20:07,3542,57,Yes,Same side,No,1,0,0,0,No,No,Lost comms ,0
+3/16/2018 16:42,3547,31,Yes,Same side,No,1,0,0,7,Parked,No,,0
+3/16/2018 16:42,3547,31,Yes,Same side,No,1,0,0,7,No,No,,0
+3/16/2018 18:12,3547,41,Yes,No,No,0,1,1,4,No,No,,0
+3/16/2018 20:07,3547,57,Yes,No,No,0,0,3,3,No,No,,0
+3/16/2018 11:44,3547,5,Yes,No,No,0,1,4,0,Parked,Yes,Reliable grabber and lift ,0
+3/16/2018 12:55,3547,13,Yes,Same side,No,1,0,4,0,Parked,No,,0
+3/17/2018 10:42,3547,71,Yes,Same side,No,1,0,4,0,No,Yes,,0
+3/17/2018 9:26,3547,60,Yes,No,No,1,1,3,0,Climbed but not 12 in,Yes,,0
+3/16/2018 14:19,3547,16,Yes,Same side,No,1,1,2,0,No,No,Slow,0
+3/16/2018 15:26,3604,23,No,From center,No,1,0,3,1,Yes,No,,3
+3/16/2018 19:16,3604,50,Yes,No,Yes,1,0,4,0,Yes,Yes,Good job to them,0
+3/16/2018 11:28,3604,3,Yes,Same side,Yes,1,0,1,0,Yes,Yes,,6
+3/16/2018 12:33,3604,10,Yes,Same side,Yes,0,0,0,0,Yes,Yes,Played defense whole time ,0
+3/16/2018 18:43,3604,45,Yes,Same side,No,1,0,6,0,Yes,No,,0
+3/16/2018 14:42,3604,18,No,From center,No,1,0,4,0,Yes,Yes,Great match,0
+3/16/2018 19:37,3604,53,Yes,No,No,0,0,4,0,Yes,Yes,,0
+3/16/2018 16:49,3604,32,Yes,Same side,No,1,0,3,0,Yes,No,,0
+3/16/2018 17:25,3604,36,Yes,Same side,No,1,0,2,0,Yes,No,,0
+3/17/2018 10:09,3604,66,Yes,Same side,No,1,3,1,0,Yes,No,,4
+3/17/2018 9:28,3604,60,Yes,From center,No,1,4,0,0,Yes,No,Focused on our teams switch,2
+3/16/2018 15:09,3641,21,Yes,No,Yes,1,0,4,2,Yes,Yes,Got focused,3
+3/16/2018 17:50,3641,39,Yes,Same side,No,1,0,3,2,No,No,,0
+3/16/2018 11:07,3641,1,Yes,From center,Yes,1,2,7,0,Parked,Yes,Quick bot,0
+3/16/2018 16:19,3641,29,Yes,Same side,Yes,1,2,7,0,Parked,Yes,"SUPER FAST, but a little unstable",0
+3/16/2018 12:06,3641,7,Yes,No,Yes,1,0,5,0,Parked,Yes,Quickly got cubes to scale,2
+3/16/2018 18:44,3641,45,Yes,No,Yes,1,0,3,0,Parked,No,Cube placing knowcked off a cube and placed+dropped twice ,0
+3/17/2018 9:39,3641,62,Yes,No,Yes,2,2,2,0,No,Yes,,5
+3/16/2018 20:22,3641,59,Yes,From center,No,1,0,8,0,Parked,No,,0
+3/16/2018 19:22,3641,51,Yes,Same side,No,1,1,7,0,Parked,Yes,Righted itself,0
+3/17/2018 10:42,3641,71,Yes,No,No,0,0,3,0,Yes,Yes,,2
+3/17/2018 10:23,3656,68,Yes,No,Yes,1,0,0,9,Yes,No,Side climb op,0
+3/16/2018 12:05,3656,7,Yes,Same side,No,1,1,0,7,Yes,No,,0
+3/16/2018 17:42,3656,37,Yes,From center,Unknown,1,2,2,5,Yes,No,Climber is awesome.  Very robust.  Climbs to side.,0
+3/16/2018 18:19,3656,42,Yes,No,No,0,1,2,1,Yes,No,Non-monopolizing climb,0
+3/17/2018 10:50,3656,72,Yes,From center,No,1,0,1,1,Yes,No,,4
+3/16/2018 12:40,3656,11,Yes,Same side,Yes,1,0,4,0,Yes,No,,0
+3/16/2018 19:03,3656,48,Yes,Same side,Yes,1,1,2,0,Yes,,,0
+3/16/2018 13:05,3656,14,No,No,No,0,0,8,0,Yes,Yes,"Side climber, was blocked in auton",0
+3/17/2018 10:02,3656,65,Yes,Same side,No,1,1,4,0,Yes,No,"Accomadating climb, got focused",0
+3/16/2018 20:15,3656,58,No,From center,No,1,1,2,0,Yes,Yes,,1
+3/16/2018 16:32,3656,30,No,No,No,0,0,0,0,Yes,Yes,Played defense whole game,0
+3/16/2018 17:00,3773,33,No,No,No,0,1,0,1,No,No,Prevented climbing for whole team,0
+3/16/2018 18:50,3773,46,No,No,No,0,3,0,1,Yes,No,,0
+3/16/2018 19:31,3773,52,No,No,No,0,0,0,1,Parked,No,Bad driving,0
+3/16/2018 12:55,3773,13,No,No,Yes,0,0,0,0,Parked,No,,0
+3/16/2018 14:52,3773,19,No,No,Yes,0,1,0,0,"Parked, No",No,"Almost tipped, disabled for 1/2 of it, super slow",0
+3/17/2018 9:48,3773,63,Yes,No,Tried,0,2,0,0,No,No,Meh,0
+3/16/2018 12:05,3773,7,No,No,No,0,1,0,0,Parked,No,Almost tipped over twice,0
+3/16/2018 15:26,3773,23,No,No,No,0,1,0,0,Yes,No,Trash with cubes,0
+3/16/2018 16:34,3773,30,No,No,No,0,1,0,0,No,No,,0
+3/16/2018 20:01,3773,56,No,No,No,0,0,0,0,Parked,Yes,"Played some defense, not super good but ok",0
+3/17/2018 10:09,3773,66,No,No,No,0,1,0,0,Parked,Yes,,0
+3/16/2018 17:42,4393,38,Yes,No,No,0,1,0,4,Parked,No,,0
+3/16/2018 19:37,4395,53,Yes,No,No,0,0,0,9,No,No,,0
+3/17/2018 9:33,4395,61,Yes,No,No,0,0,0,9,Parked,No,,0
+3/17/2018 10:15,4395,67,Yes,No,No,0,0,0,8,Parked,No,,0
+3/16/2018 18:57,4395,47,Yes,No,No,0,0,0,6,No,No,,0
+3/16/2018 12:48,4395,12,Yes,No,No,0,0,1,0,No,No,Smashed into opposite wall during auton,0
+3/16/2018 11:05,4395,1,yes,No,No,0,0,0,0,Parked,No,?? Don’t know didn’t do much,0
+3/16/2018 14:54,4395,19,Yes,No,No,0,0,0,0,Parked,No,The robot had a horrible auton and drive on a cube into multiple barriers... also unprofessional drivers,0
+3/16/2018 18:12,4395,41,Yes,No,No,0,0,0,0,Parked,Yes,Didn’t pick up any cubes. Inflatable wheels + very fast= very unstable,0
+3/17/2018 9:56,4568,64,Yes,No,No,0,1,0,5,Parked,No,,0
+3/17/2018 10:50,4568,72,Yes,No,No,0,1,0,5,Parked,No,,0
+3/16/2018 14:52,4568,19,Yes,No,No,0,2,0,4,Parked,No,,0
+3/16/2018 19:32,4568,52,No,No,No,0,1,0,4,Parked,No,This robot has issues.  Do not pick!,1
+3/16/2018 12:05,4568,7,Yes,No,No,0,0,0,3,Parked,No,,0
+3/16/2018 15:17,4568,22,Yes,No,No,0,1,0,2,Parked,Yes,Good match,0
+3/16/2018 16:42,4568,31,Yes,No,No,0,0,0,2,Parked,No,Bad gripper,0
+3/16/2018 11:29,4568,3,Yes,No,No,0,0,0,1,No,No,"Grabber arms too inward, struggled to pick up cud, dropped the cube while turning",0
+3/16/2018 18:04,4568,40,Yes,No,No,0,0,0,1,No,No,,0
+3/16/2018 19:52,4568,55,Yes,No,No,0,0,0,1,Parked,No,,0
+3/16/2018 17:06,4568,34,No,No,No,0,0,0,0,No,No,Not present,0
+3/16/2018 12:32,5050,10,Yes,No,Yes,1,2,5,0,No,Yes,Good boi,0
+3/16/2018 17:25,5050,36,Yes,No,Yes,1,0,5,0,No,No,,0
+3/16/2018 11:55,5050,6,Yes,No,Yes,1,3,4,0,Yes,Yes,CLIMBER IS AMAZING IT SHOOTS UP AND GRABS IT: THIS ROBOT IS A TOTAL ******* BEAST,1
+3/16/2018 15:53,5050,26,Yes,Same side,Yes,1,3,3,0,Yes,Yes,"Climbed with 2 total on it, almost tipped, very smart cube placement",0
+3/16/2018 16:32,5050,30,Yes,No,Yes,1,1,2,0,Yes,Yes,Whoa climber,2
+3/16/2018 19:30,5050,52,Yes,Did scale,Yes,1,0,2,0,Yes,Yes,,2
+3/16/2018 20:23,5050,59,Yes,No,Tried but Bedford blocked by accident,0,0,3,0,Yes,No,,3
+3/16/2018 18:36,5050,44,Yes,No,No,0,0,6,0,Yes,No,,0
+3/17/2018 10:29,5050,69,Yes,From center,No,1,0,6,0,Yes,Yes,"Very quick, but drops a few cubes",3
+3/16/2018 14:31,5050,17,Yes,Same side,No,1,0,5,0,Yes,No,,0
+3/17/2018 9:56,5050,64,Yes,From center,No,1,2,4,0,Yes,No,,0
+3/16/2018 11:44,5066,5,Yes,No,No,0,0,0,3,Parked,No,,0
+3/16/2018 12:40,5066,11,Yes,No,No,0,0,0,3,Parked,No,,0
+3/16/2018 15:52,5066,26,Yes,No,No,0,0,0,3,Parked,No,,0
+3/16/2018 17:50,5066,39,Yes,No,No,0,0,0,2,Parked,No,,0
+3/17/2018 9:31,5066,61,No,Wasnt in the match,Wasnt in the match,0,0,0,0,Wasnt in the match,No,Wasnt in the match,0
+3/16/2018 14:19,5066,16,No,No,No,0,0,0,0,No,No,,0
+3/16/2018 18:50,5066,46,No,No,No,0,0,0,0,No,No,No movement,0
+3/16/2018 19:52,5066,55,No,No,No,0,0,0,0,No,No,Didn’t move at all,0
+3/17/2018 10:14,5066,67,No,No,No,0,0,0,0,No,No,Absent ,0
+3/17/2018 10:35,5067,70,Yes,No,No,0,1,0,5,No,No,,0
+3/16/2018 17:35,5067,37,Yes,No,No,0,2,0,4,Parked,No,,0
+3/16/2018 11:36,5067,4,Yes,Same side,No,0,0,0,3,Parked,No,,0
+3/16/2018 12:47,5067,12,No,No,No,0,0,0,3,Parked,No,,0
+3/16/2018 18:43,5067,45,Yes,No,No,0,2,0,3,No,No,,0
+3/16/2018 19:31,5067,53,Yes,No,No,0,3,0,2,No,No,,0
+3/16/2018 14:19,5067,16,Yes,No,No,0,0,0,1,Parked,No,Tried to lift but the entire grabber just fell back down,0
+3/16/2018 20:14,5067,58,Yes,Same side,Yes,1,1,3,0,Yes,No,,0
+3/17/2018 9:39,5067,62,Yes,No,Yes,1,3,1,0,Parked,,,0
+3/16/2018 15:17,5067,22,Yes,No,No,0,1,0,0,Parked,No,,1
+3/17/2018 9:48,5144,63,No,No,No,1,2,4,1,No,Yes,,0
+3/16/2018 18:04,5144,40,No,No,No,1,0,0,1,No,No,,0
+3/16/2018 19:22,5144,51,No,Same side,No,0,0,0,1,Parked,No,,0
+3/16/2018 20:07,5144,57,No,No,No,0,0,0,1,Parked,No,Didn't do much,0
+3/16/2018 15:43,5144,25,No,Wasnt in the match,Wasnt in the match,0,0,0,0,Wasnt in the match,No,Wasnt in the match,0
+3/16/2018 11:57,5144,6,No,No,No,0,0,0,0,No,No,"They didn’t compete, robot not on field.",0
+3/16/2018 14:17,5144,16,No,No,No,0,0,0,0,No,No,Was not enabled ,0
+3/17/2018 10:36,5144,70,No,No,No,0,0,0,0,Parked,No,Spent 30 sec to grab one cubed but failed and gave up,0
+3/16/2018 16:32,5144,30,No,.,.,0,0,0,0,.,No,was not part of this round,0
+3/17/2018 9:26,5216,60,Yes,No,No,0,2,1,7,Parked,Yes,,0
+3/16/2018 18:50,5216,46,Yes,Same side,Yes,0,0,3,3,Yes,No,Very good placement and stacking preciseness ,0
+3/16/2018 17:42,5216,38,Yes,No,No,0,0,3,1,Yes,Yes,,0
+3/16/2018 19:23,5216,51,Yes,Same side,No,1,2,3,1,Parked,No,,0
+3/17/2018 10:16,5216,67,Yes,No,Yes,0,2,2,0,Yes,No,,0
+3/16/2018 11:14,5216,2,yes,No,No,0,1,5,0,Parked,No,,0
+3/16/2018 12:47,5216,12,No,Same side,No,1,0,4,0,Yes,No,,0
+3/16/2018 15:18,5216,22,Yes,Same side,No,0,1,3,0,Parked,No,,0
+3/16/2018 20:02,5216,56,Yes,From center,No,1,0,3,0,Yes,Yes,,3
+3/16/2018 14:30,5216,17,Yes,Failed,No,0,1,2,0,Tried,No,,2
+3/16/2018 18:31,5448,42,Yes,No,No,0,1,0,3,Parked,No,,0
+3/16/2018 11:54,5448,6,No,No,No,0,0,0,0,No,No,Fell over in first 5 seconds,0
+3/16/2018 12:55,5448,13,Yes,No,No,0,1,0,0,No,No,Driver could not control it. Stuck in same place.,0
+3/16/2018 14:29,5448,17,Yes,No,No,0,1,0,0,No,No,,0
+3/16/2018 15:07,5448,21,Yes,No,No,1,0,0,0,Parked,No,had trouble getting cubes,0
+3/16/2018 15:59,5448,27,No,No,No,0,1,0,0,Parked,No,Hard to pick up cubes,0
+3/16/2018 17:13,5448,35,Yes,No,No,1,0,0,0,Parked,No,,0
+3/16/2018 19:38,5448,53,Yes,No,No,0,0,0,0,Parked,No,Just drove around: blocked own team a little bit on accident,0
+3/16/2018 19:39,5448,53,No,No,No,0,0,0,0,Parked,No,This robot wandered aimlessly around the field...,0
+3/17/2018 10:02,5448,64,Yes,No,No,0,0,0,0,Parked,Yes,No upper chassiss ,0
+3/17/2018 10:50,5448,72,Yes,No,No,0,0,0,0,"Parked, No",Yes,No upper chassis,0
+3/16/2018 15:01,5498,20,Yes,No,No,0,1,0,2,Parked,Yes,Wasn’t able to pick up cubes if they were on their side,1
+3/16/2018 11:13,5498,2,Yes,From center,Yes,0,3,0,1,No,No,There grabber wasn’t strong enough to hold a cube reliably ,0
+3/17/2018 9:56,5498,64,Yes,No,No,0,1,6,1,No,No,,0
+3/16/2018 16:50,5498,32,No,No,No,0,0,4,0,No,No,Buzzerbeater for scale,0
+3/17/2018 10:23,5498,68,Yes,Same side,No,1,0,3,0,No,No,,0
+3/16/2018 12:12,5498,8,No,No,No,0,1,2,0,No,Yes,,0
+3/16/2018 19:16,5498,50,Yes,No,No,0,1,2,0,Parked,No,Dropped multiple cubes for scale,0
+3/16/2018 17:50,5498,39,No,No,No,0,0,1,0,No,No,,0
+3/16/2018 18:26,5498,43,No,No,No,0,0,1,0,Climbed on another robot,No,,3
+3/16/2018 20:14,5498,58,Yes,No,No,0,2,1,0,No,No,,0
+3/16/2018 15:28,5498,23,Yes,No,No,0,0,0,0,No,No,Most likely disqualified due to throwing cube at ref in auton.,0
+3/16/2018 18:43,5530,45,Yes,No,No,0,1,0,6,No,Yes,,0
+3/16/2018 11:55,5530,6,Yes,Same side,Yes,0,0,0,4,Parked,No,,2
+3/16/2018 12:24,5530,9,No,No,No,0,0,1,3,No,No,Drive system is faulty,0
+3/16/2018 19:03,5530,48,Yes,No,No,0,0,2,2,No,No,,0
+3/17/2018 10:23,5530,68,Yes,No,No,0,0,1,1,No,No,,0
+3/16/2018 19:37,5530,53,Yes,No,No,0,1,3,0,Parked,No,,0
+3/17/2018 9:25,5530,60,No,From center,No,1,0,2,0,Parked,Yes,Had a bad game plan,2
+3/16/2018 15:52,5530,26,No,No,No,0,0,0,0,Parked,No,,1
+3/16/2018 17:13,5536,35,Yes,No,No,0,0,1,3,Parked,No,Bad pilot,0
+3/16/2018 14:52,5539,19,No,No,No,0,0,1,0,No,No,,1
+3/16/2018 19:16,5548,50,Yes,No,No,0,0,4,0,Parked,No,,0
+3/16/2018 19:16,5567,50,Yes,No,No,0,1,0,9,Yes,Yes,,0
+3/17/2018 9:39,5567,62,Yes,No,No,0,1,0,9,Parked,Yes,,0
+3/16/2018 17:25,5567,36,Yes,No,No,0,1,0,7,Parked,No,,0
+3/16/2018 12:55,5567,13,Yes,Same side,No,1,2,0,6,Yes,No,Bumper fell off,0
+3/16/2018 15:00,5567,20,No,Same side,No,1,0,0,6,Parked,No,,0
+3/16/2018 11:36,5567,4,Yes,No,No,0,0,0,4,No,No,Arms broken: stayed in top resting position,0
+3/16/2018 18:04,5567,40,Yes,Same side,No,1,1,0,3,Yes,Yes,"Can’t reach scale, but effective ",4
+3/16/2018 15:44,5567,25,Yes,No,No,0,0,0,2,Yes,No,,3
+3/17/2018 10:15,5567,67,Yes,No,No,1,3,0,2,No,Yes,,2
+3/16/2018 20:14,5567,59,Yes,From center,No,1,0,0,0,Parked,No,,6
+3/16/2018 12:23,5708,9,Yes,No,No,0,0,0,2,No,No,Grabber's pool noodle feel off mid-match,0
+3/16/2018 19:52,5708,55,Yes,No,No,0,1,0,1,Parked,No,,0
+3/16/2018 11:44,5708,5,Yes,No,No,0,1,0,0,Parked,No,Not good robot. Struggles with any form of cube manipulation ,0
+3/16/2018 13:04,5708,14,Yes,No,No,0,0,0,0,No,No,"It was not moving at all
+think it broke
+",0
+3/16/2018 16:50,5708,32,No,No,No,0,1,0,0,No,Yes,,1
+3/16/2018 17:25,5708,36,Yes,No,No,0,2,0,0,Parked,No,,0
+3/16/2018 18:35,5708,44,Yes,No,No,0,0,0,0,No,No,,0
+3/16/2018 19:11,5708,49,Yes,No,No,0,1,0,0,"Parked, No",No,,1
+3/17/2018 9:25,5708,60,Yes,No,No,0,0,0,0,Parked,Yes,,3
+3/17/2018 10:42,5708,71,Yes,No,No,0,0,0,0,Parked,No,,0
+3/17/2018 10:01,5852,65,Yes,No,No,0,1,0,0,Parked,Yes,,0
+3/16/2018 11:44,5853,5,No,Same side,No,0,0,0,0,No,No,,0
+3/16/2018 12:23,5853,9,No,Same side,No,0,0,0,0,Parked,No,,0
+3/16/2018 15:26,5853,23,No,No,No,0,1,0,0,Parked,No,Didn’t do much ,0
+3/16/2018 15:59,5853,27,No,No,No,0,0,0,0,Parked,No,,0
+3/16/2018 17:34,5853,37,No,No,No,0,0,0,0,No,Yes,Got disabled,0
+3/16/2018 18:04,5853,40,No,No,No,0,0,0,0,No,No,,0
+3/16/2018 19:21,5853,51,Yes,No,No,0,1,0,0,No,No,Broke and had to be disabled,0
+3/16/2018 20:00,5853,56,Yes,No,No,0,0,0,0,Parked,Yes,Crossed neutral zone in auton,0
+3/17/2018 10:29,5853,69,No,No,No,0,1,0,0,Parked,Yes,,0
+3/16/2018 20:01,6013,56,Yes,No,No,0,0,0,6,Parked,No,,0
+3/16/2018 18:26,6013,43,Yes,No,No,0,0,0,4,Parked,No,Not acurate,0
+3/16/2018 20:23,6013,59,No,No,No,0,1,0,4,"Can, but ran out of time.",No,Clumsy robot.  Jumps when turns.,0
+3/17/2018 10:10,6013,66,Yes,No,No,0,1,0,4,Attached but didn’t climb,Yes,,0
+3/16/2018 14:19,6013,16,Yes,No,No,0,3,0,1,No,No,,0
+3/16/2018 15:08,6013,21,Yes,No,No,0,0,1,0,Parked,No,,0
+3/16/2018 17:50,6013,39,Yes,No,No,0,0,1,0,"Parked, No",No,,0
+3/16/2018 11:38,6013,4,Yes,No,No,0,2,0,0,No,No,Tried to put cube on scale but extended unevenly and couldn't clear it. Attempted to climb with cube but failed to hook on.,0
+3/16/2018 12:24,6013,9,Yes,No,No,0,2,0,0,Parked,No,Pretty shaky and slow,1
+3/16/2018 18:57,6013,47,Yes,No,No,0,2,0,0,"Parked, hooked to the bar",Yes,,2
+3/17/2018 10:49,6013,72,Yes,No,No,0,1,0,0,Parked,Yes,,2
+3/16/2018 12:55,6029,13,No,No,No,0,0,0,5,No,No,,0
+3/16/2018 15:26,6029,23,No,No,No,0,0,0,5,No,No,,0
+3/16/2018 18:12,6029,41,Yes,No,No,0,0,0,5,No,No,,0
+3/16/2018 17:06,6029,34,Yes,No,No,0,0,0,4,No,No,,0
+3/16/2018 11:36,6029,4,No,No,No,0,0,0,3,No,No,Grabbed similar to p0 and didnt work. Only used as a cut out to push cubes,0
+3/16/2018 14:29,6029,17,Yes,No,No,0,0,0,3,No,No,Died 15 seconds before the end of the match.,0
+3/17/2018 9:48,6029,63,Yes,No,No,0,0,0,3,Parked,No,,0
+3/17/2018 10:23,6029,68,Yes,No,No,0,0,0,3,Parked,Yes,,0
+3/16/2018 19:10,6029,49,No,No,No,0,0,0,2,No,No,Poor grabber system,0
+3/16/2018 19:45,6029,54,Yes,No,No,0,0,0,1,Parked,No,Stopped working near beginning,0
+3/16/2018 18:19,6081,42,Yes,No,No,0,0,1,6,No,No,Strat is eh,0
+3/16/2018 19:10,6081,49,Yes,No,Yes,0,1,0,4,Parked,No,,0
+3/17/2018 10:29,6081,69,Yes,Same side,Yes,0,2,1,3,Parked,Yes,,0
+3/16/2018 17:50,6081,39,Yes,No,Yes,1,0,0,1,"Parked, No",No,,0
+3/16/2018 15:17,6081,22,Yes,No,No,0,0,3,1,Parked,No,,0
+3/16/2018 12:33,6081,10,Yes,Same side,Yes,1,3,6,0,No,No,fell down while putting cube on scale,0
+3/17/2018 10:02,6081,65,Yes,No,Yes,1,1,3,0,No,No,,0
+3/16/2018 19:45,6081,54,Yes,Same side,No,1,0,4,0,Parked,No,Some cubes that where meant to be on the scale fell off,0
+3/16/2018 11:04,6081,1,Yes,Same side,No,1,0,0,0,Parked,Yes,"Seemed to move slowly, almost fell over",0
+3/16/2018 14:29,6081,17,Yes,No,No,0,1,0,0,Parked,No,,0
+3/16/2018 16:49,6081,32,Yes,No,If they fix it,0,0,3,0,Parked,No,Bad pilot/strategy,0
+3/16/2018 12:41,6101,11,Yes,No,No,0,0,0,7,Parked,No,The grabber broke after 5 cubes in the exchange,0
+3/16/2018 11:05,6101,1,Yes,No,No,0,0,0,4,Parked,No,Struggled with moving cubes from pile to exchange. Gripper stopped working but still managed to move cubes.,0
+3/16/2018 14:42,6101,18,Yes,No,No,0,0,0,4,Parked,No,,0
+3/17/2018 9:55,6101,64,Yes,Same side,Yes,1,1,1,3,"Parked, No",Yes,,0
+3/16/2018 19:09,6101,49,Yes,No,No,0,0,0,3,Parked,No,,0
+3/17/2018 10:29,6101,69,Yes,Same side,No,0,1,1,1,Parked,No,,0
+3/16/2018 17:05,6101,34,Yes,No,No,0,0,0,1,No,No,Broken mechanism,0
+3/16/2018 15:08,6101,21,Yes,No,No,0,0,0,0,Parked,No,They suck.,0
+3/16/2018 20:08,6101,57,Yes,No,No,0,0,0,0,Parked,No,Robot had issues during match.,0
+3/16/2018 15:26,6150,23,Yes,Same side,Yes,1,1,0,1,Parked,No,,1
+3/16/2018 12:05,6150,7,Yes,Same side,Yes,0,0,2,0,Yes,No,,0
+3/16/2018 14:18,6150,16,Yes,Same side,Yes,0,1,0,0,No,No,Super slow,0
+3/16/2018 20:07,6150,57,Yes,No,No,0,0,3,0,"Parked, tried to climb",No,,0
+3/16/2018 11:36,6150,4,Yes,No,No,0,0,2,0,Parked,No,Robot is quite slow,0
+3/16/2018 18:19,6150,42,Yes,No,No,0,0,2,0,Yes,Yes,,0
+3/17/2018 9:55,6150,63,Yes,No,No,0,0,2,0,Parked,No,,1
+3/17/2018 10:16,6150,67,Yes,No,No,0,1,2,0,Yes,Yes,,0
+3/16/2018 16:59,6150,33,No,No,No,0,0,1,0,Parked,No,,0
+3/16/2018 19:03,6150,48,Yes,No,No,0,0,0,0,"Parked, No",No,,3
+3/17/2018 10:49,6538,72,Yes,No,No,0,1,0,5,Yes,No,"Often dropped cubes
+Good exchange",0
+3/16/2018 16:19,6538,29,Yes,No,No,0,0,0,4,Parked,No,Pushed cubes only,0
+3/16/2018 17:13,6538,35,Yes,No,No,0,0,0,4,"Parked, No",No,Arms broken,0
+3/16/2018 18:36,6538,44,Yes,No,No,0,0,0,4,No,No,,0
+3/16/2018 19:23,6538,51,Yes,No,No,0,0,0,3,Parked,No,,0
+3/16/2018 12:55,6538,13,No,No,No,0,0,0,2,Parked,No,,0
+3/16/2018 11:28,6538,3,No,No,No,0,0,0,0,No,No,Broken: arms broken and can barely move,0
+3/16/2018 20:01,6538,56,Yes,No,No,0,0,0,0,No,No,"1 attempt on switch
+Doesn't seem to be able to pick up",0
+3/17/2018 9:40,6538,62,Yes,No,No,0,1,0,0,Parked,No,Really struggles with cubes. Can't really pick them up ,0
+3/16/2018 11:14,6618,2,Yes,No,No,0,2,0,9,Yes,No,Put cubes in exchange most of time,0
+3/16/2018 16:00,6618,27,Yes,No,No,0,1,0,9,Yes,No,,0
+3/16/2018 17:25,6618,36,Yes,No,No,0,2,0,9,"Parked, No",No,,0
+3/17/2018 10:42,6618,71,Yes,Same side,No,0,4,0,9,Yes,Yes,,0
+3/16/2018 12:13,6618,8,Yes,Placed out of field,No,0,1,0,8,No,No,Fast exchange/good pilot,0
+3/16/2018 14:52,6618,19,Yes,No,No,0,1,0,8,Yes,No,,0
+3/16/2018 19:03,6618,48,Yes,No,No,0,2,0,7,Yes,No,,0
+3/17/2018 10:01,6618,65,Yes,Opposite side,No,1,1,6,6,Yes,Yes,,0
+3/16/2018 20:01,6618,56,Yes,No,No,0,4,0,5,Tried to climb,Yes,Defense in fighting for own scale when needed,0
+3/16/2018 15:33,6618,24,Yes,No,No,0,0,0,1,No,No,Deactivated for accidentally cheating with exchange,0
+3/16/2018 19:51,6852,55,Yes,From center,No,1,0,0,9,Parked,No,,0
+3/16/2018 12:35,6852,10,No,No,No,0,3,0,7,Parked,No,Mostly just put cubes in the exchange.,0
+3/17/2018 10:36,6852,70,Yes,No,No,0,0,0,6,Parked,No,,0
+3/17/2018 9:48,6852,63,Yes,Collided with other robot preventing auton from working,No,0,3,0,3,No,No,,0
+3/16/2018 14:02,6852,15,No,Same side,No,2,2,0,1,Parked,No,,0
+3/16/2018 17:34,6852,37,No,No,No,0,0,0,0,Parked,No,,3
+3/16/2018 18:12,6852,41,Yes,From center,No,1,0,0,0,"Parked, No",Yes,,3
+3/16/2018 19:19,6853,42,No,N/A,Unknown,0,0,0,6,"Parked, No",No,Wonky driving.  Team seemed confused at end.,0
+3/16/2018 16:50,6861,32,No,From center,No,1,0,0,7,No,No,Great at the exchange ,0
+3/16/2018 13:05,6861,14,Yes,Same side,Yes,1,2,0,6,No,No,,0
+3/16/2018 18:50,6861,46,Yes,Same side,No,1,1,0,6,Parked,No,,0
+3/16/2018 17:43,6861,38,Yes,Same side,Yes,1,2,0,5,Parked,No,I don’t think it’s shooty system worked,0
+3/16/2018 15:08,6861,21,No,No,No,0,1,0,5,No,No,,0
+3/16/2018 18:12,6861,41,Yes,No,No,0,1,0,5,No,,,0
+3/16/2018 20:22,6861,59,Yes,From center,No,1,1,0,5,Parked,No,,0
+3/17/2018 10:35,6861,70,Yes,Same side,No,1,0,2,3,Parked,No,,0
+3/16/2018 12:12,6861,8,Yes,Same side,Yes,0,0,2,0,Parked,No,,0
+3/16/2018 11:28,6861,3,No,From center,No,1,2,0,0,No,No,Weird mechanism a little hard to suck up a cube,0
+3/17/2018 9:39,6861,62,Yes,Same side,No,1,0,0,0,No,No,,2
+3/16/2018 11:55,7147,6,No,No,No,0,0,0,0,"Parked, No",No,Bad design. Has one board and a drive train. Can hold on to cubes didn’t score any points.,0
+3/16/2018 12:44,7147,12,Yes,No,No,0,0,0,0,No,No,,0
+3/16/2018 16:40,7147,31,No,No,No,0,0,0,0,Parked,No,Absolute buns,0
+3/16/2018 18:19,7147,42,Yes,No,No,0,1,0,0,No,No,,0
+3/16/2018 18:51,7147,46,No,No,No,0,1,0,0,Parked,No,,0
+3/16/2018 19:44,7147,54,Yes,No,No,0,1,0,0,No,No,Wood Bot,0
+3/17/2018 9:33,7147,61,Yes,No,No,0,1,0,0,No,No,,0
+3/17/2018 10:42,7147,71,Yes,Same side,No,0,1,0,0,Parked,Yes,,0
+3/16/2018 14:43,7147,18,No,No,No,0,0,0,0,Parked,No,,0

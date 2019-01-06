@@ -1,0 +1,40 @@
+match_id,team_id,cross_line,auton_ci_switch,auton_ci_scale,auton_cube_count,cube_count,cube_switch,cube_scale,cube_vault,fouls,tech_fouls,endgame_action,helping_robot,comments
+16,6013,False,False,False,0,0,0,0,0,0,0,2,False,
+17,6029,True,False,False,0,4,0,0,3,0,0,2,False,
+18,6538,True,False,False,0,2,0,0,2,0,0,1,False,
+19,5530,True,False,False,0,3,1,1,0,0,0,2,False,"Tried to put a cube in the vault instead of parking, but the vault was full."
+20,66,False,False,False,0,0,0,0,0,0,0,2,False,"rainbow jerry
+one sus boi"
+21,6101,True,False,False,0,0,0,0,0,0,0,1,False,didn't seem to have a complete grabber
+22,1502,False,False,False,0,0,0,0,0,0,0,2,False,werent there
+23,6150,False,True,False,1,3,2,0,0,0,0,1,False,very mediocre
+24,910,True,True,False,0,4,0,3,0,0,0,2,False,"The robot didn't even try to enter the climbing station, though whether it was pre-arrranged or not is unknown."
+25,5144,True,True,False,0,6,4,0,1,0,0,0,False,"All four of the robot's deliveries, excluding those to vault, were to the enemy switch; and were sufficiently fast-paced that the enemy team was unable to controll their own switch for an extended period."
+26,5066,True,False,False,0,4,0,3,1,0,0,1,False,"1) All three robots climbed (5066 levitated)
+
+2) If their auton was based on a post-singularity AI, humanity is not nearly so doomed as previously suspected."
+27,6618,False,False,False,0,0,0,0,0,0,0,2,False,"I was unable to fully track the robot so these numbers may be slightly innacurate. However, the robot did cross the line and climb."
+28,5216,True,True,False,2,0,1,0,0,0,0,0,False,This robot clearly had difficulty possesing cubes.
+29,3641,False,True,False,0,12,1,9,0,0,0,1,False,"has a guitar for controls
+10/10 would recommend"
+30,3656,False,False,False,1,0,0,0,0,0,0,0,False,auton almost worked. Started slamming into other robots
+31,7147,True,False,False,1,0,0,0,0,0,0,2,False,Tote Bot
+32,6081,True,False,False,1,4,1,1,0,0,0,1,False,tried to put a cube in the switch in auton going around the switch the long way
+33,3773,False,False,False,0,0,0,0,0,0,0,2,False,tall totebot
+34,6029,True,False,False,0,4,0,0,4,0,0,2,False,Cannot score in switch or scale.
+38,1023,False,False,False,0,4,0,3,0,0,0,2,False,
+39,6013,True,False,False,0,2,0,1,0,0,0,1,False,
+40,453,False,True,False,0,6,2,0,4,0,0,1,False,
+60,5708,False,False,False,0,3,2,1,0,0,0,1,False,The robot stopped at several points and dropped its arm at others.
+61,66,True,True,False,0,7,2,2,2,0,0,1,False,
+62,6538,False,False,False,0,0,1,0,0,0,0,1,False,"This robot might have been able to climb, but had difficulty lineing up its hooks."
+63,470,False,False,True,0,5,2,3,0,0,0,2,False,
+64,5050,False,True,False,0,7,3,3,0,0,0,0,False,
+65,5448,False,False,False,0,0,0,0,0,0,0,2,False,
+66,3773,False,False,False,0,0,1,0,0,0,0,1,False,
+67,6150,True,False,False,1,4,2,2,0,0,0,0,False,
+70,1502,True,False,False,1,1,1,0,0,0,0,1,False,
+71,3547,True,True,False,0,4,0,4,0,0,0,2,False,This bot is slow but it can get cubes and put them into the scale 
+72,3656,True,True,False,0,5,4,1,0,0,0,0,False,"Dexter has a pretty good robot, and one thing to note about their climbing is that they can climb to the side, allowing another robot to also use the bar"
+73,2832,True,False,False,0,4,4,1,0,0,0,1,False,This team is pretty good at getting the switch
+74,1023,True,False,True,0,6,0,4,0,0,0,1,False,

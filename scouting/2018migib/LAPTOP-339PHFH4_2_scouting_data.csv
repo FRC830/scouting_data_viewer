@@ -1,0 +1,16 @@
+match_id,team_id,cross_line,auton_ci_switch,auton_ci_scale,auton_cube_count,cube_count,cube_switch,cube_scale,cube_vault,fouls,tech_fouls,endgame_action,helping_robot,comments
+51,280,False,False,False,0,0,0,0,0,0,0,2,False,
+51,7174,False,False,False,0,10,0,0,9,0,0,1,False,great for powwer ups
+61,6852,False,False,False,0,4,3,0,0,0,0,1,False,not sure if there were any fouls
+62,6528,True,False,False,0,1,0,0,0,0,0,1,False,Hydraulic based intake instead of flywheel...does not work very well but sometimes picks up a cube. Pretty ineffective.
+63,2676,True,False,False,0,1,0,0,0,0,0,2,False,"Very abrupt drive train that jerks around a lot. Cube intake in not a flywheel but hydraulic arms, not very effective. Also it will sometimes tip over."
+64,2620,True,False,False,0,3,1,2,0,0,0,2,False,"This is a pretty good robot and has the ability to climb or help another robot climb, but they did not do that in this match."
+65,5205,True,False,False,0,8,5,0,4,0,0,1,False,This robot is really good at intake and depositing in both vault and switch. This would be a beneficial robot if we already had a scale-bot on our alliance. Its also pretty fast
+66,5090,False,False,False,0,3,3,0,0,0,0,1,False,Robot is ok at getting cubes and putting them in switch but its sorta bad
+67,3536,True,False,False,0,3,0,2,0,0,0,0,False,We all know this is a good team
+68,3604,False,True,False,0,0,0,0,0,0,0,2,False,
+69,280,False,True,False,0,0,0,2,0,0,0,2,False,
+70,5225,True,False,False,0,0,0,0,0,0,0,2,False,Does absolutely nothing. It's a pancake drive train lmao
+71,4384,False,False,False,1,4,0,3,0,0,0,2,False,Wrong switch in auton (5 points OMEGALUL)
+72,815,False,False,False,0,0,0,0,0,0,0,2,False,Probably not running anymore
+73,2620,False,False,False,0,1,0,0,0,0,0,1,False,

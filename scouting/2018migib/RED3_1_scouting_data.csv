@@ -1,0 +1,44 @@
+match_id,team_id,cross_line,auton_ci_switch,auton_ci_scale,auton_cube_count,cube_count,cube_switch,cube_scale,cube_vault,fouls,tech_fouls,endgame_action,helping_robot,comments
+1,1188,True,False,False,1,0,0,0,0,0,1,2,False,Got stuck under a switch near the end of the round.
+2,4405,True,False,False,1,7,2,1,4,0,0,1,False,
+3,6591,False,False,False,0,2,0,0,3,0,0,2,False,
+4,5225,False,False,False,0,0,0,0,0,0,0,2,False,
+5,3604,False,True,False,0,8,2,3,4,0,0,1,False,
+6,7174,True,False,False,0,3,1,0,2,0,0,2,False,
+7,4384,True,False,False,0,8,0,0,8,0,0,1,False,"Did nothing but put cube in vault, I think climbing/hanging doesn't work"
+8,3875,False,True,False,0,6,4,0,0,0,0,1,False,
+9,830,False,False,False,0,0,0,0,0,0,0,0,False,
+10,4810,True,False,False,0,0,0,0,0,0,0,1,False,NOVICE LIKE DRIVING. NOT A FIRST CHOICE. FAULTY CONTRAPTION
+11,3655,False,False,False,0,2,0,0,0,0,0,1,False,
+28,4216,False,True,False,0,4,0,4,0,0,0,0,False,
+29,7225,False,True,False,0,8,3,0,5,0,0,1,False,
+30,5090,False,False,False,0,5,0,0,5,0,0,1,False,
+31,4405,False,False,False,0,6,1,4,1,0,0,2,False,"has climbing capabilities and is a reliable bot, almost tipped tho"
+32,6618,True,False,False,0,7,1,0,7,0,0,0,False,
+33,7174,True,False,False,0,6,0,0,5,0,0,1,False,
+34,5523,False,False,False,1,2,2,0,0,0,0,1,False,"
+stopped in middle of game? failed climb"
+35,4453,True,False,False,0,3,1,0,2,0,0,1,False,
+36,3655,True,False,False,0,3,0,1,0,0,0,1,False,
+37,5066,True,False,False,0,0,0,0,0,0,0,0,True,
+38,1528,True,False,False,0,0,0,0,0,0,0,1,False,stop it
+39,3604,True,False,False,0,4,2,2,0,0,0,0,False,
+40,2834,False,True,False,0,5,1,0,4,0,0,1,False,
+41,5523,True,False,False,0,0,4,0,0,0,0,1,False,can only get cube from exchange.
+51,5066,True,False,False,0,0,0,0,0,0,0,0,True,Had Platforms for the other robots to climb on
+52,6618,True,False,False,0,9,1,0,9,0,0,0,False,
+53,1023,False,False,False,0,0,0,0,0,0,0,1,False,
+54,4453,False,False,False,0,6,0,6,0,0,0,0,False,
+54,4453,False,False,False,0,3,2,0,0,0,0,1,False,
+64,6914,False,False,False,0,8,1,0,6,0,0,1,False,this robot is physically incapable of climbing
+65,6528,True,False,False,0,0,0,0,0,0,0,2,False,worse than our robot
+66,4327,True,False,False,0,3,1,1,0,3,2,1,False,this robot cannot place cubes onto the scale without fouling
+67,6852,True,False,False,0,0,0,0,0,0,0,1,False,broke down in front of the cube loader for most of the match
+68,6570,False,False,False,0,2,0,2,0,0,0,2,False,
+69,815,False,False,False,0,0,0,0,0,0,0,2,False,Robot was not there for some reason
+70,6618,False,False,False,0,9,1,0,9,0,0,0,False,
+71,1023,False,False,False,0,4,2,2,0,0,0,0,False,We all know this is a top team we dont have to worry about them...they are good at putting blocks on the scale 
+72,5263,True,False,False,0,4,0,0,4,0,0,1,False,This robot is an ok vault bot 
+73,6570,True,False,False,0,2,0,2,0,0,0,1,False,Almost tipped over   very high center of mass
+74,4453,True,False,False,0,0,0,0,0,0,0,1,False,"high center of mass, tried to hang but went back down when the match ended"
+75,5225,False,False,False,0,0,0,0,0,0,0,2,False,www.asktotebot.com 

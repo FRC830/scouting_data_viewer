@@ -1,0 +1,51 @@
+match_id,team_id,cross_line,auton_ci_switch,auton_ci_scale,auton_cube_count,cube_count,cube_switch,cube_scale,cube_vault,fouls,tech_fouls,endgame_action,helping_robot,comments
+16,5067,True,False,False,0,1,0,1,0,0,0,1,False,Not that good 
+17,66,True,False,False,0,3,2,2,0,0,1,1,False,"This bot is in the middle, not amazing, but not too bad. It can get cubes on both scale and switch"
+18,3604,False,True,False,0,4,0,3,0,0,0,0,False,
+19,6618,True,False,False,0,9,1,0,9,0,0,0,False,This robot is a very good vault bot that can also climb...not bad
+20,3414,True,False,False,0,2,0,3,0,0,0,1,False,Not a terrible robot. Pretty slow but it can do stuff
+21,6861,False,False,False,0,3,0,0,3,0,0,2,False,Not that good vault bot
+22,5216,False,False,False,0,3,0,2,0,0,0,1,False,"6081 got a foul
+5067 can;t pick up cubes
+this robot almost climbed"
+23,3604,True,True,False,0,8,4,3,0,0,0,0,False,Yup it's the Goon Squad. They are good
+24,6538,False,False,False,0,2,0,0,2,0,0,1,False,eh not that good 
+25,3322,True,False,False,0,3,3,0,0,0,0,1,False,
+26,5050,True,True,False,0,5,1,4,0,0,0,0,False,issa good bot
+27,66,True,False,False,0,4,1,4,0,0,0,1,False,eyjrjyhety
+28,3536,False,False,False,0,0,0,0,0,0,0,2,False,
+29,6029,True,False,False,0,0,0,0,0,0,0,2,False,Bot stopped moving at the beginning of the match
+30,453,False,False,False,0,8,2,0,6,0,0,1,False,This bot can pretty effectively get cubes in the vault and the switch
+31,3542,False,True,False,0,6,0,5,1,0,0,0,False,
+32,6861,True,False,False,0,7,0,0,7,0,0,2,False,Pretty good vault bot
+33,3322,False,False,False,0,6,1,0,3,0,0,1,False,
+34,5144,False,False,False,0,0,0,0,0,0,0,2,False,"This robot never moved LOL
+but 830's robot lookin sxy "
+35,123,False,False,False,0,0,0,0,0,0,0,2,False,no team 123 in the match i was told to scout for
+42,470,False,False,False,0,0,0,0,0,0,0,2,False,
+41,6861,False,False,False,0,0,0,0,0,0,0,2,False,
+42,470,True,False,False,1,0,0,7,0,0,0,1,False,
+43,910,False,False,True,1,0,0,4,0,0,0,0,False,
+44,1502,False,False,False,0,0,0,0,2,0,0,2,False,
+45,3641,False,False,False,0,0,0,3,0,0,0,1,False,
+46,5066,False,False,False,0,0,0,0,0,0,0,2,False,
+47,470,False,False,False,0,0,0,0,0,0,0,2,False,
+48,3414,True,False,False,0,0,0,1,1,0,0,1,False,
+56,5216,False,False,False,0,0,0,0,0,0,0,2,False,NOT GOOD
+56,5216,True,False,False,0,1,0,0,0,1,0,2,False,GARBAGE
+60,5530,False,True,False,0,4,2,1,0,0,0,2,False,
+61,5066,False,False,False,0,0,0,0,0,0,0,2,False,Had tech dificulties 
+62,453,False,False,False,0,7,0,0,7,0,0,2,False,
+63,3773,False,False,False,0,3,1,0,2,0,0,2,False,
+64,6101,False,False,False,0,0,0,1,0,0,0,1,False,
+65,3542,True,True,False,0,6,0,5,1,0,0,1,False,
+66,830,False,False,False,0,3,3,0,0,0,0,1,False,
+67,4395,False,False,False,0,9,0,0,9,0,0,2,False,
+68,3656,True,False,True,0,7,0,0,7,0,0,0,False,
+69,5853,False,False,False,0,0,1,0,0,0,0,1,False,
+70,6852,True,True,False,0,8,4,0,4,0,0,2,False,
+71,6618,False,False,False,0,5,0,0,5,0,0,0,False,
+72,3322,True,False,False,0,1,0,2,0,0,0,1,False,
+73,5530,True,False,False,0,2,0,3,0,0,0,2,False,
+74,830,True,False,False,0,7,1,0,6,0,0,1,False,
+75,3542,True,False,False,0,5,0,4,0,0,0,2,False,

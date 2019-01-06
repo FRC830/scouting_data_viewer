@@ -1,0 +1,60 @@
+match_id,team_id,cross_line,auton_ci_switch,auton_ci_scale,auton_cube_count,cube_count,cube_switch,cube_scale,cube_vault,fouls,tech_fouls,endgame_action,helping_robot,comments
+2,6618,True,False,False,0,0,0,0,9,0,0,0,False,
+3,1528,False,False,False,0,0,0,0,0,0,0,2,False,bad statrt. struggles to do basics.  non responsove to humn players. dropped cube instantly. kept going for cubes during endgame. oof
+4,4453,False,False,False,0,0,0,0,0,0,0,2,False,defensive bot
+5,280,True,False,False,0,0,0,0,0,0,0,2,False,after auton robot seemed out of shape.
+6,5090,False,False,False,0,0,0,0,0,0,0,2,False,
+7,2834,False,False,False,0,0,0,1,5,0,0,1,False,
+8,862,False,False,False,0,0,0,0,0,0,0,2,False,
+9,1023,False,False,False,0,0,0,0,0,0,0,2,False,
+10,4405,False,False,False,0,0,0,0,0,0,0,2,False,
+11,4216,False,False,False,0,0,0,0,0,0,0,2,False,
+12,6591,False,False,False,0,0,0,0,0,0,0,2,False,
+6,5090,False,False,False,0,0,0,0,0,0,0,2,False,
+7,2834,False,False,False,0,0,0,0,0,0,0,2,False,
+8,862,True,False,False,1,0,0,0,1,0,0,1,False,
+9,1023,True,False,False,1,1,4,1,0,0,0,2,False,
+10,4405,True,False,False,1,1,1,1,1,0,0,2,False,
+11,4216,False,False,False,0,0,0,0,0,0,0,2,False,
+12,6591,False,False,False,0,0,0,0,0,0,0,2,False,this team bot did close to nothing 
+13,862,True,False,False,0,6,0,4,0,0,0,2,False,reeeeaaalllyy good team
+14,5225,False,False,False,0,0,0,0,0,0,0,2,False,
+15,4810,False,False,False,0,0,0,0,0,0,0,2,False,
+15,4810,False,False,False,0,0,0,0,0,0,0,2,False,just no
+16,4405,True,False,False,0,4,1,2,0,0,0,1,False,ok
+17,6101,True,False,False,0,6,6,0,0,0,0,1,False,
+18,4453,True,True,False,1,0,0,0,0,0,0,1,False,meh:l
+19,6852,False,False,False,0,7,0,0,7,0,0,1,False,
+20,6591,True,False,False,0,3,0,0,0,0,0,2,False,first win FINNALLY
+24,5205,True,False,False,0,5,0,0,5,0,0,1,False,
+25,7174,True,False,False,0,5,0,0,5,0,0,1,False,
+26,5523,True,False,False,0,1,2,0,0,0,0,1,False,
+27,5205,False,False,False,0,3,2,0,1,0,0,2,False,
+28,6618,True,False,False,0,3,3,0,0,0,0,1,False,
+29,830,True,True,False,0,2,0,0,0,0,0,2,False,the best team in michigan
+34,2834,True,False,False,0,6,5,2,0,0,0,1,False,
+35,6852,False,False,False,0,3,3,0,0,0,0,1,False,rainbow water game
+36,1023,True,False,False,0,7,3,5,0,0,0,1,False,
+37,5090,True,False,False,0,0,0,0,9,0,0,1,False,"filled all of the vaults
+"
+38,815,False,False,False,0,3,4,0,0,0,0,2,False,
+48,1023,True,False,False,0,5,0,4,0,0,0,1,False,"stable build, unlikely to tip over - fast"
+51,5263,True,True,False,0,7,1,0,6,0,0,1,False,no scale capability
+52,830,True,False,False,0,10,1,1,9,0,0,2,False,much better
+60,815,False,False,False,0,2,0,1,2,0,0,1,False,
+61,5066,False,False,False,0,0,1,0,0,0,0,1,False,
+62,3536,False,True,False,0,4,0,4,0,1,0,0,False,
+63,3875,False,False,False,0,8,4,1,0,0,0,1,False,
+64,6029,False,False,False,0,0,0,0,5,0,0,2,False,
+65,7225,False,True,False,0,9,0,0,9,0,0,1,False,
+66,5523,False,False,False,0,0,3,0,0,0,0,1,False,
+67,2676,False,False,False,0,0,0,0,0,0,0,1,False,
+68,830,False,False,False,0,6,0,0,6,0,0,2,False,
+69,5263,False,True,False,0,2,5,0,0,0,0,1,False,
+70,2620,False,False,False,0,4,0,0,3,0,0,1,False,
+71,3604,False,False,False,0,9,4,2,0,0,0,0,False,
+72,6591,False,False,False,0,0,0,0,0,1,0,0,False,
+73,1188,False,False,False,0,7,2,3,0,0,0,2,False,
+74,7225,False,True,False,0,7,0,0,7,0,0,1,False,
+75,6852,False,True,False,0,0,4,0,0,0,0,2,False,
+76,2676,False,False,False,0,1,0,0,0,0,0,2,False,

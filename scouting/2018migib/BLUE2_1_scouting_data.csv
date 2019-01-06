@@ -1,0 +1,16 @@
+match_id,team_id,cross_line,auton_ci_switch,auton_ci_scale,auton_cube_count,cube_count,cube_switch,cube_scale,cube_vault,fouls,tech_fouls,endgame_action,helping_robot,comments
+45,2676,False,False,False,0,0,0,0,0,0,0,2,False,
+46,4453,False,False,False,0,0,0,0,0,0,0,2,False,DID NOT RECORD
+47,7225,False,False,False,0,0,0,0,0,0,0,2,False,DID NOT RECORD
+48,123,True,False,False,0,1,1,0,0,0,0,1,False,"Not very good, but this team sometimes does better "
+51,4327,True,False,False,0,2,0,0,0,0,0,2,False,has trouble picking up and keeping cubes
+60,830,True,False,False,1,3,0,3,0,0,0,2,False,"the best team in all the lands, a glorious team, full of spirit, memes, music, and other amazing things including stupid music. the best team in all of the world. even if they are sometimes not too great, theyre still amazing"
+61,2834,False,False,False,0,0,0,0,0,0,0,2,False,
+62,4327,False,True,False,1,2,1,0,0,0,0,2,False,
+63,1023,False,True,False,1,5,0,4,0,0,0,0,False,
+64,1528,True,True,False,1,1,1,0,0,0,0,2,False,rainbow jerry 
+65,5066,True,True,False,1,0,0,0,9,0,0,1,False,rainbow jerryrainbow jerry
+66,6591,True,True,False,1,4,1,0,6,0,0,1,False,rainbow jerry
+67,2834,True,False,False,1,4,0,3,0,0,0,0,False,rainbow jerry jerry
+68,123,False,True,False,1,4,0,4,0,0,0,1,False,
+69,1188,False,False,False,1,4,1,0,3,0,0,2,False,rainbow water game

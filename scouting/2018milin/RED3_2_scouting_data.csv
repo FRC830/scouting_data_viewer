@@ -1,0 +1,50 @@
+match_id,team_id,cross_line,auton_ci_switch,auton_ci_scale,auton_cube_count,cube_count,cube_switch,cube_scale,cube_vault,fouls,tech_fouls,endgame_action,helping_robot,comments
+16,3547,True,True,False,1,5,2,3,0,0,0,1,False,
+17,6081,True,False,False,1,2,2,0,0,0,0,1,False,Auton Almost put cube in scale but it fell out
+18,1023,False,False,False,1,6,1,3,0,0,0,0,False,
+19,3773,False,False,False,0,2,1,0,0,0,0,0,False,almost tiped over
+20,3322,True,False,False,1,3,0,0,4,0,0,1,False,
+21,3641,False,False,True,1,6,3,2,1,0,0,1,False,
+22,5067,False,False,False,0,3,2,0,0,0,0,2,False,
+23,5853,False,False,False,0,0,1,0,0,0,0,2,False,possibly the worse robot ive ever seen that can actually (maybe) do stuff
+24,6852,False,False,False,0,6,5,0,0,0,0,1,False,
+25,7147,False,False,False,0,2,0,0,0,0,0,1,False,"DO NOT GROUP WITH THIS BOT!
+THEY HAVE A CARDBOARD SLAB INSTEAD OF AN ARM
+VERY TRIPLE SUS
+SAD ROBOT"
+39,5066,True,False,False,0,2,0,0,2,0,0,1,False,
+40,4568,False,False,False,0,1,0,0,1,0,0,2,False,
+41,6618,True,False,False,0,5,5,0,0,0,0,1,False,Their signal light broke off.
+42,5448,True,False,False,0,0,0,0,0,0,0,1,False,
+43,2832,True,False,False,1,4,3,0,0,0,0,1,False,tried to hang on side of bar
+44,5708,True,False,False,1,3,0,0,3,0,0,1,False,stripehorse go moo
+45,5067,False,True,False,1,2,2,0,0,0,0,2,False,
+46,6861,True,False,False,0,6,0,0,6,0,0,1,False,
+47,6013,True,False,False,1,4,5,0,0,0,0,1,False,"Tried to hang, but its hook didn't go far enough. Put two cubes in opponent's switch."
+48,3656,False,False,False,0,1,2,1,0,0,0,0,False,
+49,6029,True,False,False,1,2,0,0,3,0,0,2,False,It could have parked if it tried harder.
+50,5498,True,False,False,1,4,1,3,0,0,0,2,False,
+51,5144,False,False,False,1,0,0,0,2,0,0,1,False,
+52,5050,True,False,True,1,6,3,3,0,0,0,0,False,
+53,5448,True,False,False,1,0,0,0,0,0,0,1,False,The fanciest totebot I've ever seen.
+54,7147,True,False,False,1,0,1,0,0,0,0,2,False,Just has a platform on top with a cube. No intake.
+55,4568,True,False,False,1,2,1,0,2,0,0,1,False,
+56,6538,True,False,False,1,0,0,0,0,0,0,2,False,Moved some cubes over to its side.
+57,6150,True,False,False,1,4,0,3,0,0,0,0,False,
+58,3656,False,False,False,1,1,0,2,0,0,0,0,False,
+60,3604,False,True,False,0,9,6,1,0,0,0,0,False,
+61,1502,True,False,False,0,0,0,0,0,0,0,1,False,
+62,3641,False,False,True,1,9,7,1,0,0,0,1,False,Two cubes is scale during auton
+63,830,False,False,False,0,5,2,2,0,0,0,2,False,
+64,2832,False,True,False,0,5,1,3,0,0,0,0,False,
+65,3656,False,True,False,0,5,2,3,0,0,0,0,False,
+66,453,True,False,False,0,9,0,0,9,0,0,2,False,
+67,5216,False,False,False,0,5,2,3,0,2,0,0,False,
+68,6029,True,False,False,0,4,0,0,5,0,0,2,False,
+69,6101,False,False,False,0,3,0,2,0,0,0,1,False,
+70,2832,True,False,False,0,4,3,1,2,0,0,0,False,
+71,3641,True,False,False,1,0,1,0,0,0,0,2,False,This is the table-bot. Need I say more?
+72,6013,True,False,False,0,3,3,0,0,0,0,1,False,Robot was really jenky. Also had difficulty accurately grabbing cubes.
+73,6029,True,False,False,0,4,0,0,4,0,0,1,False,This robot can't deliver to the switch or scale.
+74,3773,False,False,False,0,1,0,0,0,0,0,0,False,
+75,5144,False,False,False,0,0,0,0,0,0,0,2,False,This robot just didn't work.
