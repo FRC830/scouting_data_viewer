@@ -275,12 +275,73 @@ powerup_rankings = {'tech_fouls':0}
 POWER_UP = Game(powerup_cats, powerup_cats[:-2], None, powerup_process_scouting, powerup_rankings)
 
 #DEEP SPACE
-def deepspace_process_scouting(scouting):
-    pass
+def deepspace_process_match(match):
+    match = match.copy(),
+    return match
 
-deepspace_cats = ['source',
+def deepspace_process_scouting(scouting):
+    processed = process_scouting_by_match(scouting, deepspace_process_match)
+    return processed
+
+deepspace_cats = ['cross_line_from_l1',
+                  'cross_line_from_l2',
+                  'sandstorm_balls_in_cargo_ship',
+                  'sandstorm_balls_in_rocket_l1',
+                  'sandstorm_balls_in_rocket_l2',
+                  'sandstorm_balls_in_rocket_l3',
+                  'sandstorm_hatches_in_cargo_ship',
+                  'sandstorm_hatches_in_rocket_l1',
+                  'sandstorm_hatches_in_rocket_l2',
+                  'sandstorm_hatches_in_rocket_l3',
+                  'teleop_balls_in_cargo_ship',
+                  'teleop_balls_in_rocket_l1',
+                  'teleop_balls_in_rocket_l2',
+                  'teleop_balls_in_rocket_l3',
+                  'teleop_hatches_in_cargo_ship',
+                  'teleop_hatches_in_rocket_l1',
+                  'teleop_hatches_in_rocket_l2',
+                  'teleop_hatches_in_rocket_l3',
+                  'teleop_balls_dropped',
+                  'teleop_hatches_dropped',
+                  'teleop_pick_up_hatches',
+                  'endgame_ramp_l1',
+                  'endgame_ramp_l2',
+                  'endgame_ramp_l3',
+                  'endgame_helped_l2',
+                  'endgame_helped_l3',
+                  'fouls',
+                  'tech_fouls',
+                  'source',
                   'comments']
-deepspace_rankings = {}
+
+deepspace_rankings = {'cross_line_from_l1':3,
+                      'cross_line_from_l2':6,
+                      'sandstorm_balls_in_cargo_ship':3,
+                      'sandstorm_balls_in_rocket_l1':3,
+                      'sandstorm_balls_in_rocket_l2':3,
+                      'sandstorm_balls_in_rocket_l3':3,
+                      'sandstorm_hatches_in_cargo_ship':2,
+                      'sandstorm_hatches_in_rocket_l1':2,
+                      'sandstorm_hatches_in_rocket_l2':2,
+                      'sandstorm_hatches_in_rocket_l3':2,
+                      'teleop_balls_in_cargo_ship':3,
+                      'teleop_balls_in_rocket_l1':3,
+                      'teleop_balls_in_rocket_l2':3,
+                      'teleop_balls_in_rocket_l3':3,
+                      'teleop_hatches_in_cargo_ship':2,
+                      'teleop_hatches_in_rocket_l1':2,
+                      'teleop_hatches_in_rocket_l2':2,
+                      'teleop_hatches_in_rocket_l3':2,
+                      'teleop_balls_dropped':0,
+                      'teleop_hatches_dropped':0,
+                      'teleop_pick_up_hatches':0,
+                      'endgame_ramp_l1':3,
+                      'endgame_ramp_l2':6,
+                      'endgame_ramp_l3':12,
+                      'endgame_helped_l2':6,
+                      'endgame_helped_l3':12,
+                      'fouls':-3,
+                      'tech_fouls':-10}
 
 DEEP_SPACE = Game(deepspace_cats, deepspace_cats[:-2], None, deepspace_process_scouting, deepspace_rankings)
 
