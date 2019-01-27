@@ -529,49 +529,53 @@ class ZScoutFrame(tk.Frame):
                         'competition_frame':self.competition_frame,
                         'ranking_frame':self.ranking_frame,
                         'parent':self.parent}
-            print('self: ' + str(self))
+#            print('self: ' + str(self))
             make_gui_from_html_file('menu.html', root=self, namespace=namespace)
             #add_to_namespace(widgets) None are used
-            
-#            self.menubar = tk.Menu(self) #A menubar
-#            self.frame_select = tk.Menu(self.menubar, tearoff=0) #The menubar to choose the frames from
-#            self.frame_select.add_command(label='Scouting', command=get_go_to_frame(self.scouting_frame)) #Add the command to go to scouting
-#            self.frame_select.add_command(label='Teams', command=get_go_to_frame(self.teams_frame)) #Add the command to go to teams
-#            self.frame_select.add_command(label='Competition', command=get_go_to_frame(self.competition_frame)) #Add the command to go to compeitition
-#            self.frame_select.add_command(label='Ranking', command=get_go_to_frame(self.ranking_frame)) #Add the command to go to ranking
-#            self.menubar.add_cascade(label='Sections', menu=self.frame_select) #Add the frame select to the menubar
-#            self.parent.config(menu=self.menubar) #Add the menubar to the frame
         
         def setup_team_summary_frame():
             """Set up the team summary frame."""
             
-            self.scouting_frame = tk.Frame(self, relief=tk.RAISED, borderwidth=1) #The scouting frame
+            def get_config_func(canvas):
+                return lambda e: config_canvas(canvas)
+            
+            namespace = {#'config_canvas':config_canvas,
+                         'get_config_func':get_config_func,
+                         'show_summary':show_summary}
+#            print('config_canvas: ' + str(config_canvas))
+            widgets, n = make_gui_from_html_file('team_summary_frame.html', root=self, namespace=namespace)
+            add_to_namespace(widgets)
             self.active_frame = self.scouting_frame #This frame is the frame to start from
             
-            self.team_summary_y_scroll = tk.Scrollbar(self.scouting_frame, orient=tk.VERTICAL) #The vertical scrollbar
-            self.team_summary_y_scroll.grid(row=0, column=1, sticky=tk.N+tk.S+tk.E+tk.W) #Add the team summary y scroll
+#            self.scouting_frame = tk.Frame(self, relief=tk.RAISED, borderwidth=1) #The scouting frame
+#            self.active_frame = self.scouting_frame #This frame is the frame to start from
+#            
+#            self.team_summary_y_scroll = tk.Scrollbar(self.scouting_frame, orient=tk.VERTICAL) #The vertical scrollbar
+#            self.team_summary_y_scroll.grid(row=0, column=1, sticky=tk.N+tk.S+tk.E+tk.W) #Add the team summary y scroll
+#            
+#            self.team_summary_canvas = tk.Canvas(self.scouting_frame, yscrollcommand=self.team_summary_y_scroll.set) #The canvas for the team summary (because we're using a scrollbar)
+#            self.team_summary_canvas.grid(row=0, column=0) #Add the team summary canvas
+#            
+#            self.team_summary_canvas_frame = tk.Frame(self.team_summary_canvas) #The frame to put in the team summary canvas
+#            self.team_summary_canvas_frame.bind('<Configure>', lambda e: config_canvas(self.team_summary_canvas)) #Configure the frame to set dimensions when configured
+#            
+#            self.team_summary_canvas.create_window((0,0), window=self.team_summary_canvas_frame, anchor='nw', tags='self.team_summary_canvas_frame') #Make a space for the scouting panel in the scouting canvas
+#            
+#            self.team_summary_y_scroll.config(command=self.team_summary_canvas.yview) #Make the scroll scroll the team summary canvas
+#            
+#            self.team_summary_team_label = tk.Label(self.team_summary_canvas_frame, text='Team:') #The label that says 'Team'
+#            self.team_summary_team_label.pack(side=tk.TOP, padx=5, pady=5) #Add the team summary team label
+#            
+#            self.team_summary_team_field = tk.Entry(self.team_summary_canvas_frame) #The field to enter the team in
+#            self.team_summary_team_field.pack(side=tk.TOP, padx=5, pady=5) #Add the team summary team field
+#            self.team_summary_team_field.bind('<Return>', show_summary)
+#            
+#            self.team_summary_button = tk.Button(self.team_summary_canvas_frame, command=show_summary, text='Show Summary') #The button to show the summary
+#            self.team_summary_button.pack(side=tk.TOP, padx=5, pady=5) #Add the team summary button
+#            
+#            self.team_summary_inner_frame = tk.Frame(self.team_summary_canvas_frame, relief=tk.RAISED, borderwidth=1) #The frame inside the canvas
             
-            self.team_summary_canvas = tk.Canvas(self.scouting_frame, yscrollcommand=self.team_summary_y_scroll.set) #The canvas for the team summary (because we're using a scrollbar)
-            self.team_summary_canvas.grid(row=0, column=0) #Add the team summary canvas
             
-            self.team_summary_canvas_frame = tk.Frame(self.team_summary_canvas) #The frame to put in the team summary canvas
-            self.team_summary_canvas_frame.bind('<Configure>', lambda e: config_canvas(self.team_summary_canvas)) #Configure the frame to set dimensions when configured
-            
-            self.team_summary_canvas.create_window((0,0), window=self.team_summary_canvas_frame, anchor='nw', tags='self.team_summary_canvas_frame') #Make a space for the scouting panel in the scouting canvas
-            
-            self.team_summary_y_scroll.config(command=self.team_summary_canvas.yview) #Make the scroll scroll the team summary canvas
-            
-            self.team_summary_team_label = tk.Label(self.team_summary_canvas_frame, text='Team:') #The label that says 'Team'
-            self.team_summary_team_label.pack(side=tk.TOP, padx=5, pady=5) #Add the team summary team label
-            
-            self.team_summary_team_field = tk.Entry(self.team_summary_canvas_frame) #The field to enter the team in
-            self.team_summary_team_field.pack(side=tk.TOP, padx=5, pady=5) #Add the team summary team field
-            self.team_summary_team_field.bind('<Return>', show_summary)
-            
-            self.team_summary_button = tk.Button(self.team_summary_canvas_frame, command=show_summary, text='Show Summary') #The button to show the summary
-            self.team_summary_button.pack(side=tk.TOP, padx=5, pady=5) #Add the team summary button
-            
-            self.team_summary_inner_frame = tk.Frame(self.team_summary_canvas_frame, relief=tk.RAISED, borderwidth=1) #The frame inside the canvas
         
         def setup_comp_frame():
             """Set up the team competition frame."""
