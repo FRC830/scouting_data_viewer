@@ -18,6 +18,8 @@ import save_data as sd
 
 import easter_eggs as ee
 
+GRAPH_WIDTH = 600
+
 class ZScoutFrame(tk.Frame):
     """The frame the ZScout Gui is in."""
            
@@ -75,19 +77,30 @@ class ZScoutFrame(tk.Frame):
             """Return the current game."""
             return self.game
         
+        #scouting methods
+        def set_comp_tkevent(*args):
+            """
+            Set the competition and update the comp_notice label.
+            Called when a competition is chosen.
+            """
+#            print('Setting event')
+            self.comp_notice.set('Comp set to ' + self.comp_choose_var.get())
+            set_comp()
+        
         def year_from_comp(comp):
+            """
+            Return the year from the comp name.
+            
+            Parameters:
+                comp: The comp name to get the year from.
+            """
             result = ''
-            for char in comp:
+            for char in comp: #This assumes that the only digits in the comp name are in the year
                 if char in '0123456789':
                     result += char
                 else:
                     return result
             return result
-        #scouting methods
-        def set_comp_tkevent(*args):
-#            print('Setting event')
-            self.comp_notice.set('Comp set to ' + self.comp_choose_var.get())
-            set_comp()
         
         def set_comp(startup=False):
             """
@@ -106,22 +119,26 @@ class ZScoutFrame(tk.Frame):
                 self.state.comp = self.comp_choose_var.get()
             
             comp = self.state.comp #Makes the next line of code shorter
-          
-            self.year = year_from_comp(comp)
+            year = year_from_comp(comp)
                   
-            if self.year: #Don't do anything with an empty year
-                self.m_wid = 1200 #Twice the max width of graph data panels
-                                  #Don't ask why, I don't know
+            if year: #Don't do anything with an empty year
+#                self.m_wid = 1200 #Twice the max width of graph data panels
+#                                  #Don't ask why, I don't know
                 
                 #Get scouting
                 self.game = sdg.get_game(folder=self.state.comp) #The folders are named after comp codes
                 
-                self.state.raw_scouting = sdg.get_raw_scouting_data(folder=self.state.comp) #Get the raw data, just as the scouters entered it
-                self.state.raw_scouting = get_game().process_scouting(self.state.raw_scouting) #Get the processed data
+                #Get the raw data, just as the scouters entered it
+                self.state.raw_scouting = sdg.get_raw_scouting_data(folder=self.state.comp)
+                
+                #Get the processed data
+                self.state.raw_scouting = get_game().process_scouting(self.state.raw_scouting) 
                 
                 #Get contrs and averages
-                self.state.contrs = gms.contrs(self.state.raw_scouting, get_game()) #Histograms for the scores a team gets in a match for each category
-                self.state.averages = gms.averages_from_contrs(self.state.contrs) #The average a team scores in a match for each category
+                #Histograms for the scores a team gets in a match for each category:
+                self.state.contrs = gms.contrs(self.state.raw_scouting, get_game())
+                #The average a team scores in a match for each category:
+                self.state.averages = gms.averages_from_contrs(self.state.contrs) 
                 
                 #Get categories
                 #Access the first team in raw_scouting, access its first match, and get the keys
@@ -131,8 +148,10 @@ class ZScoutFrame(tk.Frame):
                 first_team = self.state.teams[0]
                 scouting_cats = self.state.raw_scouting[first_team][0][1].keys()
                 
-                self.state.categories = gms.get_cats(scouting_cats, get_game().categories) #All the categories both in the game categories and the scouting categories
-                self.state.numeric_cats = gms.get_cats(scouting_cats, get_game().numeric_categories, numeric=True) #All the number categories
+                #All the categories both in the game categories and the scouting categories
+                self.state.categories = gms.get_cats(scouting_cats, get_game().categories)
+                #All the number categories (pretty much everything except comments)
+                self.state.numeric_cats = gms.get_cats(scouting_cats, get_game().numeric_categories, numeric=True)
                 
                 #Get teams
                 
@@ -150,17 +169,65 @@ class ZScoutFrame(tk.Frame):
 #            print('configging teams frame')
             self.state.teams.sort(key=lambda t: int(t)) #Sort the teams in increasing numerical order.
             num_in_chunk = 10 #How many teams to display per line.
-#            print('first few teams: ' + str(self.state.teams[0:2]))
             
-            self.teams_text.config(state=tk.NORMAL)
+            self.teams_text.config(state=tk.NORMAL) #Can be edited
             self.teams_text.delete('1.0', tk.END) #Clear entire panel
             self.teams_text.insert(tk.INSERT, '\n') #Start with a newline for spacing
-            self.teams_text.insert(tk.INSERT, ' ' * (3*num_in_chunk - 3 + 10) + 'Teams:\n') #Center-align 'Teams:'
+            teams_list_title = 'Teams:\n'
+            half_title_len = (len(teams_list_title) - 1) // 2
+            self.teams_text.insert(tk.INSERT, ' ' * (3*num_in_chunk + 10 - half_title_len) + 'Teams:\n') #Center-align 'Teams:'
+            #Explanation for 3*num_in_chunk + 10 - half_title_len:
+            #When the teams are printed, they are padded so each team takes up six characters
+            #and each line is padded with then spaces at the left
+            #So a line might look like this:
+            #0123456789012345678901234567890123456789
+            #          63    830   3991  1234  4335<End of line
+            #
+            #The word 'Teams' should be centered above the list of teams
+            #Because each team takes six characters, the spot at the center of the team list
+            #Will be three characters to the right for each team:
+            #                      Center:
+            #                        ><
+            #            1  2  3  4  5
+            #          123123123123123            
+            #          63    830   3991  1234  4335<End of line
+            #
+            #So a naïve approach would be to put 10 + 3*num_in_chunk spaces before 'Teams:':
+            #                      Center:
+            #                        ><
+            #                         Teams:
+            #            1  2  3  4  5
+            #          123123123123123
+            #          63    830   3991  1234  4335<End of line
+            #
+            #But that makes the title a bit to the right
+            #instead of having the left end of the title be centered,
+            #we want the center of the title to be centered
+            #And the center of the title is halfway through, so if we move the title
+            #n/2 characters to the left, where n = len(title),
+            #the center will be centered:
+            #
+            #                      Center:
+            #                        ><
+            #                      <<<
+            #                      Teams:
+            #            1  2  3  4  5
+            #          123123123123123
+            #          63    830   3991  1234  4335<End of line
+            #
+            #                 Without annotations:
+            #
+            #                      Teams:
+            #          63    830   3991  1234  4335<End of line
+            
+            num_teams = len(self.state.teams)
+            num_of_chunks = math.ceil(num_teams / num_in_chunk)
 
-            for i in range(0, int((len(self.state.teams) / num_in_chunk) + 1)): #Go through teams in chunks
+#            for i in range(0, int((len(self.state.teams) / num_in_chunk) + 1)): #Go through teams in chunks
+            for i in range(0, num_of_chunks): #Go through teams in chunks
                 string = ' ' * 10 #Buffer space
                 for j in range(0, num_in_chunk):
-                    index = num_in_chunk*i + j #The index of the team
+                    index = num_in_chunk*i + j #The index of the team in the teams list
                     if(index < len(self.state.teams)): #Don't go past the end of the list
                         team = self.state.teams[index]
                         ln = len(team)
@@ -171,16 +238,17 @@ class ZScoutFrame(tk.Frame):
         
         def get_weight(cat):
             """
-            Return the current ranking for the given category.
+            Return the current weight for the given category.
             
             Parameters:
-                cat: The category to get the ranking for.
+                cat: The category to get the weight for.
             """
             string = self.cat_weight_fields[cat].get() #The string entered for the category weight
             return float(string) if len(string) > 0 else 0 #Empty strings are counted as 0
+                                                           #slackers
         
-        def get_default_ranks():
-            """Return the """
+        def get_default_weights():
+            """Return the default weights for the current game."""
             weights = get_game().default_weights
             teams = self.state.teams
             result = {}
@@ -330,10 +398,10 @@ class ZScoutFrame(tk.Frame):
             
             ee.do_weight_eggs(get_weight, get_game().default_weights, self.state.numeric_cats)
             
-            ranks = {} #Collect the ranks
+            weights = {} #Collect the ranks
             for team in self.state.teams:
-                ranks[team] = score(team)
-            ee.do_rank_eggs(ranks, get_default_ranks())
+                weights[team] = score(team)
+            ee.do_rank_eggs(weights, get_default_weights())
             ee.do_gen_eggs()
         
         def show_summary(dummy_event=None):
@@ -415,7 +483,8 @@ class ZScoutFrame(tk.Frame):
                 label.pack(side=tk.TOP, padx=5, pady=5) #Add the label
                 
                 graph_data = gph.get_scouting_graph_data(prediction, red_and_blue=False, num_margins=None) #The data to display in the graph
-                graph_frame = gph.GraphDataPanel(self.team_summary_inner_frame, graph_data, g_height=100, max_width=self.m_wid/2)#, red_and_blue=False) #The graph
+#                graph_frame = gph.GraphDataPanel(self.team_summary_inner_frame, graph_data, g_height=100, max_width=self.m_wid/2)#, red_and_blue=False) #The graph
+                graph_frame = gph.GraphDataPanel(self.team_summary_inner_frame, graph_data, g_height=100, max_width=GRAPH_WIDTH) #The graph
                 graph_frame.pack(side=tk.TOP, padx=5, pady=5) #Add the graph frame
                 
                 first = False #Now we're not on the first one
@@ -445,17 +514,33 @@ class ZScoutFrame(tk.Frame):
             
             return lambda event: config_canvas(canvas, width, height)
         
+        from html_to_tk import make_gui_from_html_file
+        
+        def add_to_namespace(widgets):
+            for name in widgets:
+                widget = widgets[name]
+                setattr(self, name, widget)
+        
         def setup_menu():
             """Set up the menu frame menu."""
+            namespace = {'get_go_to_frame':get_go_to_frame,
+                        'scouting_frame':self.scouting_frame,
+                        'teams_frame':self.teams_frame,
+                        'competition_frame':self.competition_frame,
+                        'ranking_frame':self.ranking_frame,
+                        'parent':self.parent}
+            print('self: ' + str(self))
+            make_gui_from_html_file('menu.html', root=self, namespace=namespace)
+            #add_to_namespace(widgets) None are used
             
-            self.menubar = tk.Menu(self) #A menubar
-            self.frame_select = tk.Menu(self.menubar, tearoff=0) #The menubar to choose the frames from
-            self.frame_select.add_command(label='Scouting', command=get_go_to_frame(self.scouting_frame)) #Add the command to go to scouting
-            self.frame_select.add_command(label='Teams', command=get_go_to_frame(self.teams_frame)) #Add the command to go to teams
-            self.frame_select.add_command(label='Competition', command=get_go_to_frame(self.competition_frame)) #Add the command to go to compeitition
-            self.frame_select.add_command(label='Ranking', command=get_go_to_frame(self.ranking_frame)) #Add the command to go to ranking
-            self.menubar.add_cascade(label='Sections', menu=self.frame_select) #Add the frame select to the menubar
-            self.parent.config(menu=self.menubar) #Add the menubar to the frame
+#            self.menubar = tk.Menu(self) #A menubar
+#            self.frame_select = tk.Menu(self.menubar, tearoff=0) #The menubar to choose the frames from
+#            self.frame_select.add_command(label='Scouting', command=get_go_to_frame(self.scouting_frame)) #Add the command to go to scouting
+#            self.frame_select.add_command(label='Teams', command=get_go_to_frame(self.teams_frame)) #Add the command to go to teams
+#            self.frame_select.add_command(label='Competition', command=get_go_to_frame(self.competition_frame)) #Add the command to go to compeitition
+#            self.frame_select.add_command(label='Ranking', command=get_go_to_frame(self.ranking_frame)) #Add the command to go to ranking
+#            self.menubar.add_cascade(label='Sections', menu=self.frame_select) #Add the frame select to the menubar
+#            self.parent.config(menu=self.menubar) #Add the menubar to the frame
         
         def setup_team_summary_frame():
             """Set up the team summary frame."""
@@ -492,7 +577,7 @@ class ZScoutFrame(tk.Frame):
             """Set up the team competition frame."""
             
             #vars
-            self.comp_notice = tk.StringVar() #The variable to show any errors in
+            self.comp_notice = tk.StringVar() #The variable to show any messages in
             self.contrs_from_team_from_category = {} #A dict from categories to dicts from teams to dicts to scores to probabilities
             self.state.categories = [] #The current categories
             #end vars
@@ -533,7 +618,10 @@ class ZScoutFrame(tk.Frame):
         
         self.parent.title('Scouting Viewer') #Set the title of the gui
         self.pack(fill=tk.BOTH, expand=True) #Add the frame
-        self.year = '' #Cue Doctor Who theme song
+        
+        #The only place where self.year is accessed is right after it's set
+        #So setting it anywhere else is pointless
+#        self.year = '' #Cue Doctor Who theme song
         
         #Set up all the frames
         setup_team_summary_frame()
