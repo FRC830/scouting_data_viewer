@@ -24,25 +24,44 @@ class Game:
             if not category in self.default_weights:
                 self.default_weights[category] = 0
 
-def put_in_histogram(contrs, upper_limit = False, verbose=False):
+def put_in_histogram(scouted_amounts):
+    """
+    Return a zero-sum histogram made from the list of contributions given.
+    
+    Parameters:
+        contrs: A list of contributions for one category.
+    """
     result = {}
     tot = 0
-    for contr in contrs:
-        result[contr] = result.get(contr, 0) + 1
+    for amount in scouted_amounts:
+        result[amount] = result.get(amount, 0) + 1
         tot += 1
         
-    for contr in result:
-        result[contr] = result[contr] / tot
+    for amount in result:
+        result[amount] = result[amount] / tot
     
     return result
 
 def averages_from_contrs(contrs):
+    """
+    Return a dict from teams to dicts from categories to average scores.
+    
+    Parameters:
+        contrs: A dict from teams to category contrs.
+    """
     result = {}
     for team in contrs.keys():
         result[team] = averages_from_contrs_for_team(contrs[team])
     return result
 
 def averages_from_contrs_for_team(contrs):
+    """
+    Return a map from categories to average scores.
+    
+    Parameters:
+        contrs: A dict from categories to a dict from amounts scored to probabilities of that amount being scored.
+    """
+    
     result = {}
     for cat in contrs.keys():
         tot = 0
@@ -53,6 +72,13 @@ def averages_from_contrs_for_team(contrs):
     return result
 
 def contrs(raw_scouting, game):
+    """
+    Return a dict from teams to contrs.
+    
+    Parameters:
+        raw_scouting: A dict from teams to scouting data for the teams.
+        game: The game.
+    """
     contrs = {}
     for team in raw_scouting.keys():
         contrs[team] = team_contrs(raw_scouting[team], game)
@@ -60,7 +86,13 @@ def contrs(raw_scouting, game):
     return contrs
 
 def team_contrs(team_scouting, game, pr=False):
-    """Return the contrs. Contrs is cat -> distr (num -> amount)"""
+    """
+    Return the contrs from the scouting data.
+    
+    Parameters:
+        team_scouting: The scouting data for the team.
+        game: The game.
+    """
     cats = game.numeric_categories
     
     contrs = {}
@@ -82,6 +114,14 @@ def team_contrs(team_scouting, game, pr=False):
     return contrs
 
 def get_cats(scouting_cats, game_cats, numeric=False):
+    """
+    Return all the categories to show.
+    
+    Parameters:
+        scouting_cats: All the categories in the raw scouting data.
+        game_cats: The categories the game has.
+        numeric: Whether to return all categories or only numeric ones.
+    """
     if len(game_cats) == 0:
         result = scouting_cats[:]
         if numeric and 'comments' in result:
@@ -90,6 +130,13 @@ def get_cats(scouting_cats, game_cats, numeric=False):
     return [cat for cat in game_cats if cat in scouting_cats] #intersection
 
 def change_names(name_dict, match_dict):
+    """
+    Return a new dict with the key names changed as specified in name_dict.
+    
+    Parameters:
+        name_dict: The dict from old names to new names.
+        match_dict: The scouting data for the match.
+    """
     result = {}
     for cat in match_dict:
         if cat in name_dict:
@@ -100,7 +147,16 @@ def change_names(name_dict, match_dict):
     return result
 
 def process_scouting_by_match(scouting, process_match):
+    """
+    Return the scouting, processed matchwise with process_match.
+    
+    Parameters:
+        scouting: The data to process.
+        process_match: The function that processes a match.
+    """
     result = {}
+#    print('process_scouting_by_match')
+#    print(scouting['830'][0])
     for team in scouting:
         matches = []
         for match in scouting[team]:
@@ -108,7 +164,14 @@ def process_scouting_by_match(scouting, process_match):
         result[team] = matches
     return result
 
-def combine_matches_from_sources(matches, source_order):
+def choose_match_from_sources(matches, source_order):
+    """
+    Return the match data from the best source.
+    
+    Parameters:
+        matches: The list of matches.
+        source_order: The order of sources, with best first.
+    """
     matches_from_source = {}
     for match_id, match in matches:
         matches_from_source[match['source']] = match_id, match
@@ -119,6 +182,13 @@ def combine_matches_from_sources(matches, source_order):
     return None
 
 def combine_scouting_from_sources(scouting, source_order):
+    """
+    Combine the scouting data from multiple sources.
+    
+    Parameters:
+        scouting: The scouting data.
+        source_order: The order of sources, with best first.
+    """
     result = {}
     for team in scouting:
         t_scouting = scouting[team]
@@ -134,7 +204,7 @@ def combine_scouting_from_sources(scouting, source_order):
         match_ids.sort()
         for match_id in match_ids:
             matches = ts_from_match_id[match_id]
-            match = combine_matches_from_sources(matches, source_order)
+            match = choose_match_from_sources(matches, source_order)
 #            print(match)
             if match:
                 n_ts.append(match)
@@ -144,12 +214,26 @@ def combine_scouting_from_sources(scouting, source_order):
 
 ###STEAMWORKS
 def steamworks_process_match(match):
+    """
+    Process the match for steamworks.
+    
+    Parameters:
+        match: The match to process.
+    """
     if 'caught_rope' in match:
         match = match.copy()
+        
+        #If the robot hung, it caught the rope.
         match['caught_rope'] |= match['hanging']
     return match
 
 def steamworks_process_scouting(scouting):
+    """
+    Process the scouting for steamworks.
+    
+    Parameters:
+        scouting: The scouting data to process.
+    """
     return process_scouting_by_match(scouting, steamworks_process_match)
 
 steamworks_cats = ['auton_lowgoal',
@@ -199,20 +283,38 @@ EAGLE_NAME_DICT = {'Crosses the auto line (auto-run)':'cross_line',
                    'source':'source'}
 
 def zealous_convert(token):
+    """
+    Convert a token (probably scouted by team 3322) into a 1 or 0.
+    
+    Parameters:
+        token: The token to convert.
+    """
     if type(token) is int:
         return token
     if token.lower() in ['yes', 'same side', 'from center', 'in position', 'in the middle']:
         return 1
     return 0
 
-def eagle_climb_convert_parked(token):
+def eagle_convert_parked(token):
+    """
+    Convert whether an answer from 3322 about whether a robot parked into a 0 or a 1.
+    
+    Parameters:
+        token: The token to convert.
+    """
     if type(token) is int:
         return 0
     if 'parked' in token.lower():
         return 1
     return 0
 
-def eagle_climb_convert_climb(token):
+def eagle_convert_climb(token):
+    """
+    Convert whether an answer from 3322 about whether a robot climbed into a 0 or a 1.
+    
+    Parameters:
+        token: The token to convert.
+    """
     if type(token) is int:
         return token
     if token.lower() == 'yes':
@@ -221,6 +323,12 @@ def eagle_climb_convert_climb(token):
 
 #POWERUP
 def powerup_process_match(match):
+    """
+    Process a match for powerup.
+    
+    Parameters:
+        match: The match to process.
+    """
     match = match.copy()
     
     if match['source'] == 'RAT':
@@ -236,8 +344,8 @@ def powerup_process_match(match):
         n_match['auton_ci_switch'] = zealous_convert(match['Switch capabilities'])
         n_match['auton_ci_scale'] = zealous_convert(match['Scale capabilities'])
         n_match['auton_cube_count'] = 'NA'
-        n_match['parking'] = eagle_climb_convert_parked(match['Climb'])
-        n_match['climbing'] = eagle_climb_convert_climb(match['Climb'])
+        n_match['parking'] = eagle_convert_parked(match['Climb'])
+        n_match['climbing'] = eagle_convert_climb(match['Climb'])
         n_match['cube_switch'] = match['Number of Cubes on Own Switch'] + match['Number of Cubes on Opponent\'s Switch']
         n_match['cube_count'] = 'NA'
         n_match['fouls'] = 'NA'
@@ -249,9 +357,13 @@ def powerup_process_match(match):
     return match
 
 def powerup_process_scouting(scouting):
-    print('processing scouting')
+    """
+    Process scouting for powerup.
+    
+    Parameters:
+        scouting: The scouting to process.
+    """
     preprocessed = process_scouting_by_match(scouting, powerup_process_match)
-    print('combining sources')
     result = combine_scouting_from_sources(preprocessed, ['RAT', '3322'])
     return result
 
@@ -276,10 +388,22 @@ POWER_UP = Game(powerup_cats, powerup_cats[:-2], None, powerup_process_scouting,
 
 #DEEP SPACE
 def deepspace_process_match(match):
-    match = match.copy(),
+    """
+    Process a match for deepspace.
+    
+    Parameters:
+        match: The match to process.
+    """
+    match = match.copy()
     return match
 
 def deepspace_process_scouting(scouting):
+    """
+    Process scouting for deepspace.
+    
+    Parameters:
+        scouting: The scouting data to process.
+    """
     processed = process_scouting_by_match(scouting, deepspace_process_match)
     return processed
 
