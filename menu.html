@@ -1,0 +1,10 @@
+<Menu name="menubar">
+    <Menu name="frame_select" tearoff="0">
+        <Exec code="frame_select.add_command(label='Scouting', command=get_go_to_frame(scouting_frame))" />
+        <Exec code="frame_select.add_command(label='Teams', command=get_go_to_frame(teams_frame))" />
+        <Exec code="frame_select.add_command(label='Competition', command=get_go_to_frame(competition_frame))" />
+        <Exec code="frame_select.add_command(label='Ranking', command=get_go_to_frame(ranking_frame))" />
+        <Exec code="menubar.add_cascade(label='Sections', menu=frame_select)" />
+        <Exec code="parent.config(menu=menubar)" />
+    </Menu>
+</Menu>
