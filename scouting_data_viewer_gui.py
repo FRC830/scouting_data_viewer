@@ -546,7 +546,7 @@ class ZScoutFrame(tk.Frame):
                          'get_config_func':get_config_func,
                          'show_summary':show_summary}
 #            print('config_canvas: ' + str(config_canvas))
-            widgets, n = make_gui_from_html_file('team_summary_frame.html', root=self, namespace=namespace)
+            widgets, _ = make_gui_from_html_file('team_summary_frame.html', root=self, namespace=namespace)
             add_to_namespace(widgets)
             self.active_frame = self.scouting_frame #This frame is the frame to start from
         

@@ -9,7 +9,7 @@ import os
 import ast #For evaluating tokens
 import csv #For reading csv files
 import imp #For importing python modules
-
+from sys import platform
 import games
 
 def get_data(line_data):
@@ -66,12 +66,16 @@ team_num_from_source = {'RAT':'team_id', '3322':'Team Number'}
 
 def get_all_comps():
     """Return all the comps we have data for."""
-    directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting'
+    if platform == "darwin" or platform == "linux":
+        directory = os.path.dirname(os.path.realpath(__file__)) + '/scouting'
+    elif platform == "win32":
+        directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting'
     result = []
     for name in os.listdir(directory):
         if os.path.isdir(os.path.join(directory, name)):
             if not 'test' in name:
                 result.append(name)
+    print("running v2...")
     return result
 
 def get_raw_scouting_data(folder):
