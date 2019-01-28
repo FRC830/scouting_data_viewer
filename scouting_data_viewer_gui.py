@@ -586,27 +586,28 @@ class ZScoutFrame(tk.Frame):
             self.state.categories = [] #The current categories
             #end vars
             
-            self.competition_frame = tk.Frame(self, relief=tk.RAISED, borderwidth=1) #The frame to select the competition in
-            self.comp_label = tk.Label(self.competition_frame, text='Competition:') #The label that says 'Competition'
-            self.comp_label.pack(side=tk.TOP, padx=5, pady=5) #Add the comp label
-            
             comp = self.state.read_with_default('comp', '', write=True) #Get the comp from the state, make it '' if there is none
             
             comps = set(sdg.get_all_comps())
             self.comp_choose_var = tk.StringVar()
             self.comp_choose_var.set(comp)
             self.comp_choose_var.trace('w', set_comp_tkevent)
-            self.comp_choose = tk.OptionMenu(self.competition_frame, self.comp_choose_var, *comps)
-#            self.comp_choose = tk.Entry(self.competition_frame) #The textbox to write the competition in
-#            self.comp_choose.insert(0, comp) #Put the current comp into the textbox
-            self.comp_choose.pack(side=tk.TOP, padx=5, pady=5) #Add comp choose
-#            self.comp_choose.bind('<Return>', set_comp)
-    
-#            self.comp_button = tk.Button(self.competition_frame, text="Accept", command=set_comp) #The button to set the comp
-#            self.comp_button.pack(side=tk.TOP, padx=5, pady=5) #Add the comp button
-    
-            self.notice_label = tk.Label(self.competition_frame, textvariable=self.comp_notice) #The label to show errors
-            self.notice_label.pack(side=tk.TOP, pady=5) #Add the error label
+            
+            namespace = {'comps': comps,
+                         'comp_choose_var': self.comp_choose_var,
+                         'comp_notice': self.comp_notice}
+            
+            widgets, n = make_gui_from_html_file('comp_frame.html', root=self, namespace=namespace)
+            add_to_namespace(widgets)
+#            self.competition_frame = tk.Frame(self, relief=tk.RAISED, borderwidth=1) #The frame to select the competition in
+#            self.comp_label = tk.Label(self.competition_frame, text='Competition:') #The label that says 'Competition'
+#            self.comp_label.pack(side=tk.TOP, padx=5, pady=5) #Add the comp label
+#            
+#            self.comp_choose = tk.OptionMenu(self.competition_frame, self.comp_choose_var, *comps)
+#            self.comp_choose.pack(side=tk.TOP, padx=5, pady=5) #Add comp choose
+#    
+#            self.notice_label = tk.Label(self.competition_frame, textvariable=self.comp_notice) #The label to show errors
+#            self.notice_label.pack(side=tk.TOP, pady=5) #Add the error label
         
         def setup_ranking_frame():
             """Set up the ranking frame."""
