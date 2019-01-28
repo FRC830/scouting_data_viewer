@@ -135,7 +135,7 @@ def make_widget_from_node(node, root=None, add_element=None, namespace=None):
     
     
     widget = widget_class(root, **widget_attributes)
-    if widget_type != 'Menu' and add_element != 'None':
+    if widget_type != 'Menu' and add_element.lower() != 'none':
 #        print('adding to layout')
         getattr(widget, add_element)(**layout_attributes) #Add the element
     

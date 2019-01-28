@@ -6,9 +6,9 @@ Created on Sun Jan 28 13:37:51 2018
 """
 
 import os
-import ast
-import csv
-import imp
+import ast #For evaluating tokens
+import csv #For reading csv files
+import imp #For importing python modules
 
 import games
 
@@ -64,6 +64,16 @@ def get_game(folder, year=None):
 match_num_from_source = {'RAT':'match_id', '3322':'Match Number'}
 team_num_from_source = {'RAT':'team_id', '3322':'Team Number'}
 
+def get_all_comps():
+    """Return all the comps we have data for."""
+    directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting'
+    result = []
+    for name in os.listdir(directory):
+        if os.path.isdir(os.path.join(directory, name)):
+            if not 'test' in name:
+                result.append(name)
+    return result
+
 def get_raw_scouting_data(folder):
     """
     Return the raw scouting data in the folder in a dict from teams to lists of tuples of match numbers and dicts from names to amounts.
@@ -76,7 +86,8 @@ def get_raw_scouting_data(folder):
     directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting\\' + folder #The full name of the directory to search in.
     
     if not os.path.exists(directory):
-        return {}
+        raise ValueError('No such folder: ' + folder)
+#        return {}
     
     for file_name in os.listdir(directory): #Go through every file and collect data
         

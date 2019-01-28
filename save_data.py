@@ -9,7 +9,11 @@ import os
 import pickle as pkl
 
 class SaveData(object):
-    """Saves and loads attributes."""
+    """
+    Saves and loads attributes.
+    
+#    Whenever an attribute of an instance of SavaData is set, 
+    """
     
     def __init__(self, name):
         """
@@ -90,7 +94,6 @@ class SaveData(object):
         
     def load(self):
         """Load all data from the save file."""
-        
         path = self.path
         pkl_in  = open(path, 'rb') #Open a file to read bytes from
         new_self = pkl.load(pkl_in) #Read bytes

@@ -18,6 +18,8 @@ import save_data as sd
 
 import easter_eggs as ee
 
+from html_to_tk import make_gui_from_html_file
+
 GRAPH_WIDTH = 600
 
 class ZScoutFrame(tk.Frame):
@@ -154,9 +156,6 @@ class ZScoutFrame(tk.Frame):
                 self.state.numeric_cats = gms.get_cats(scouting_cats, get_game().numeric_categories, numeric=True)
                 
                 #Get teams
-                
-#                self.error.set('')
-                
                 config_teams_frame()
                 config_ranking_frame()
                 
@@ -514,9 +513,13 @@ class ZScoutFrame(tk.Frame):
             
             return lambda event: config_canvas(canvas, width, height)
         
-        from html_to_tk import make_gui_from_html_file
-        
         def add_to_namespace(widgets):
+            """
+            Make variables for the given widgets.
+            
+            Parameters:
+                widgets: The widgets to add variables for.
+            """
             for name in widgets:
                 widget = widgets[name]
                 setattr(self, name, widget)
@@ -546,36 +549,6 @@ class ZScoutFrame(tk.Frame):
             widgets, n = make_gui_from_html_file('team_summary_frame.html', root=self, namespace=namespace)
             add_to_namespace(widgets)
             self.active_frame = self.scouting_frame #This frame is the frame to start from
-            
-#            self.scouting_frame = tk.Frame(self, relief=tk.RAISED, borderwidth=1) #The scouting frame
-#            self.active_frame = self.scouting_frame #This frame is the frame to start from
-#            
-#            self.team_summary_y_scroll = tk.Scrollbar(self.scouting_frame, orient=tk.VERTICAL) #The vertical scrollbar
-#            self.team_summary_y_scroll.grid(row=0, column=1, sticky=tk.N+tk.S+tk.E+tk.W) #Add the team summary y scroll
-#            
-#            self.team_summary_canvas = tk.Canvas(self.scouting_frame, yscrollcommand=self.team_summary_y_scroll.set) #The canvas for the team summary (because we're using a scrollbar)
-#            self.team_summary_canvas.grid(row=0, column=0) #Add the team summary canvas
-#            
-#            self.team_summary_canvas_frame = tk.Frame(self.team_summary_canvas) #The frame to put in the team summary canvas
-#            self.team_summary_canvas_frame.bind('<Configure>', lambda e: config_canvas(self.team_summary_canvas)) #Configure the frame to set dimensions when configured
-#            
-#            self.team_summary_canvas.create_window((0,0), window=self.team_summary_canvas_frame, anchor='nw', tags='self.team_summary_canvas_frame') #Make a space for the scouting panel in the scouting canvas
-#            
-#            self.team_summary_y_scroll.config(command=self.team_summary_canvas.yview) #Make the scroll scroll the team summary canvas
-#            
-#            self.team_summary_team_label = tk.Label(self.team_summary_canvas_frame, text='Team:') #The label that says 'Team'
-#            self.team_summary_team_label.pack(side=tk.TOP, padx=5, pady=5) #Add the team summary team label
-#            
-#            self.team_summary_team_field = tk.Entry(self.team_summary_canvas_frame) #The field to enter the team in
-#            self.team_summary_team_field.pack(side=tk.TOP, padx=5, pady=5) #Add the team summary team field
-#            self.team_summary_team_field.bind('<Return>', show_summary)
-#            
-#            self.team_summary_button = tk.Button(self.team_summary_canvas_frame, command=show_summary, text='Show Summary') #The button to show the summary
-#            self.team_summary_button.pack(side=tk.TOP, padx=5, pady=5) #Add the team summary button
-#            
-#            self.team_summary_inner_frame = tk.Frame(self.team_summary_canvas_frame, relief=tk.RAISED, borderwidth=1) #The frame inside the canvas
-            
-            
         
         def setup_comp_frame():
             """Set up the team competition frame."""
@@ -599,15 +572,6 @@ class ZScoutFrame(tk.Frame):
             
             widgets, n = make_gui_from_html_file('comp_frame.html', root=self, namespace=namespace)
             add_to_namespace(widgets)
-#            self.competition_frame = tk.Frame(self, relief=tk.RAISED, borderwidth=1) #The frame to select the competition in
-#            self.comp_label = tk.Label(self.competition_frame, text='Competition:') #The label that says 'Competition'
-#            self.comp_label.pack(side=tk.TOP, padx=5, pady=5) #Add the comp label
-#            
-#            self.comp_choose = tk.OptionMenu(self.competition_frame, self.comp_choose_var, *comps)
-#            self.comp_choose.pack(side=tk.TOP, padx=5, pady=5) #Add comp choose
-#    
-#            self.notice_label = tk.Label(self.competition_frame, textvariable=self.comp_notice) #The label to show errors
-#            self.notice_label.pack(side=tk.TOP, pady=5) #Add the error label
         
         def setup_ranking_frame():
             """Set up the ranking frame."""

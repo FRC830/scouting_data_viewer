@@ -10,10 +10,10 @@
             <Exec code="team_summary_canvas_frame.bind('<Configure>', config_team_summary_canvas)" />
             <Exec code="team_summary_canvas.create_window((0,0), window=team_summary_canvas_frame, anchor='nw', tags='team_summary_canvas_frame')" />
             <Exec code="team_summary_y_scroll.config(command=team_summary_canvas.yview)" />
-            <Label name="team_summary_team_label" text="&quotTeam:&quot" hl_side="tk.TOP" hl_padx="5" hl_pady="5" />
+            <Label name="team_summary_team_label" text="'Team:'" hl_side="tk.TOP" hl_padx="5" hl_pady="5" />
             <Entry name="team_summary_team_field" hl_side="tk.TOP" hl_padx="5" hl_pady="5" />
             <Exec code="team_summary_team_field.bind('<Return>', show_summary)" />
-            <Button name="team_summary_button" command="show_summary" text="&quotShow Summary&quot" hl_side="tk.TOP" hl_padx="5" hl_pady="5" />
+            <Button name="team_summary_button" command="show_summary" text="'Show Summary'" hl_side="tk.TOP" hl_padx="5" hl_pady="5" />
             <Frame name="team_summary_inner_frame" relief="tk.RAISED" borderwidth="1" />
             <Exec code="#print('config_canvas: ' + str(config_canvas))" />
         </Frame>
