@@ -1,0 +1,15 @@
+<Text name="scouting_text_pane" self_layout="none" wrap="tk.NONE" />
+<Exec code="scouting_text_pane.grid(row=0, column=0)" />
+<Frame name="team_summary_inner_frame" relief="tk.RAISED" borderwidth="1" hl_side="tk.TOP" layout="pack">
+    <Scrollbar name="scouting_text_scrollbar" orient="tk.HORIZONTAL" self_layout="none" />
+    <Canvas name="scouting_text_canvas" xscrollcommand="scouting_text_scrollbar.set" width="1000" hl_side="tk.TOP" hl_fill="tk.NONE" layout="grid">
+        <Exec code="team_summary_inner_frame.bind('<Configure>', get_conf_canv(scouting_text_canvas, width=1000, height=400))" />
+    </Canvas>
+    <Exec code="scouting_text_scrollbar.pack(side=tk.TOP, fill=tk.X, padx=150, pady=2)" />
+    <Exec code="scouting_text_scrollbar.config(command=scouting_text_canvas.xview)" />
+    <Exec code="scouting_text_canvas.create_window((0, 0), window=scouting_text_pane, anchor='nw', tags='scouting_text_pane')" />
+    
+    <Text name="scouting_editable_summary" height="5" hl_side="tk.TOP" />
+    <Exec code="scouting_editable_summary.insert('1.0', prev_summary)" />
+    <Button name="save_button" text="'save'" command="lambda *args: save_summary(scouting_editable_summary)" hl_side="tk.TOP" />
+</Frame>

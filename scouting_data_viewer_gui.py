@@ -406,27 +406,8 @@ class ZScoutFrame(tk.Frame):
         def show_summary(dummy_event=None):
             """Show the graphs and whatnot for a team."""
             
-            team = self.team_summary_team_field.get().strip() #Get the team from the team textbox
+            team = self.team_summary_team_field.get().strip() #Get the team from the team textbox    
             self.team_summary_inner_frame.pack_forget() #Get rid of the old frame
-            self.team_summary_inner_frame = tk.Frame(self.team_summary_canvas_frame, relief=tk.RAISED, borderwidth=1) #The frame for the team summary
-            self.team_summary_inner_frame.pack(side=tk.TOP) #Add the team summary inner frame
-            
-            #Make scouting data viewer
-            scouting_text_scrollbar = tk.Scrollbar(self.team_summary_inner_frame, orient=tk.HORIZONTAL) #The scrollbar for the scouting text
-            scouting_text_canvas = tk.Canvas(self.team_summary_inner_frame, xscrollcommand=scouting_text_scrollbar.set, width=1000) #The canvas to put the scouting text in
-            scouting_text_canvas.pack(side=tk.TOP, fill=tk.NONE) #Add the scouting text canvas
-            self.team_summary_inner_frame.bind('<Configure>', get_conf_canv(scouting_text_canvas, width=1000, height=400)) #Set the configuring to configure the frame to the right dimensions
-            
-            scouting_text_pane = tk.Text(self.team_summary_canvas, wrap=tk.NONE) #The text pane with the scouting data in it
-            scouting_text_pane.grid(row=0, column=0) #Add the scouting text pane
-            
-            scouting_text_scrollbar.pack(side=tk.TOP, fill=tk.X, padx=150, pady=2) #Add the scouting text scrollbar
-            scouting_text_scrollbar.config(command=scouting_text_canvas.xview) #Set the scrollbar to horizontal scrolling on scouting_text_canvas
-            
-            scouting_text_canvas.create_window((0, 0), window=scouting_text_pane, anchor='nw', tags='scouting_text_pane') #Make a place in the scouting text canvas for the pane
-            
-            #Make editable summary pane
-            
             key = self.state.comp, team #The key for caching data
             
             def save_summary(summary):
@@ -441,14 +422,7 @@ class ZScoutFrame(tk.Frame):
                 do_easter_eggs()
                 self.state.summaries[key] = string #Add the summary data to state.summaries
                 self.state.save() #Save the state (writes to a file)
-            
-            scouting_editable_summary = tk.Text(self.team_summary_inner_frame, height=5) #The editable summary
             prev_summary = self.state.summaries.get(key, '') #The summary when the gui was last closed
-            scouting_editable_summary.insert('1.0', prev_summary) #Add the previous summary to the summary textbox
-            scouting_editable_summary.pack(side=tk.TOP) #Add the scouting editable summary
-            
-            save_button = tk.Button(self.team_summary_inner_frame, text='Save', command=lambda *args:save_summary(scouting_editable_summary)) #The button to save the editable summary
-            save_button.pack(side=tk.TOP) #Add the save button
             
             raw_team_scouting = self.state.raw_scouting.get(team, []) #Scouting for this team
             scouting_string_list = [get_column_string()] #The column headers should be at the top
@@ -462,6 +436,39 @@ class ZScoutFrame(tk.Frame):
             lens.append(len(av_string)) #Add the len of the av string to the lens
             scouting_string_list.append(av_string) #Add the av string
             
+            namespace = {'save_summary': save_summary,
+                         'prev_summary': prev_summary,
+                         'get_conf_canv': get_conf_canv}
+            
+            widgets, _ = make_gui_from_html_file('team_summary_inner_frame.html', root=self.team_summary_canvas_frame, namespace=namespace)
+            scouting_text_pane = widgets['scouting_text_pane']
+            
+            #********************************************************
+#            self.team_summary_inner_frame = tk.Frame(self.team_summary_canvas_frame, relief=tk.RAISED, borderwidth=1) #The frame for the team summary
+#            self.team_summary_inner_frame.pack(side=tk.TOP) #Add the team summary inner frame
+#            
+#            #Make scouting data viewer
+#            scouting_text_scrollbar = tk.Scrollbar(self.team_summary_inner_frame, orient=tk.HORIZONTAL) #The scrollbar for the scouting text
+#            scouting_text_canvas = tk.Canvas(self.team_summary_inner_frame, xscrollcommand=scouting_text_scrollbar.set, width=1000) #The canvas to put the scouting text in
+#            scouting_text_canvas.pack(side=tk.TOP, fill=tk.NONE) #Add the scouting text canvas
+#            self.team_summary_inner_frame.bind('<Configure>', get_conf_canv(scouting_text_canvas, width=1000, height=400)) #Set the configuring to configure the frame to the right dimensions
+#            
+#            scouting_text_pane = tk.Text(self.team_summary_canvas, wrap=tk.NONE) #The text pane with the scouting data in it
+#            scouting_text_pane.grid(row=0, column=0) #Add the scouting text pane
+#            
+#            scouting_text_scrollbar.pack(side=tk.TOP, fill=tk.X, padx=150, pady=2) #Add the scouting text scrollbar
+#            scouting_text_scrollbar.config(command=scouting_text_canvas.xview) #Set the scrollbar to horizontal scrolling on scouting_text_canvas
+#            
+#            scouting_text_canvas.create_window((0, 0), window=scouting_text_pane, anchor='nw', tags='scouting_text_pane') #Make a place in the scouting text canvas for the pane
+#            
+#            #Make editable summary pane
+#            scouting_editable_summary = tk.Text(self.team_summary_inner_frame, height=5) #The editable summary
+#            scouting_editable_summary.insert('1.0', prev_summary) #Add the previous summary to the summary textbox
+#            scouting_editable_summary.pack(side=tk.TOP) #Add the scouting editable summary
+#            
+#            save_button = tk.Button(self.team_summary_inner_frame, text='Save', command=lambda *args:save_summary(scouting_editable_summary)) #The button to save the editable summary
+#            save_button.pack(side=tk.TOP) #Add the save button
+            #********************************************************
             #Expand text box to right width
             scouting_text_pane.config(width = max(lens) + 1) #Make the text pane wide enough to hold all its text
             
@@ -570,7 +577,7 @@ class ZScoutFrame(tk.Frame):
                          'comp_choose_var': self.comp_choose_var,
                          'comp_notice': self.comp_notice}
             
-            widgets, _ = make_gui_from_html_file('comp_frame.html', root=self, namespace=namespace)
+            widgets, _ = make_gui_from_html_file('comp_frame.html', root=self, namespace=namespace, add_element='none')
             add_to_namespace(widgets)
         
         def setup_ranking_frame():
