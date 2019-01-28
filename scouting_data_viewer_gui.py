@@ -15,7 +15,7 @@ import scouting_data_getters as sdg
 import games as gms
 import graph as gph
 import save_data as sd
-
+import re
 import easter_eggs as ee
 
 from html_to_tk import make_gui_from_html_file
@@ -96,13 +96,8 @@ class ZScoutFrame(tk.Frame):
             Parameters:
                 comp: The comp name to get the year from.
             """
-            result = ''
-            for char in comp: #This assumes that the only digits in the comp name are in the year
-                if char in '0123456789':
-                    result += char
-                else:
-                    return result
-            return result
+            # https://stackoverflow.com/questions/26825729/extract-number-from-string-in-python/26825781
+            return list(filter(str.isdigit, comp))[0]
         
         def set_comp(startup=False):
             """
@@ -123,9 +118,7 @@ class ZScoutFrame(tk.Frame):
             comp = self.state.comp #Makes the next line of code shorter
             year = year_from_comp(comp)
                   
-            if year: #Don't do anything with an empty year
-#                self.m_wid = 1200 #Twice the max width of graph data panels
-#                                  #Don't ask why, I don't know
+            if year != "": #Don't do anything with an empty year
                 
                 #Get scouting
                 self.game = sdg.get_game(folder=self.state.comp) #The folders are named after comp codes
@@ -160,80 +153,42 @@ class ZScoutFrame(tk.Frame):
                 config_ranking_frame()
                 
                 self.state.save()
-#                else:
-#                    self.comp_notice.set('No such folder: ' + self.state.comp)
                 
         def config_teams_frame():
             """Set up the frame that shows a list of teams in the current competition."""
-#            print('configging teams frame')
-            self.state.teams.sort(key=lambda t: int(t)) #Sort the teams in increasing numerical order.
-            num_in_chunk = 10 #How many teams to display per line.
-            
-            self.teams_text.config(state=tk.NORMAL) #Can be edited
-            self.teams_text.delete('1.0', tk.END) #Clear entire panel
-            self.teams_text.insert(tk.INSERT, '\n') #Start with a newline for spacing
+            # Initialize Variables
+            self.state.teams.sort(key=lambda t: int(t))
+            teams_in_row = 10
+            left_padding_size = 10
+
+            # Reset Panel
+            self.teams_text.config(state=tk.NORMAL)
+            self.teams_text.delete('1.0', tk.END)
+            self.teams_text.insert(tk.INSERT, '\n')
+
+            # Center-align 'Teams:'
             teams_list_title = 'Teams:\n'
             half_title_len = (len(teams_list_title) - 1) // 2
-            self.teams_text.insert(tk.INSERT, ' ' * (3*num_in_chunk + 10 - half_title_len) + 'Teams:\n') #Center-align 'Teams:'
-            #Explanation for 3*num_in_chunk + 10 - half_title_len:
-            #When the teams are printed, they are padded so each team takes up six characters
-            #and each line is padded with then spaces at the left
-            #So a line might look like this:
-            #0123456789012345678901234567890123456789
-            #          63    830   3991  1234  4335<End of line
-            #
-            #The word 'Teams' should be centered above the list of teams
-            #Because each team takes six characters, the spot at the center of the team list
-            #Will be three characters to the right for each team:
-            #                      Center:
-            #                        ><
-            #            1  2  3  4  5
-            #          123123123123123            
-            #          63    830   3991  1234  4335<End of line
-            #
-            #So a naïve approach would be to put 10 + 3*num_in_chunk spaces before 'Teams:':
-            #                      Center:
-            #                        ><
-            #                         Teams:
-            #            1  2  3  4  5
-            #          123123123123123
-            #          63    830   3991  1234  4335<End of line
-            #
-            #But that makes the title a bit to the right
-            #instead of having the left end of the title be centered,
-            #we want the center of the title to be centered
-            #And the center of the title is halfway through, so if we move the title
-            #n/2 characters to the left, where n = len(title),
-            #the center will be centered:
-            #
-            #                      Center:
-            #                        ><
-            #                      <<<
-            #                      Teams:
-            #            1  2  3  4  5
-            #          123123123123123
-            #          63    830   3991  1234  4335<End of line
-            #
-            #                 Without annotations:
-            #
-            #                      Teams:
-            #          63    830   3991  1234  4335<End of line
-            
-            num_teams = len(self.state.teams)
-            num_of_chunks = math.ceil(num_teams / num_in_chunk)
+            title_padding = (left_padding_size + 3 * teams_in_row - half_title_len) * ' '
+            self.teams_text.insert(tk.INSERT, title_padding + teams_list_title) 
 
-#            for i in range(0, int((len(self.state.teams) / num_in_chunk) + 1)): #Go through teams in chunks
-            for i in range(0, num_of_chunks): #Go through teams in chunks
-                string = ' ' * 10 #Buffer space
-                for j in range(0, num_in_chunk):
-                    index = num_in_chunk*i + j #The index of the team in the teams list
-                    if(index < len(self.state.teams)): #Don't go past the end of the list
-                        team = self.state.teams[index]
-                        ln = len(team)
-                        string += team + ' '*(6-ln) #Pad the string to six characters
-                        
-                self.teams_text.insert(tk.INSERT, string + '\n') #Add a line
-            self.teams_text.config(state=tk.DISABLED) #Make it so the teams list can't be modified
+            num_teams = len(self.state.teams)
+            complete_rows = math.floor(num_teams / teams_in_row)
+            leftover_teams_count = num_teams % teams_in_row
+
+            # Display teams
+            for i in range(complete_rows):
+                format_code = left_padding_size * " " + "{: <6}" * teams_in_row + "\n"
+                print("starting team:", i * teams_in_row, i * teams_in_row + teams_in_row)
+                team_list = self.state.teams[i * teams_in_row:i * teams_in_row + teams_in_row]
+        
+                self.teams_text.insert(tk.INSERT, format_code.format(*team_list))
+
+            # Deal with leftover teams
+            leftover_format_code = left_padding_size * " " + "{: <6}" * leftover_teams_count + "\n"
+            leftover_teams = self.state.teams[num_teams - leftover_teams_count:num_teams]
+            self.teams_text.insert(tk.INSERT, leftover_format_code.format(*leftover_teams))
+            self.teams_text.config(state=tk.DISABLED)
         
         def get_weight(cat):
             """
@@ -242,16 +197,16 @@ class ZScoutFrame(tk.Frame):
             Parameters:
                 cat: The category to get the weight for.
             """
-            string = self.cat_weight_fields[cat].get() #The string entered for the category weight
-            return float(string) if len(string) > 0 else 0 #Empty strings are counted as 0
-                                                           #slackers
+            s = self.cat_weight_fields[cat].get()
+            if s == "":
+                return 0
+            return float(s)
         
         def get_default_weights():
             """Return the default weights for the current game."""
             weights = get_game().default_weights
-            teams = self.state.teams
             result = {}
-            for team in teams:
+            for team in self.state.teams:
                 result[team] = get_score(self.state.averages[team], weights=weights)
             return result
         
@@ -265,16 +220,18 @@ class ZScoutFrame(tk.Frame):
                 weight_func: The weights for each category. A function from categories to doubles.
                 verbose: Whether to print debug info
             """
-            if not weights is None:
-                weight_func = lambda a: weights[a] #Make a weight_func equivalent to weights
+            # Create Weight Function, default is 0
+            if weights is not None:
+                weight_func = lambda a: weights[a]
             if weights is None and weight_func is None:
-                weight_func = lambda a:0 #If no weight info is passed, all weights are zero
+                weight_func = lambda a:0
             
+            # Calculate score
             score = 0
             for cat in self.state.numeric_cats:
-                if verbose: #Debug info
+                if verbose:
                     print(avs.get(cat, 0), float(weight_func(cat)))
-                score += avs.get(cat,0) * float(weight_func(cat)) #Add the average times the weight
+                score += avs.get(cat,0) * float(weight_func(cat))
             return score
             
         def score(team):
@@ -284,58 +241,59 @@ class ZScoutFrame(tk.Frame):
             Parameters:
                 team: The team to return the score for.
             """
-            avs = self.state.averages[team]
-            score = get_score(avs, weight_func=get_weight)
-            return score
+            return get_score(self.state.averages[team], weight_func=get_weight)
         
         def config_ranking_frame():
             """Set up the frame that displays scores and ranks for the teams"""
             
             def refresh_rankings():
                 """Set up the rankings for each team"""
+                # Reset panel to desired state
+                self.team_ranks_panel.pack_forget()
+                self.team_ranks_panel = tk.Frame(self.ranking_frame)
+                self.team_ranks_panel.grid(row=3, column=0)
                 
-                self.team_ranks_panel.pack_forget() #Get rid of the old rankings
-                self.team_ranks_panel = tk.Frame(self.ranking_frame) #Make a new ranks panel
-                self.team_ranks_panel.grid(row=3, column=0) #Add the panel
+                self.team_ranks_textbox = tk.Text(self.team_ranks_panel, width=24, wrap=tk.NONE)
+                self.team_ranks_textbox.pack(side=tk.TOP)
                 
-                self.team_ranks_textbox = tk.Text(self.team_ranks_panel, width=24, wrap=tk.NONE) #The textbox with the ranking and score information
-                self.team_ranks_textbox.pack(side=tk.TOP) #Add the team ranks textbox
-                
-                r_teams = self.state.teams[:] #The teams to show ranks for
-                r_teams.sort(key=lambda t:-score(t)) #Sort the teams by score in descending order
-                
-                for i in range(0, len(r_teams)): #Add the teams to the team ranks textbox one at a time
-                    team = r_teams[i] #Get the team to add
-                    num_string = str(i+1)
-                    num_string = num_string + ':' + (' ' * (4-len(num_string)))
-                    string = num_string + str(team) #The rank and the team
-                    string += ' ' * (11-len(string)) + 'with ' + '%.2f' % score(team) #The score of the team
-                    if i != len(r_teams) - 1: #Add newlines after every string but the last
+                # Sort teams in descending order
+                r_teams = self.state.teams[:]
+                r_teams.sort(key=lambda t:score(t)).reversed()
+                # Creates string for each team
+                for i, team in enumerate(r_teams):
+                    num_string = "{: <5}".format(str(i+1) + ":")
+                    string = num_string + str(team)
+                    string += ' ' * (11-len(string)) + 'with {:.2f}'.format(score(team))
+
+
+                    if i != len(r_teams) - 1:
                         string += '\n'
-                    self.team_ranks_textbox.insert(tk.INSERT, chars=string) #Add the string to the team ranks textbox
+                    self.team_ranks_textbox.insert(tk.INSERT, chars=string)
                 
-                self.team_ranks_textbox.config(state=tk.DISABLED, height=30) #Make it so the team ranks textbox can't be edited 
+                self.team_ranks_textbox.config(state=tk.DISABLED, height=30)
                 
-                do_easter_eggs() #Trigger any appropriate easter eggs
-                    
-            for child in self.ranking_frame.winfo_children(): #Get rid of all the child widgets
+                do_easter_eggs()
+
+            #Get rid of all the child widgets
+            for child in self.ranking_frame.winfo_children(): 
                 child.destroy()
             
             self.ranking_scroll = tk.Scrollbar(self.ranking_frame, orient=tk.HORIZONTAL) #Make a scrollbar for the weight setting
             
-            self.rank_box_canvas = tk.Canvas(self.ranking_frame, relief=tk.RAISED, xscrollcommand=self.ranking_scroll.set) #Make a convas to put the weight setters in
-                                                                                                                           #We need to do this because we're using a scrollbar and scrollbars are jank in tk
+            # Use canvas instead of scrollbars
+            self.rank_box_canvas = tk.Canvas(self.ranking_frame, relief=tk.RAISED, xscrollcommand=self.ranking_scroll.set) 
             
-            self.rank_box_canvas.grid(row=0, column=0) #Add the rank box canvas
-            self.ranking_scroll.grid(row=1, column=0, sticky=tk.N+tk.S+tk.E+tk.W) #Add the rank box scrollbar
-            self.rank_box_frame = tk.Frame(self.rank_box_canvas, relief=tk.RAISED) #The frame to put the weight setters in
+            # Configure Ranking Box Frame, Canvas, and Scroll
+            self.rank_box_canvas.grid(row=0, column=0)
+            self.ranking_scroll.grid(row=1, column=0, sticky=tk.N+tk.S+tk.E+tk.W)
+            self.rank_box_frame = tk.Frame(self.rank_box_canvas, relief=tk.RAISED)
             self.rank_box_frame.grid(row=0, column=0) #Add the rank box frame
             self.rank_box_frame.bind('<Configure>', get_conf_canv(self.rank_box_canvas, width=1343, height=50)) #Set the config method to config the canvas to the right dimensions
             self.rank_box_canvas.create_window((0, 0), window=self.rank_box_frame, tags='self.rank_box_frame') #Make a place in the canvas for the frame
-                                                                                                               #(Because tk scrollbars are jank)
-            self.ranking_scroll.config(command=self.rank_box_canvas.xview) #Link the scrollbar to the rank box canvas
+            # Link the scrollbar to the rank box canvas
+            self.ranking_scroll.config(command=self.rank_box_canvas.xview)
             
-            self.cat_weight_fields = {} #Set the weight map to empty
+            self.cat_weight_fields = {}
             
             for cat in self.state.numeric_cats: #Construct weight-setting panel
                 entry_panel = tk.Frame(self.rank_box_frame, relief=tk.RAISED) #An empty panel to put the weight setter in
@@ -356,10 +314,7 @@ class ZScoutFrame(tk.Frame):
             
             self.team_ranks_panel = tk.Frame(self.ranking_frame) #The panel for the team ranks
             self.team_ranks_panel.grid(row=3, column=0) #Add the team ranks panel
-            
-        #end scouting methods
-        
-        #team summary methods
+                    
         def get_match_scouting_string(match, line_data):
             """
             Return a string describing the match and line data in human-readable format.
@@ -377,18 +332,20 @@ class ZScoutFrame(tk.Frame):
                 line_data_types.append(data_type)
                 
             for line_data_type in line_data_types: #Add the info for each data type
-                data = line_data.get(line_data_type, '') #Retrieve the info, use an empty string if none
-                length = len(line_data_type) #The length of the category string
-                inner_length = length - len(data.__str__()) #The whitespace around the data
-                result += ' '*math.floor(inner_length /2) + data.__str__() + ' '*math.ceil(inner_length / 2) + ' '*2 #Center-align the info
+                data = line_data.get(line_data_type, '')
+                # Center-align the info
+                length = len(line_data_type)
+                inner_length = length - len(data.__str__())
+                result += ' '*math.floor(inner_length /2) + data.__str__() + ' '*math.ceil(inner_length / 2) + ' '*2
             
             return result.rstrip()
         
         def get_column_string():
             """Return the string at the top of the scouting summary that labels the columns."""
-            result = 'match_id  '
+            padding = 2 * ' '
+            result = 'match_id' + padding
             for data_type in self.state.categories:
-                result += data_type.__str__() + '  '
+                result += data_type.__str__() + padding
                 
             return result.rstrip()
         
@@ -487,7 +444,6 @@ class ZScoutFrame(tk.Frame):
                 graph_frame.pack(side=tk.TOP, padx=5, pady=5) #Add the graph frame
                 
                 first = False #Now we're not on the first one
-        #end team summary methods
         
         def config_canvas(canvas, width=1343, height=650):
             """
@@ -532,9 +488,7 @@ class ZScoutFrame(tk.Frame):
                         'competition_frame':self.competition_frame,
                         'ranking_frame':self.ranking_frame,
                         'parent':self.parent}
-#            print('self: ' + str(self))
             make_gui_from_html_file('menu.html', root=self, namespace=namespace)
-            #add_to_namespace(widgets) None are used
         
         def setup_team_summary_frame():
             """Set up the team summary frame."""
@@ -542,10 +496,8 @@ class ZScoutFrame(tk.Frame):
             def get_config_func(canvas):
                 return lambda e: config_canvas(canvas)
             
-            namespace = {#'config_canvas':config_canvas,
-                         'get_config_func':get_config_func,
-                         'show_summary':show_summary}
-#            print('config_canvas: ' + str(config_canvas))
+            namespace = {'get_config_func':get_config_func,
+            'show_summary':show_summary}
             widgets, _ = make_gui_from_html_file('team_summary_frame.html', root=self, namespace=namespace)
             add_to_namespace(widgets)
             self.active_frame = self.scouting_frame #This frame is the frame to start from
@@ -553,11 +505,10 @@ class ZScoutFrame(tk.Frame):
         def setup_comp_frame():
             """Set up the team competition frame."""
             
-            #vars
+            # Variables
             self.comp_notice = tk.StringVar() #The variable to show any messages in
             self.contrs_from_team_from_category = {} #A dict from categories to dicts from teams to dicts to scores to probabilities
             self.state.categories = [] #The current categories
-            #end vars
             
             comp = self.state.read_with_default('comp', '', write=True) #Get the comp from the state, make it '' if there is none
             
@@ -567,8 +518,8 @@ class ZScoutFrame(tk.Frame):
             self.comp_choose_var.trace('w', set_comp_tkevent)
             
             namespace = {'comps': comps,
-                         'comp_choose_var': self.comp_choose_var,
-                         'comp_notice': self.comp_notice}
+            'comp_choose_var': self.comp_choose_var,
+            'comp_notice': self.comp_notice}
             
             widgets, _ = make_gui_from_html_file('comp_frame.html', root=self, namespace=namespace)
             add_to_namespace(widgets)
@@ -590,7 +541,6 @@ class ZScoutFrame(tk.Frame):
         
         #The only place where self.year is accessed is right after it's set
         #So setting it anywhere else is pointless
-#        self.year = '' #Cue Doctor Who theme song
         
         #Set up all the frames
         setup_team_summary_frame()
@@ -603,12 +553,12 @@ class ZScoutFrame(tk.Frame):
 def main():
     """Run the scouting data viewer."""
     
-    print('Running scouting data viewer')
+    print('\nRunning scouting data viewer...\n')
     
-    root = tk.Tk() #Make the root
-    root.geometry('350x250+300+300') #Set the dimensions and location
-    tk.app = ZScoutFrame(root) #Make the main frame
-    root.mainloop() #Start
+    root = tk.Tk()
+    root.geometry('350x250+300+300')
+    tk.app = ZScoutFrame(root)
+    root.mainloop()
 
 if __name__ == '__main__':
-    main() #Run
+    main()

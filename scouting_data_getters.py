@@ -6,9 +6,9 @@ Created on Sun Jan 28 13:37:51 2018
 """
 
 import os
-import ast #For evaluating tokens
-import csv #For reading csv files
-import imp #For importing python modules
+import ast
+import csv
+import imp
 from sys import platform
 import games
 
@@ -25,8 +25,7 @@ def get_data(line_data):
     
     result = {}
     for key in line_data.keys():
-#        if not key in ['match_id', 'team_id']:
-        if key != 'match_id' and key != 'team_id': #These values aren't added
+        if key != 'match_id' and key != 'team_id': # Do not add
             result[key] = {match_num: {team_num: line_data[key]}}
     
     return result
@@ -40,7 +39,7 @@ def get_game(folder, year=None):
         year: The year to get a game for.
     """
     
-    directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting\\' + folder + '\\gamedef' #The full path of the directory to look in
+    directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting\\' + folder + '\\gamedef' # TODO add mac support
     try:
         for file_name in os.listdir(directory): #There should only be one .py file, but I don't know its name
 #            The game should be defined in this file
@@ -55,12 +54,10 @@ def get_game(folder, year=None):
     except FileNotFoundError:
         print('getting game from year')
         if year == None:
-            #The first four letters of the folder will *probably* be the year
             year = folder[:4] #TODO make into robust regex for year 10,000 AD
         return games.GAMES_FROM_YEARS[year]
 
-#These lines are here because at one competition we shared scouting data with team 3322 and they had a different format
-#I could make this more robust and easily changeable
+# TODO make this more robust and easily changeable
 match_num_from_source = {'RAT':'match_id', '3322':'Match Number'}
 team_num_from_source = {'RAT':'team_id', '3322':'Team Number'}
 
@@ -75,7 +72,6 @@ def get_all_comps():
         if os.path.isdir(os.path.join(directory, name)):
             if not 'test' in name:
                 result.append(name)
-    print("running v2...")
     return result
 
 def get_raw_scouting_data(folder):
@@ -87,11 +83,10 @@ def get_raw_scouting_data(folder):
     """
     
     result = {}
-    directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting\\' + folder #The full name of the directory to search in.
+    directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting\\' + folder # TODO add mac support
     
     if not os.path.exists(directory):
         raise ValueError('No such folder: ' + folder)
-#        return {}
     
     for file_name in os.listdir(directory): #Go through every file and collect data
         
@@ -104,18 +99,14 @@ def get_raw_scouting_data(folder):
                                                             #I said "datas"
                                                             #Ha ha ha, grammar man
             
-            for line_data in line_datas: #Procees the line datas
-#                team_num = line_data['team_id'].__str__()
+            for line_data in line_datas: # Process the line data
                 team_key = team_num_from_source[source] #Get the keys
                 match_key = match_num_from_source[source] #Because once we shared scouting data with 3322
                 
                 team_num = line_data[team_key].__str__() #Get the team num
                 
-#                match_num = line_data['match_id']
                 match_num = line_data[match_key]
                 line_data = line_data.copy()
-#                line_data.pop('team_id')
-#                line_data.pop('match_id')
                 line_data.pop(team_key) #Remove the team and match parts from the line data
                 line_data.pop(match_key)
                 match_scouting_data = (match_num, line_data)
@@ -142,8 +133,8 @@ def eval_token(token):
     if token.lower() in ['false', 'no']:
         return 0
     try: 
-        return ast.literal_eval(token) #Evaluate the token
-    except ValueError: #Just a string
+        return ast.literal_eval(token)
+    except ValueError:
         return token
 
 def read_scouting(file, source='RAT'):
