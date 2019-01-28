@@ -570,7 +570,7 @@ class ZScoutFrame(tk.Frame):
                          'comp_choose_var': self.comp_choose_var,
                          'comp_notice': self.comp_notice}
             
-            widgets, n = make_gui_from_html_file('comp_frame.html', root=self, namespace=namespace)
+            widgets, _ = make_gui_from_html_file('comp_frame.html', root=self, namespace=namespace)
             add_to_namespace(widgets)
         
         def setup_ranking_frame():
