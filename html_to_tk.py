@@ -48,17 +48,19 @@ def make_gui_from_parsed_html(html, root=None, add_element=None, namespace=None)
     Returns:
         A map from names (specified in 'name' attributes in HTML) to widgets 
     """
+#    print('')
     root = root if root else tk.Tk()
     add_element = add_element if add_element else 'pack'
     namespace = namespace if namespace else {}
     result = {}
     for node in html:
 #        print('Node: '+ str(node))
-        w_result = make_widget_from_node(node, root=root, add_element=add_element, namespace=namespace)
+        w_result, w_namespace = make_widget_from_node(node, root=root, add_element=add_element, namespace=namespace)
         result.update(w_result)
         namespace.update(w_result)
+        namespace.update(w_namespace)
     
-    return result
+    return result, namespace
 
 LAYOUT_PREFIX = 'hl_'
 SPECIAL_ATTRIBUTES = ['name', 'layout']
@@ -81,6 +83,7 @@ def capitalize_first(tag):
 def parse_val(val, namespace=None):
     namespace = namespace if namespace else {}
     locals().update(namespace)
+#    print('val: ' + str(val))
     return eval(val)
 
 def make_widget_from_node(node, root=None, add_element=None, namespace=None):
@@ -96,18 +99,26 @@ def make_widget_from_node(node, root=None, add_element=None, namespace=None):
         node = node.strip()
         if node:
             widget = tk.Label(root, text=node)
-        return {}
+        return {}, {}
     
     namespace = namespace if namespace else {}
     
-    print(node.tag)
+#    print(node.tag)
     
     if node.tag == 'exec':
-#        print('EXECUTING')
+#        if 'config_canvas' in namespace:
+#            print(namespace['config_canvas'])
         locals().update(namespace)
         code = node.attributes.get('code', '')
+        vals = list(locals())
         exec(code)
-        return {}
+        new_vals = list(locals())
+        added_vals = [val for val in new_vals if not val in vals]
+        added_vals.remove('vals')
+        new_namespace = {}
+        for val in added_vals:
+            new_namespace[val] = locals()[val]
+        return {}, new_namespace
     
     widget_type = capitalize_first(node.tag)
     widget_class = getattr(tk, widget_type)
@@ -124,8 +135,8 @@ def make_widget_from_node(node, root=None, add_element=None, namespace=None):
     
     
     widget = widget_class(root, **widget_attributes)
-    if widget_type != 'Menu':
-        print('adding to layout')
+    if widget_type != 'Menu' and add_element != 'None':
+#        print('adding to layout')
         getattr(widget, add_element)(**layout_attributes) #Add the element
     
     result = {}
@@ -137,8 +148,9 @@ def make_widget_from_node(node, root=None, add_element=None, namespace=None):
 #    print('namespace after: ' + str(namespace))
     
     sub_add_element = node.attributes.get('layout', 'pack')
-    h_result = make_gui_from_parsed_html(node.children, root=widget, add_element=sub_add_element, namespace=namespace)
+    h_result, h_namespace = make_gui_from_parsed_html(node.children, root=widget, add_element=sub_add_element, namespace=namespace)
     
     result.update(h_result)
+    namespace.update(h_namespace)
     
-    return result
+    return result, {}
