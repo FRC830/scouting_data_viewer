@@ -1,0 +1,8 @@
+<Frame name="competition_frame" relief="tk.RAISED" borderwidth="1" layout="pack">
+    <Label text="'Competition:'" hl_side="tk.TOP" hl_padx="5" hl_pady="5" />
+    <!-- <OptionMenu name="comp_choose"> -->
+    <!-- I needed an exec to do this because OptionMenu doesn't use a keyword argument for its list -->
+    <Exec code="comp_choose = tk.OptionMenu(competition_frame, comp_choose_var, *comps)" />
+    <Exec code="comp_choose.pack(side=tk.TOP, padx=5, pady=5)" />
+    <Label name="notice_label" textvariable="comp_notice" hl_side="tk.TOP" hl_pady="5" />
+</Frame>
