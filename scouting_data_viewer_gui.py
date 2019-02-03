@@ -183,7 +183,7 @@ class ZScoutFrame(tk.Frame):
                 if (i + 1) * teams_in_row > num_teams: # change the number of teams to the leftover
                     teams_displayed = num_teams % teams_in_row
                 format_code = left_padding_size * " " + "{: <6}" * teams_displayed+ "\n"
-                print("starting team:", i * teams_in_row, i * teams_in_row + teams_displayed)
+#                print("starting team:", i * teams_in_row, i * teams_in_row + teams_displayed)
                 team_list = self.state.teams[i * teams_in_row:i * teams_in_row + teams_displayed]
                 self.teams_text.insert(tk.INSERT, format_code.format(*team_list))
             self.teams_text.config(state=tk.DISABLED)
@@ -382,7 +382,7 @@ class ZScoutFrame(tk.Frame):
             
             raw_scouting = self.state.read_with_default('raw_scouting', val={})
             raw_team_scouting = raw_scouting.get(team, []) #Scouting for this team
-
+            
             if raw_team_scouting:
                 scouting_string_list = [get_column_string()] #The column headers should be at the top
                 

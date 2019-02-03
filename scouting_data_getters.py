@@ -41,7 +41,7 @@ def get_game(folder, year=None):
     """
     dirname = os.path.dirname(os.path.realpath(__file__))
 #    directory_old = os.path.dirname(os.path.realpath(__file__)) + '\\scouting\\' + folder + '\\gamedef' #The full path of the directory to look in
-    directory = os.path.join(dirname, 'scouting', folder, 'gamedef');
+    directory = os.path.join(dirname, 'scouting', folder, 'gamedef')
 #    print('directories:')
 #    print(directory_old)
 #    print(directory)
