@@ -9,7 +9,7 @@ import os
 import ast #For evaluating tokens
 import csv #For reading csv files
 import imp #For importing python modules
-from sys import platform
+#from sys import platform
 import games
 
 def get_data(line_data):
@@ -39,8 +39,12 @@ def get_game(folder, year=None):
         folder: The folder to game the game from.
         year: The year to get a game for.
     """
-    
-    directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting\\' + folder + '\\gamedef' #The full path of the directory to look in
+    dirname = os.path.dirname(os.path.realpath(__file__))
+#    directory_old = os.path.dirname(os.path.realpath(__file__)) + '\\scouting\\' + folder + '\\gamedef' #The full path of the directory to look in
+    directory = os.path.join(dirname, 'scouting', folder, 'gamedef');
+#    print('directories:')
+#    print(directory_old)
+#    print(directory)
     try:
         for file_name in os.listdir(directory): #There should only be one .py file, but I don't know its name
 #            The game should be defined in this file
@@ -66,16 +70,17 @@ team_num_from_source = {'RAT':'team_id', '3322':'Team Number'}
 
 def get_all_comps():
     """Return all the comps we have data for."""
-    if platform == "darwin" or platform == "linux":
-        directory = os.path.dirname(os.path.realpath(__file__)) + '/scouting'
-    elif platform == "win32":
-        directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting'
+#    if platform == "darwin" or platform == "linux":
+#        directory = os.path.dirname(os.path.realpath(__file__)) + '/scouting'
+#    elif platform == "win32":
+#        directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting'
+    directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'scouting')
     result = []
     for name in os.listdir(directory):
         if os.path.isdir(os.path.join(directory, name)):
             if not 'test' in name:
                 result.append(name)
-    print("running v2...")
+#    print("running v2...")
     return result
 
 def get_raw_scouting_data(folder):
@@ -87,7 +92,9 @@ def get_raw_scouting_data(folder):
     """
     
     result = {}
-    directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting\\' + folder #The full name of the directory to search in.
+    dirname = os.path.dirname(os.path.realpath(__file__))
+#    directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting\\' + folder #The full name of the directory to search in.
+    directory = os.path.join(dirname, 'scouting', folder)
     
     if not os.path.exists(directory):
         raise ValueError('No such folder: ' + folder)

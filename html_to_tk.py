@@ -63,7 +63,7 @@ def make_gui_from_parsed_html(html, root=None, add_element=None, namespace=None)
     return result, namespace
 
 LAYOUT_PREFIX = 'hl_'
-SPECIAL_ATTRIBUTES = ['name', 'layout']
+SPECIAL_ATTRIBUTES = ['name', 'layout', 'self_layout']
 
 def capitalize_first(tag):
     return tag[0].upper() + tag[1:]
@@ -135,6 +135,7 @@ def make_widget_from_node(node, root=None, add_element=None, namespace=None):
     
     
     widget = widget_class(root, **widget_attributes)
+    add_element = node.attributes.get('self_layout', add_element) #default is to keep using the same layout
     if widget_type != 'Menu' and add_element.lower() != 'none':
 #        print('adding to layout')
         getattr(widget, add_element)(**layout_attributes) #Add the element

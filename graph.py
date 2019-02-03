@@ -10,33 +10,51 @@ import math
 import tkinter as tk
 
 def get_scouting_graph_data(match_data, red_and_blue, num_margins=None):
+    """
+    Return the graph data made from the given match data.
+    
+    Parameters:
+        match_data: A dict from score margins to probabilities.
+        red_and_blue: Whether to show both the red and blue side or just the red
+        num_margins: The number of score margins to show in the graph
+    """
+#    print('match_data:')
+#    print(match_data)
+#    print('')
+#    print('red_and_blue:')
+#    print(red_and_blue)
+#    print('')
+#    print('num_margins:')
+#    print(num_margins)
+#    print('')
     
     MARGIN_TIERS = [1, 5, 15, 25, 50, 100, 150, 200, 250, 300, 400, 500, 1000]
     
     def get_num_margins(max_red_margin, max_blue_margin):
-            if num_margins == None:
-                result = None
-                result = max(max_red_margin, max_blue_margin)
-                for tier in MARGIN_TIERS:#(TWO_SIDE_MARGIN_TIERS if red_and_blue else ONE_SIDE_MARGIN_TIERS):
-                    if result <= tier:
-                        result = tier*2+1 if red_and_blue else tier
-                        #print('num_margins: ' + result.__str__())
-                        return result
-                tier = MARGIN_TIERS[-1]
-                return tier*2+1 if red_and_blue else tier
-            else:
-                return num_margins
+#            if num_margins == None:
+            result = None
+            result = max(max_red_margin, max_blue_margin)
+            for tier in MARGIN_TIERS:#(TWO_SIDE_MARGIN_TIERS if red_and_blue else ONE_SIDE_MARGIN_TIERS):
+                if result <= tier:
+                    #If showing both sides, we need twice as many margins, plus the middle (?)
+                    result = tier*2+1 if red_and_blue else tier
+                    #print('num_margins: ' + result.__str__())
+                    return result
+            tier = MARGIN_TIERS[-1]
+            return tier*2+1 if red_and_blue else tier
+#            else:
+#                return num_margins
         
-    def get_one_side_margins():
-        return (num_margins // 2 - 1) if red_and_blue else num_margins
+#    def get_one_side_margins(red_and_blue): #Not used
+#        return (num_margins // 2 - 1) if red_and_blue else num_margins
     
-    def get_margin(match):
-        """Return the margin of the match's scores. Matches blue wins in have a negative margin."""
-        return match
+#    def get_margin(match): #Not used
+#        """Return the margin of the match's scores. Matches blue wins in have a negative margin."""
+#        return match
         
-    def data_sort(match):
-        """Return the margin of the match's scores. Used as a sort key."""
-        return get_margin(match)
+#    def data_sort(match): #Not used
+#        """Return the margin of the match's scores. Used as a sort key."""
+#        return get_margin(match)
     
     class GraphData:
         def __init__(self, red_and_blue, margins, label_margins):
@@ -46,12 +64,12 @@ def get_scouting_graph_data(match_data, red_and_blue, num_margins=None):
     
     max_red_margin = 0
     max_blue_margin = 0
-    for match in match_data:
-        if match_data[match] > 0:
-            max_red_margin = max(max_red_margin, abs(get_margin(match)))
-            max_blue_margin = max(max_blue_margin, abs(-get_margin(match)))
+    for margin in match_data:
+        if match_data[margin] > 0: #The probability of this isn't zero, so it's an actual margin
+            max_red_margin = max(max_red_margin, abs(margin))
+            max_blue_margin = max(max_blue_margin, abs(-margin))
     
-    num_margins = get_num_margins(max_red_margin, max_blue_margin)
+    num_margins = num_margins if num_margins else get_num_margins(max_red_margin, max_blue_margin)
     
     margins = {}
     

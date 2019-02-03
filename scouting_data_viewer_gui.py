@@ -44,7 +44,8 @@ class ZScoutFrame(tk.Frame):
     
     def init_state(self):
         """Initialize the state variable."""
-        self.state.non_override_write('summaries', {}) #If there is not already a 'summaries' variable in state, add one and make it equal to {}
+        #If there is not already a 'summaries' variable in state, add one and make it equal to {}
+        self.state.non_override_write('summaries', {})
     
     def initUI(self):
         """Initialize the user interface."""
@@ -96,13 +97,14 @@ class ZScoutFrame(tk.Frame):
             Parameters:
                 comp: The comp name to get the year from.
             """
-            result = ''
-            for char in comp: #This assumes that the only digits in the comp name are in the year
-                if char in '0123456789':
-                    result += char
-                else:
-                    return result
-            return result
+            return ''.join([c for c in comp if c in '0123456789'])
+#            result = ''
+#            for char in comp: #This assumes that the only digits in the comp name are in the year
+#                if char in '0123456789':
+#                    result += char
+#                else:
+#                    return result
+#            return result
         
         def set_comp(startup=False):
             """
@@ -160,8 +162,6 @@ class ZScoutFrame(tk.Frame):
                 config_ranking_frame()
                 
                 self.state.save()
-#                else:
-#                    self.comp_notice.set('No such folder: ' + self.state.comp)
                 
         def config_teams_frame():
             """Set up the frame that shows a list of teams in the current competition."""
@@ -321,6 +321,9 @@ class ZScoutFrame(tk.Frame):
             for child in self.ranking_frame.winfo_children(): #Get rid of all the child widgets
                 child.destroy()
             
+            #namespace = {'get_conf_canv': get_conf_canv,
+            #             'refresh_rankings': refresh_rankings}
+            
             self.ranking_scroll = tk.Scrollbar(self.ranking_frame, orient=tk.HORIZONTAL) #Make a scrollbar for the weight setting
             
             self.rank_box_canvas = tk.Canvas(self.ranking_frame, relief=tk.RAISED, xscrollcommand=self.ranking_scroll.set) #Make a convas to put the weight setters in
@@ -334,6 +337,12 @@ class ZScoutFrame(tk.Frame):
             self.rank_box_canvas.create_window((0, 0), window=self.rank_box_frame, tags='self.rank_box_frame') #Make a place in the canvas for the frame
                                                                                                                #(Because tk scrollbars are jank)
             self.ranking_scroll.config(command=self.rank_box_canvas.xview) #Link the scrollbar to the rank box canvas
+            #*************************************************************
+            self.ranking_refresh_button = tk.Button(self.ranking_frame, text='Refresh Rankings', command=refresh_rankings) #The button to refresh the rankings
+            self.ranking_refresh_button.grid(row=2, column=0) #Add the ranking refresh button
+            
+            self.team_ranks_panel = tk.Frame(self.ranking_frame) #The panel for the team ranks
+            self.team_ranks_panel.grid(row=3, column=0) #Add the team ranks panel
             
             self.cat_weight_fields = {} #Set the weight map to empty
             
@@ -350,12 +359,6 @@ class ZScoutFrame(tk.Frame):
                 entry.pack(side=tk.TOP) #Add the textbox to the entry panel
                 
                 self.cat_weight_fields[cat] = entry
-            
-            self.ranking_refresh_button = tk.Button(self.ranking_frame, text='Refresh Rankings', command=refresh_rankings) #The button to refresh the rankings
-            self.ranking_refresh_button.grid(row=2, column=0) #Add the ranking refresh button
-            
-            self.team_ranks_panel = tk.Frame(self.ranking_frame) #The panel for the team ranks
-            self.team_ranks_panel.grid(row=3, column=0) #Add the team ranks panel
             
         #end scouting methods
         
@@ -436,38 +439,39 @@ class ZScoutFrame(tk.Frame):
             lens.append(len(av_string)) #Add the len of the av string to the lens
             scouting_string_list.append(av_string) #Add the av string
             
-            namespace = {'save_summary': save_summary,
-                         'prev_summary': prev_summary,
-                         'get_conf_canv': get_conf_canv}
+            scouting_text_pane = tk.Text(self.team_summary_canvas, wrap=tk.NONE) #The text pane with the scouting data in it
+            scouting_text_pane.grid(row=0, column=0) #Add the scouting text pane
             
-            widgets, _ = make_gui_from_html_file('team_summary_inner_frame.html', root=self.team_summary_canvas_frame, namespace=namespace)
-            scouting_text_pane = widgets['scouting_text_pane']
+#            namespace = {'save_summary': save_summary,
+#                         'prev_summary': prev_summary,
+#                         'get_conf_canv': get_conf_canv,
+#                         'scouting_text_pane': scouting_text_pane}
+#            
+#            widgets, _ = make_gui_from_html_file('team_summary_inner_frame.html', root=self.team_summary_canvas_frame, namespace=namespace)
+#            scouting_text_pane = widgets['scouting_text_pane']
             
             #********************************************************
-#            self.team_summary_inner_frame = tk.Frame(self.team_summary_canvas_frame, relief=tk.RAISED, borderwidth=1) #The frame for the team summary
-#            self.team_summary_inner_frame.pack(side=tk.TOP) #Add the team summary inner frame
-#            
-#            #Make scouting data viewer
-#            scouting_text_scrollbar = tk.Scrollbar(self.team_summary_inner_frame, orient=tk.HORIZONTAL) #The scrollbar for the scouting text
-#            scouting_text_canvas = tk.Canvas(self.team_summary_inner_frame, xscrollcommand=scouting_text_scrollbar.set, width=1000) #The canvas to put the scouting text in
-#            scouting_text_canvas.pack(side=tk.TOP, fill=tk.NONE) #Add the scouting text canvas
-#            self.team_summary_inner_frame.bind('<Configure>', get_conf_canv(scouting_text_canvas, width=1000, height=400)) #Set the configuring to configure the frame to the right dimensions
-#            
-#            scouting_text_pane = tk.Text(self.team_summary_canvas, wrap=tk.NONE) #The text pane with the scouting data in it
-#            scouting_text_pane.grid(row=0, column=0) #Add the scouting text pane
-#            
-#            scouting_text_scrollbar.pack(side=tk.TOP, fill=tk.X, padx=150, pady=2) #Add the scouting text scrollbar
-#            scouting_text_scrollbar.config(command=scouting_text_canvas.xview) #Set the scrollbar to horizontal scrolling on scouting_text_canvas
-#            
-#            scouting_text_canvas.create_window((0, 0), window=scouting_text_pane, anchor='nw', tags='scouting_text_pane') #Make a place in the scouting text canvas for the pane
-#            
-#            #Make editable summary pane
-#            scouting_editable_summary = tk.Text(self.team_summary_inner_frame, height=5) #The editable summary
-#            scouting_editable_summary.insert('1.0', prev_summary) #Add the previous summary to the summary textbox
-#            scouting_editable_summary.pack(side=tk.TOP) #Add the scouting editable summary
-#            
-#            save_button = tk.Button(self.team_summary_inner_frame, text='Save', command=lambda *args:save_summary(scouting_editable_summary)) #The button to save the editable summary
-#            save_button.pack(side=tk.TOP) #Add the save button
+            self.team_summary_inner_frame = tk.Frame(self.team_summary_canvas_frame, relief=tk.RAISED, borderwidth=1) #The frame for the team summary
+            self.team_summary_inner_frame.pack(side=tk.TOP) #Add the team summary inner frame
+            
+            #Make scouting data viewer
+            scouting_text_scrollbar = tk.Scrollbar(self.team_summary_inner_frame, orient=tk.HORIZONTAL) #The scrollbar for the scouting text
+            scouting_text_canvas = tk.Canvas(self.team_summary_inner_frame, xscrollcommand=scouting_text_scrollbar.set, width=1000) #The canvas to put the scouting text in
+            scouting_text_canvas.pack(side=tk.TOP, fill=tk.NONE) #Add the scouting text canvas
+            self.team_summary_inner_frame.bind('<Configure>', get_conf_canv(scouting_text_canvas, width=1000, height=400)) #Set the configuring to configure the frame to the right dimensions
+            
+            scouting_text_scrollbar.pack(side=tk.TOP, fill=tk.X, padx=150, pady=2) #Add the scouting text scrollbar
+            scouting_text_scrollbar.config(command=scouting_text_canvas.xview) #Set the scrollbar to horizontal scrolling on scouting_text_canvas
+            
+            scouting_text_canvas.create_window((0, 0), window=scouting_text_pane, anchor='nw', tags='scouting_text_pane') #Make a place in the scouting text canvas for the pane
+            
+            #Make editable summary pane
+            scouting_editable_summary = tk.Text(self.team_summary_inner_frame, height=5) #The editable summary
+            scouting_editable_summary.insert('1.0', prev_summary) #Add the previous summary to the summary textbox
+            scouting_editable_summary.pack(side=tk.TOP) #Add the scouting editable summary
+            
+            save_button = tk.Button(self.team_summary_inner_frame, text='Save', command=lambda *args:save_summary(scouting_editable_summary)) #The button to save the editable summary
+            save_button.pack(side=tk.TOP) #Add the save button
             #********************************************************
             #Expand text box to right width
             scouting_text_pane.config(width = max(lens) + 1) #Make the text pane wide enough to hold all its text
@@ -597,7 +601,6 @@ class ZScoutFrame(tk.Frame):
         
         #The only place where self.year is accessed is right after it's set
         #So setting it anywhere else is pointless
-#        self.year = '' #Cue Doctor Who theme song
         
         #Set up all the frames
         setup_team_summary_frame()
