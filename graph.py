@@ -18,20 +18,10 @@ def get_scouting_graph_data(match_data, red_and_blue, num_margins=None):
         red_and_blue: Whether to show both the red and blue side or just the red
         num_margins: The number of score margins to show in the graph
     """
-#    print('match_data:')
-#    print(match_data)
-#    print('')
-#    print('red_and_blue:')
-#    print(red_and_blue)
-#    print('')
-#    print('num_margins:')
-#    print(num_margins)
-#    print('')
     
     MARGIN_TIERS = [1, 5, 15, 25, 50, 100, 150, 200, 250, 300, 400, 500, 1000]
     
     def get_num_margins(max_red_margin, max_blue_margin):
-#            if num_margins == None:
             result = None
             result = max(max_red_margin, max_blue_margin)
             for tier in MARGIN_TIERS:#(TWO_SIDE_MARGIN_TIERS if red_and_blue else ONE_SIDE_MARGIN_TIERS):
@@ -42,20 +32,7 @@ def get_scouting_graph_data(match_data, red_and_blue, num_margins=None):
                     return result
             tier = MARGIN_TIERS[-1]
             return tier*2+1 if red_and_blue else tier
-#            else:
-#                return num_margins
         
-#    def get_one_side_margins(red_and_blue): #Not used
-#        return (num_margins // 2 - 1) if red_and_blue else num_margins
-    
-#    def get_margin(match): #Not used
-#        """Return the margin of the match's scores. Matches blue wins in have a negative margin."""
-#        return match
-        
-#    def data_sort(match): #Not used
-#        """Return the margin of the match's scores. Used as a sort key."""
-#        return get_margin(match)
-    
     class GraphData:
         def __init__(self, red_and_blue, margins, label_margins):
             self.red_and_blue = red_and_blue

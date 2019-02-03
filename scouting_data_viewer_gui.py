@@ -427,7 +427,8 @@ class ZScoutFrame(tk.Frame):
                 self.state.save() #Save the state (writes to a file)
             prev_summary = self.state.summaries.get(key, '') #The summary when the gui was last closed
             
-            raw_team_scouting = self.state.raw_scouting.get(team, []) #Scouting for this team
+            raw_scouting = self.state.read_with_default('raw_scouting', val={})
+            raw_team_scouting = raw_scouting.get(team, []) #Scouting for this team
             scouting_string_list = [get_column_string()] #The column headers should be at the top
             
             lens = [len(scouting_string_list[0])] #start with len of column string

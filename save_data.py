@@ -23,8 +23,9 @@ class SaveData(object):
             name: The file name for the save data.
         """
         
-        directory = os.path.dirname(os.path.realpath(__file__)) + '\\save\\'
-        self.path = directory + name + '.save'
+        dirname = os.path.dirname(os.path.realpath(__file__))
+        #directory = os.path.join(dirname, ) '\\save\\'
+        self.path = os.path.join(dirname, 'save', name + '.save')
         if not os.path.exists(self.path):
             os.makedirs(directory)
             file = open(self.path, 'w')
