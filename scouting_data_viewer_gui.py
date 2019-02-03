@@ -98,13 +98,6 @@ class ZScoutFrame(tk.Frame):
                 comp: The comp name to get the year from.
             """
             return ''.join([c for c in comp if c in '0123456789'])
-#            result = ''
-#            for char in comp: #This assumes that the only digits in the comp name are in the year
-#                if char in '0123456789':
-#                    result += char
-#                else:
-#                    return result
-#            return result
         
         def set_comp(startup=False):
             """
@@ -165,75 +158,34 @@ class ZScoutFrame(tk.Frame):
                 
         def config_teams_frame():
             """Set up the frame that shows a list of teams in the current competition."""
-#            print('configging teams frame')
-            self.state.teams.sort(key=lambda t: int(t)) #Sort the teams in increasing numerical order.
-            num_in_chunk = 10 #How many teams to display per line.
-            
-            self.teams_text.config(state=tk.NORMAL) #Can be edited
-            self.teams_text.delete('1.0', tk.END) #Clear entire panel
-            self.teams_text.insert(tk.INSERT, '\n') #Start with a newline for spacing
+            ### Setup Variables
+            self.state.teams.sort(key=lambda t: int(t))
+            teams_in_row = 10
+            left_padding_size = 10
+
+            # Reset Panel
+            self.teams_text.config(state=tk.NORMAL)
+            self.teams_text.delete('1.0', tk.END)
+            self.teams_text.insert(tk.INSERT, '\n')
+
+            # Center-align 'Teams:'
             teams_list_title = 'Teams:\n'
             half_title_len = (len(teams_list_title) - 1) // 2
-            self.teams_text.insert(tk.INSERT, ' ' * (3*num_in_chunk + 10 - half_title_len) + 'Teams:\n') #Center-align 'Teams:'
-            #Explanation for 3*num_in_chunk + 10 - half_title_len:
-            #When the teams are printed, they are padded so each team takes up six characters
-            #and each line is padded with then spaces at the left
-            #So a line might look like this:
-            #0123456789012345678901234567890123456789
-            #          63    830   3991  1234  4335<End of line
-            #
-            #The word 'Teams' should be centered above the list of teams
-            #Because each team takes six characters, the spot at the center of the team list
-            #Will be three characters to the right for each team:
-            #                      Center:
-            #                        ><
-            #            1  2  3  4  5
-            #          123123123123123            
-            #          63    830   3991  1234  4335<End of line
-            #
-            #So a naïve approach would be to put 10 + 3*num_in_chunk spaces before 'Teams:':
-            #                      Center:
-            #                        ><
-            #                         Teams:
-            #            1  2  3  4  5
-            #          123123123123123
-            #          63    830   3991  1234  4335<End of line
-            #
-            #But that makes the title a bit to the right
-            #instead of having the left end of the title be centered,
-            #we want the center of the title to be centered
-            #And the center of the title is halfway through, so if we move the title
-            #n/2 characters to the left, where n = len(title),
-            #the center will be centered:
-            #
-            #                      Center:
-            #                        ><
-            #                      <<<
-            #                      Teams:
-            #            1  2  3  4  5
-            #          123123123123123
-            #          63    830   3991  1234  4335<End of line
-            #
-            #                 Without annotations:
-            #
-            #                      Teams:
-            #          63    830   3991  1234  4335<End of line
-            
-            num_teams = len(self.state.teams)
-            num_of_chunks = math.ceil(num_teams / num_in_chunk)
+            title_padding = (left_padding_size + 3 * teams_in_row - half_title_len) * ' '
+            self.teams_text.insert(tk.INSERT, title_padding + teams_list_title)
 
-#            for i in range(0, int((len(self.state.teams) / num_in_chunk) + 1)): #Go through teams in chunks
-            for i in range(0, num_of_chunks): #Go through teams in chunks
-                string = ' ' * 10 #Buffer space
-                for j in range(0, num_in_chunk):
-                    index = num_in_chunk*i + j #The index of the team in the teams list
-                    if(index < len(self.state.teams)): #Don't go past the end of the list
-                        team = self.state.teams[index]
-                        ln = len(team)
-                        string += team + ' '*(6-ln) #Pad the string to six characters
-                        
-                self.teams_text.insert(tk.INSERT, string + '\n') #Add a line
-            self.teams_text.config(state=tk.DISABLED) #Make it so the teams list can't be modified
+            num_teams = len(self.state.teams)
+            rows = math.ceil(num_teams / teams_in_row)
+
+            # Display teams
+            for i in range(rows):
+                if (i + 1) * teams_in_row > num_teams: # change the number of teams to the leftover
+                    teams_in_row = num_teams % teams_in_row
+                format_code = left_padding_size * " " + "{: <6}" * teams_in_row + "\n"
+                print("starting team:", i * teams_in_row, i + 1 * teams_in_row)
+                team_list = self.state.teams[i * teams_in_row:i + 1 * teams_in_row]
+                self.teams_text.insert(tk.INSERT, format_code.format(*team_list))
+            self.teams_text.config(state=tk.DISABLED)
         
         def get_weight(cat):
             """
@@ -429,76 +381,78 @@ class ZScoutFrame(tk.Frame):
             
             raw_scouting = self.state.read_with_default('raw_scouting', val={})
             raw_team_scouting = raw_scouting.get(team, []) #Scouting for this team
-            scouting_string_list = [get_column_string()] #The column headers should be at the top
-            
-            lens = [len(scouting_string_list[0])] #start with len of column string
-            for match, line_data in raw_team_scouting: #Collect list of scouting strings, insert later
-                string = get_match_scouting_string(match, line_data) #Get the scouting string
-                lens.append(len(string)) #Add the length of this string to the lens list
-                scouting_string_list.append(get_match_scouting_string(match, line_data)) #Add the scouting string
-            av_string = get_match_scouting_string('Avs:', self.state.averages[team]) #The string for the averages
-            lens.append(len(av_string)) #Add the len of the av string to the lens
-            scouting_string_list.append(av_string) #Add the av string
-            
-            scouting_text_pane = tk.Text(self.team_summary_canvas, wrap=tk.NONE) #The text pane with the scouting data in it
-            scouting_text_pane.grid(row=0, column=0) #Add the scouting text pane
-            
-#            namespace = {'save_summary': save_summary,
-#                         'prev_summary': prev_summary,
-#                         'get_conf_canv': get_conf_canv,
-#                         'scouting_text_pane': scouting_text_pane}
-#            
-#            widgets, _ = make_gui_from_html_file('team_summary_inner_frame.html', root=self.team_summary_canvas_frame, namespace=namespace)
-#            scouting_text_pane = widgets['scouting_text_pane']
-            
-            #********************************************************
-            self.team_summary_inner_frame = tk.Frame(self.team_summary_canvas_frame, relief=tk.RAISED, borderwidth=1) #The frame for the team summary
-            self.team_summary_inner_frame.pack(side=tk.TOP) #Add the team summary inner frame
-            
-            #Make scouting data viewer
-            scouting_text_scrollbar = tk.Scrollbar(self.team_summary_inner_frame, orient=tk.HORIZONTAL) #The scrollbar for the scouting text
-            scouting_text_canvas = tk.Canvas(self.team_summary_inner_frame, xscrollcommand=scouting_text_scrollbar.set, width=1000) #The canvas to put the scouting text in
-            scouting_text_canvas.pack(side=tk.TOP, fill=tk.NONE) #Add the scouting text canvas
-            self.team_summary_inner_frame.bind('<Configure>', get_conf_canv(scouting_text_canvas, width=1000, height=400)) #Set the configuring to configure the frame to the right dimensions
-            
-            scouting_text_scrollbar.pack(side=tk.TOP, fill=tk.X, padx=150, pady=2) #Add the scouting text scrollbar
-            scouting_text_scrollbar.config(command=scouting_text_canvas.xview) #Set the scrollbar to horizontal scrolling on scouting_text_canvas
-            
-            scouting_text_canvas.create_window((0, 0), window=scouting_text_pane, anchor='nw', tags='scouting_text_pane') #Make a place in the scouting text canvas for the pane
-            
-            #Make editable summary pane
-            scouting_editable_summary = tk.Text(self.team_summary_inner_frame, height=5) #The editable summary
-            scouting_editable_summary.insert('1.0', prev_summary) #Add the previous summary to the summary textbox
-            scouting_editable_summary.pack(side=tk.TOP) #Add the scouting editable summary
-            
-            save_button = tk.Button(self.team_summary_inner_frame, text='Save', command=lambda *args:save_summary(scouting_editable_summary)) #The button to save the editable summary
-            save_button.pack(side=tk.TOP) #Add the save button
-            #********************************************************
-            #Expand text box to right width
-            scouting_text_pane.config(width = max(lens) + 1) #Make the text pane wide enough to hold all its text
-            
-            for s in scouting_string_list: #Add the strings to the pane
-                scouting_text_pane.insert(tk.INSERT, s + '\n') #Add the current string
-            scouting_text_pane.config(state=tk.DISABLED) #Make the scouting text pane not editable
-            
-            #Add the category charts
-            
-            first=True #To track whether we're on the first category chart
-            
-            for category in self.state.numeric_cats: #Add a graph for each category
-                prediction = self.state.contrs[team][category] #Use scouted contrs
-                if not first: #Add spacing between the graphs
-                    tk.Label(self.team_summary_inner_frame, text=' ').pack(side=tk.TOP, padx=0, pady=5)
+
+            if raw_team_scouting:
+                scouting_string_list = [get_column_string()] #The column headers should be at the top
+                
+                lens = [len(scouting_string_list[0])] #start with len of column string
+                for match, line_data in raw_team_scouting: #Collect list of scouting strings, insert later
+                    string = get_match_scouting_string(match, line_data) #Get the scouting string
+                    lens.append(len(string)) #Add the length of this string to the lens list
+                    scouting_string_list.append(get_match_scouting_string(match, line_data)) #Add the scouting string
+                av_string = get_match_scouting_string('Avs:', self.state.averages[team]) #The string for the averages
+                lens.append(len(av_string)) #Add the len of the av string to the lens
+                scouting_string_list.append(av_string) #Add the av string
+                
+                scouting_text_pane = tk.Text(self.team_summary_canvas, wrap=tk.NONE) #The text pane with the scouting data in it
+                scouting_text_pane.grid(row=0, column=0) #Add the scouting text pane
+                
+    #            namespace = {'save_summary': save_summary,
+    #                         'prev_summary': prev_summary,
+    #                         'get_conf_canv': get_conf_canv,
+    #                         'scouting_text_pane': scouting_text_pane}
+    #            
+    #            widgets, _ = make_gui_from_html_file('team_summary_inner_frame.html', root=self.team_summary_canvas_frame, namespace=namespace)
+    #            scouting_text_pane = widgets['scouting_text_pane']
+                
+                #********************************************************
+                self.team_summary_inner_frame = tk.Frame(self.team_summary_canvas_frame, relief=tk.RAISED, borderwidth=1) #The frame for the team summary
+                self.team_summary_inner_frame.pack(side=tk.TOP) #Add the team summary inner frame
+                
+                #Make scouting data viewer
+                scouting_text_scrollbar = tk.Scrollbar(self.team_summary_inner_frame, orient=tk.HORIZONTAL) #The scrollbar for the scouting text
+                scouting_text_canvas = tk.Canvas(self.team_summary_inner_frame, xscrollcommand=scouting_text_scrollbar.set, width=1000) #The canvas to put the scouting text in
+                scouting_text_canvas.pack(side=tk.TOP, fill=tk.NONE) #Add the scouting text canvas
+                self.team_summary_inner_frame.bind('<Configure>', get_conf_canv(scouting_text_canvas, width=1000, height=400)) #Set the configuring to configure the frame to the right dimensions
+                
+                scouting_text_scrollbar.pack(side=tk.TOP, fill=tk.X, padx=150, pady=2) #Add the scouting text scrollbar
+                scouting_text_scrollbar.config(command=scouting_text_canvas.xview) #Set the scrollbar to horizontal scrolling on scouting_text_canvas
+                
+                scouting_text_canvas.create_window((0, 0), window=scouting_text_pane, anchor='nw', tags='scouting_text_pane') #Make a place in the scouting text canvas for the pane
+                
+                #Make editable summary pane
+                scouting_editable_summary = tk.Text(self.team_summary_inner_frame, height=5) #The editable summary
+                scouting_editable_summary.insert('1.0', prev_summary) #Add the previous summary to the summary textbox
+                scouting_editable_summary.pack(side=tk.TOP) #Add the scouting editable summary
+                
+                save_button = tk.Button(self.team_summary_inner_frame, text='Save', command=lambda *args:save_summary(scouting_editable_summary)) #The button to save the editable summary
+                save_button.pack(side=tk.TOP) #Add the save button
+                #********************************************************
+                #Expand text box to right width
+                scouting_text_pane.config(width = max(lens) + 1) #Make the text pane wide enough to hold all its text
+                
+                for s in scouting_string_list: #Add the strings to the pane
+                    scouting_text_pane.insert(tk.INSERT, s + '\n') #Add the current string
+                scouting_text_pane.config(state=tk.DISABLED) #Make the scouting text pane not editable
+                
+                #Add the category charts
+                
+                first=True #To track whether we're on the first category chart
+                
+                for category in self.state.numeric_cats: #Add a graph for each category
+                    prediction = self.state.contrs[team][category] #Use scouted contrs
+                    if not first: #Add spacing between the graphs
+                        tk.Label(self.team_summary_inner_frame, text=' ').pack(side=tk.TOP, padx=0, pady=5)
+                        
+                    label = tk.Label(self.team_summary_inner_frame, text=category + ':') #The category label
+                    label.pack(side=tk.TOP, padx=5, pady=5) #Add the label
                     
-                label = tk.Label(self.team_summary_inner_frame, text=category + ':') #The category label
-                label.pack(side=tk.TOP, padx=5, pady=5) #Add the label
-                
-                graph_data = gph.get_scouting_graph_data(prediction, red_and_blue=False, num_margins=None) #The data to display in the graph
-#                graph_frame = gph.GraphDataPanel(self.team_summary_inner_frame, graph_data, g_height=100, max_width=self.m_wid/2)#, red_and_blue=False) #The graph
-                graph_frame = gph.GraphDataPanel(self.team_summary_inner_frame, graph_data, g_height=100, max_width=GRAPH_WIDTH) #The graph
-                graph_frame.pack(side=tk.TOP, padx=5, pady=5) #Add the graph frame
-                
-                first = False #Now we're not on the first one
+                    graph_data = gph.get_scouting_graph_data(prediction, red_and_blue=False, num_margins=None) #The data to display in the graph
+    #                graph_frame = gph.GraphDataPanel(self.team_summary_inner_frame, graph_data, g_height=100, max_width=self.m_wid/2)#, red_and_blue=False) #The graph
+                    graph_frame = gph.GraphDataPanel(self.team_summary_inner_frame, graph_data, g_height=100, max_width=GRAPH_WIDTH) #The graph
+                    graph_frame.pack(side=tk.TOP, padx=5, pady=5) #Add the graph frame
+                    
+                    first = False #Now we're not on the first one
         #end team summary methods
         
         def config_canvas(canvas, width=1343, height=650):
