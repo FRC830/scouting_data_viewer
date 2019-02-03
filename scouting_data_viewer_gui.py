@@ -162,6 +162,7 @@ class ZScoutFrame(tk.Frame):
             self.state.teams.sort(key=lambda t: int(t))
             teams_in_row = 10
             left_padding_size = 10
+            teams_displayed = 10
 
             # Reset Panel
             self.teams_text.config(state=tk.NORMAL)
@@ -180,10 +181,10 @@ class ZScoutFrame(tk.Frame):
             # Display teams
             for i in range(rows):
                 if (i + 1) * teams_in_row > num_teams: # change the number of teams to the leftover
-                    teams_in_row = num_teams % teams_in_row
-                format_code = left_padding_size * " " + "{: <6}" * teams_in_row + "\n"
-                print("starting team:", i * teams_in_row, i + 1 * teams_in_row)
-                team_list = self.state.teams[i * teams_in_row:i + 1 * teams_in_row]
+                    teams_displayed = num_teams % teams_in_row
+                format_code = left_padding_size * " " + "{: <6}" * teams_displayed+ "\n"
+                print("starting team:", i * teams_in_row, i * teams_in_row + teams_displayed)
+                team_list = self.state.teams[i * teams_in_row:i * teams_in_row + teams_displayed]
                 self.teams_text.insert(tk.INSERT, format_code.format(*team_list))
             self.teams_text.config(state=tk.DISABLED)
         

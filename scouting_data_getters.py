@@ -104,7 +104,7 @@ def get_raw_scouting_data(folder):
         
         if (not 'gamedef' in file_name) and (not '__pycache__' in file_name): #gamedef and pychache files don't have scouting data
             
-            file = open(directory + '\\' + file_name, 'r', newline='') #Open the file to read from
+            file = open(os.path.join(directory,file_name), 'r', newline='') #Open the file to read from
             source = '3322' if '3322' in file_name.upper() else 'RAT' #Checking the source of the file
                                                                       #Because one time we shared scouting data with 3322
             line_datas = read_scouting(file, source=source) #Read the line data
