@@ -182,8 +182,7 @@ class ZScoutFrame(tk.Frame):
             for i in range(rows):
                 if (i + 1) * teams_in_row > num_teams: # change the number of teams to the leftover
                     teams_displayed = num_teams % teams_in_row
-                format_code = left_padding_size * " " + "{: <6}" * teams_displayed+ "\n"
-                print("starting team:", i * teams_in_row, i * teams_in_row + teams_displayed)
+                format_code = left_padding_size * " " + "{: <6}" * teams_displayed + "\n"
                 team_list = self.state.teams[i * teams_in_row:i * teams_in_row + teams_displayed]
                 self.teams_text.insert(tk.INSERT, format_code.format(*team_list))
             self.teams_text.config(state=tk.DISABLED)
