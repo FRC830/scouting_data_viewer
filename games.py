@@ -132,6 +132,7 @@ def get_cats(scouting_cats, game_cats, numeric=False):
 def change_names(name_dict, match_dict):
     """
     Return a new dict with the key names changed as specified in name_dict.
+    Keys without a new name specified in name_dict will not be in the returned dict.
     
     Parameters:
         name_dict: The dict from old names to new names.
@@ -449,7 +450,7 @@ deepspace_cats = ['cross_line_from_l1',
                   'endgame_ramp_l1',
                   'endgame_ramp_l2',
                   'endgame_ramp_l3',
-                  'endgame_helped_climb'
+                  'endgame_helped_climb',
 #                  'endgame_helped_l2',
 #                  'endgame_helped_l3',
                   
@@ -479,6 +480,9 @@ deepspace_name_dict = {'auton_ci_ball_cargo':'sandstorm_balls_in_cargo_ship',
                        'ball_count':'teleop_balls_picked_up',
                        'hatch_pickup':'teleop_hatches_can_pick_up',
                        'hatch_dropped':'teleop_hatches_dropped',
+                       
+                       'fouls':'fouls',
+                       'tech_fouls':'tech_fouls',
                        
                        'helping_robot_climb':'endgame_helped_climb'}
 
