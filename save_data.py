@@ -8,43 +8,6 @@ Created on Fri Feb 16 19:58:56 2018
 import os
 import pickle as pkl
 
-#def _merge_getattrs_helper(name, *objs):
-#    for obj in objs:
-#        var_dict = vars(obj)
-#        if name in var_dict:
-#            return var_dict[name]
-#    raise AttributeError('no object in ' + str(objs) + ' has attr ' + name)
-#
-#def merge_getattrs(*objs):
-#    return lambda name: _merge_getattrs_helper(name, *objs)
-#
-#def _merge_setattrs_helper(name, val, *objs):
-#    for obj in reversed(objs):
-#        var_dict = vars(obj)
-#        if name in var_dict:
-#            var_dict[name] = val
-#            return
-#    
-#    vars(objs[0])[name] = val
-#
-#def merge_setattrs(*objs):
-#    return lambda name, val: _merge_setattrs_helper(name, val, *objs)
-#
-#def _merge_hasattrs_helper(name, *objs):
-#    for obj in objs:
-##        print('obj: ' + str(obj))
-#        if name in vars(obj):
-#            return True
-#    return False
-#
-#def merge_hasattrs(*objs):
-#    return lambda name: _merge_hasattrs_helper(name, *objs)
-#
-#def do_merge_attrs(base, *subs):
-#    base.__getattr__ = merge_getattrs(*([base] + list(subs)))
-#    base.__setattr__ = merge_setattrs(*([base] + list(subs)))
-#    base.__hasattr__ = merge_hasattrs(*([base] + list(subs)))
-
 class SaveData(object):
     """
     Saves and loads attributes.
