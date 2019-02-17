@@ -173,7 +173,8 @@ def main():
     print('Running scouting data viewer')
     
     root = tk.Tk() #Make the root
-    root.geometry('350x250+300+300') #Set the dimensions and location
+    
+    root.state('zoomed')
     tk.app = ZScoutFrame(root) #Make the main frame
     root.mainloop() #Start
 
