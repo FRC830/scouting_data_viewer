@@ -35,16 +35,8 @@ class ZScoutFrame(tk.Frame):
         tk.Frame.__init__(self, parent, background='white')
         self.parent = parent
         self.dir_path = os.path.dirname(os.path.realpath(__file__))
-        
-        self.state = sd.SaveData('Gui_state') #The state holds all data that should be persistent across runs
-        self.init_state()
-        
-        self.initUI()
-    
-    def init_state(self):
-        """Initialize the state variable."""
-        #If there is not already a 'summaries' variable in state, add one and make it equal to {}
-        self.state.non_override_write('summaries', {})
+            
+        self.init_gui()
     
     def get_categories(self):
 #        return self.state.categories
@@ -128,7 +120,7 @@ class ZScoutFrame(tk.Frame):
         
         return lambda event: self.config_canvas(canvas, width, height)
     
-    def initUI(self):
+    def init_gui(self):
         """Initialize the user interface."""
         
         def setup_menu():
