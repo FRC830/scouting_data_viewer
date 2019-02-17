@@ -13,6 +13,7 @@ import os
 
 import save_data as sd
 
+import menu
 import team_summary_frame
 import teams_frame
 import comp_frame
@@ -20,7 +21,7 @@ import ranking_frame
 
 import easter_eggs as ee
 
-from html_to_tk import make_gui_from_html_file
+#from html_to_tk import make_gui_from_html_file
 
 GRAPH_WIDTH = 600
 
@@ -51,29 +52,29 @@ class ZScoutFrame(tk.Frame):
     
     def get_categories(self):
 #        return self.state.categories
-        return self.comp_frame.get_scouting_data().categories
+        return self.competition_frame.get_scouting_data().categories
     
     def get_numeric_categories(self):
 #        return self.state.numeric_cats
-        return self.comp_frame.get_scouting_data().numeric_cats
+        return self.competition_frame.get_scouting_data().numeric_cats
     
     def get_contr(self, team, category):
 #        return self.state.contrs[team][category]
-        return self.comp_frame.get_scouting_data().contrs[team][category]
+        return self.competition_frame.get_scouting_data().contrs[team][category]
     
     def get_averages(self):
 #        return self.state.averages
-        return self.comp_frame.get_scouting_data().averages
+        return self.competition_frame.get_scouting_data().averages
     
     def get_teams(self):
 #        return self.state.teams
-        return self.comp_frame.get_scouting_data().teams
+        return self.competition_frame.get_scouting_data().teams
     
     def get_comp(self):
-        return self.comp_frame.get_scouting_data().comp
+        return self.competition_frame.get_scouting_data().comp
     
     def get_raw_scouting(self):
-        return self.comp_frame.get_scouting_data().raw_scouting
+        return self.competition_frame.get_scouting_data().raw_scouting
     
     def get_weight(self, cat):
         return self.ranking_frame.get_weight(cat)
@@ -105,7 +106,7 @@ class ZScoutFrame(tk.Frame):
     
     def get_game(self):
         """Return the current game."""
-        return self.comp_frame.get_scouting_data().game
+        return self.competition_frame.get_scouting_data().game
     
     def config_canvas(self, canvas, width=1343, height=650):
         """
@@ -134,52 +135,9 @@ class ZScoutFrame(tk.Frame):
     def initUI(self):
         """Initialize the user interface."""
         
-        def get_go_to_frame(frame):
-            """
-            Return a function that goes to the frame.
-            
-            Parameters:
-                frame: The frame the function will go to when called
-            """
-            return lambda *args, **kwargs: go_to_frame(frame)
-        
-        def go_to_frame(frame):
-            """
-            Go to the passed frame.
-            
-            Parameters:
-                frame: The frame to go to
-            """
-            
-            if self.active_frame == frame:
-                #Already at the frame to go to
-                return
-            
-            self.active_frame.pack_forget() #Remove the current frame from the gui
-            frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True) #Add the new frame to the gui
-            self.active_frame = frame #Update the active frame
-        #end frame methods
-        
-        def add_to_namespace(widgets):
-            """
-            Make variables for the given widgets.
-            
-            Parameters:
-                widgets: The widgets to add variables for.
-            """
-            for name in widgets:
-                widget = widgets[name]
-                setattr(self, name, widget)
-        
         def setup_menu():
             """Set up the menu frame menu."""
-            namespace = {'get_go_to_frame':get_go_to_frame,
-                        'scouting_frame':self.team_summary_frame.scouting_frame,
-                        'teams_frame':self.teams_frame.teams_frame,
-                        'competition_frame':self.comp_frame.competition_frame,
-                        'ranking_frame':self.ranking_frame.ranking_frame,
-                        'parent':self.parent}
-            make_gui_from_html_file('menu.html', root=self, namespace=namespace)
+            self.menubar = menu.Menubar(self)
         
         def setup_team_summary_frame():
             """Set up the team summary frame."""
@@ -191,7 +149,7 @@ class ZScoutFrame(tk.Frame):
         
         def setup_comp_frame():
             """Set up the team competition frame."""
-            self.comp_frame = comp_frame.CompFrame(self)
+            self.competition_frame = comp_frame.CompFrame(self)
         
         def setup_ranking_frame():
             """Set up the ranking frame."""
@@ -211,7 +169,7 @@ class ZScoutFrame(tk.Frame):
         setup_teams_frame()
         setup_menu()
         
-        self.comp_frame.set_comp(startup=True)
+        self.competition_frame.set_comp(startup=True)
 
 def main():
     """Run the scouting data viewer."""
