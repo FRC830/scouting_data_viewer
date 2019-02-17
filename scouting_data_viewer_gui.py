@@ -17,6 +17,7 @@ import graph as gph
 import save_data as sd
 
 import comp_frame
+import ranking_frame
 
 import easter_eggs as ee
 
@@ -72,113 +73,122 @@ class ZScoutFrame(tk.Frame):
     def get_comp(self):
         return self.comp_frame.get_scouting_data().comp
     
+    def get_weight(self, cat):
+        return self.ranking_frame.get_weight(cat)
+    
+    def score(self, team):
+        return self.ranking_frame.score(team)
+    
+    def get_default_points(self):
+        return self.ranking_frame.get_default_points()
+    
     def config_ranking_frame(self):
         """Set up the frame that displays scores and ranks for the teams"""
-        
-        def refresh_rankings():
-            """Set up the rankings for each team"""
-            
-            self.team_ranks_panel.pack_forget() #Get rid of the old rankings
-            self.team_ranks_panel = tk.Frame(self.ranking_frame) #Make a new ranks panel
-            self.team_ranks_panel.grid(row=3, column=0) #Add the panel
-            
-            self.team_ranks_textbox = tk.Text(self.team_ranks_panel, width=24, wrap=tk.NONE) #The textbox with the ranking and score information
-            self.team_ranks_textbox.pack(side=tk.TOP) #Add the team ranks textbox
-            
-            r_teams = self.get_teams()[:] #The teams to show ranks for
-            r_teams.sort(key=lambda t:-self.score(t)) #Sort the teams by score in descending order
-            
-            for i in range(0, len(r_teams)): #Add the teams to the team ranks textbox one at a time
-                team = r_teams[i] #Get the team to add
-                num_string = str(i+1)
-                num_string = num_string + ':' + (' ' * (4-len(num_string)))
-                string = num_string + str(team) #The rank and the team
-                string += ' ' * (11-len(string)) + 'with ' + '%.2f' % self.score(team) #The score of the team
-                if i != len(r_teams) - 1: #Add newlines after every string but the last
-                    string += '\n'
-                self.team_ranks_textbox.insert(tk.INSERT, chars=string) #Add the string to the team ranks textbox
-            
-            self.team_ranks_textbox.config(state=tk.DISABLED, height=30) #Make it so the team ranks textbox can't be edited 
-            
-            self.do_easter_eggs() #Trigger any appropriate easter eggs
-                
-        for child in self.ranking_frame.winfo_children(): #Get rid of all the child widgets
-            child.destroy()
-        
-        #namespace = {'get_conf_canv': get_conf_canv,
-        #             'refresh_rankings': refresh_rankings}
-        
-        self.ranking_scroll = tk.Scrollbar(self.ranking_frame, orient=tk.HORIZONTAL) #Make a scrollbar for the weight setting
-        
-        self.rank_box_canvas = tk.Canvas(self.ranking_frame, relief=tk.RAISED, xscrollcommand=self.ranking_scroll.set) #Make a convas to put the weight setters in
-                                                                                                                       #We need to do this because we're using a scrollbar and scrollbars are jank in tk
-        
-        self.rank_box_canvas.grid(row=0, column=0) #Add the rank box canvas
-        self.ranking_scroll.grid(row=1, column=0, sticky=tk.N+tk.S+tk.E+tk.W) #Add the rank box scrollbar
-        self.rank_box_frame = tk.Frame(self.rank_box_canvas, relief=tk.RAISED) #The frame to put the weight setters in
-        self.rank_box_frame.grid(row=0, column=0) #Add the rank box frame
-        self.rank_box_frame.bind('<Configure>', self.get_conf_canv(self.rank_box_canvas, width=1343, height=50)) #Set the config method to config the canvas to the right dimensions
-        self.rank_box_canvas.create_window((0, 0), window=self.rank_box_frame, tags='self.rank_box_frame') #Make a place in the canvas for the frame
-                                                                                                           #(Because tk scrollbars are jank)
-        self.ranking_scroll.config(command=self.rank_box_canvas.xview) #Link the scrollbar to the rank box canvas
-        #*************************************************************
-        self.ranking_refresh_button = tk.Button(self.ranking_frame, text='Refresh Rankings', command=refresh_rankings) #The button to refresh the rankings
-        self.ranking_refresh_button.grid(row=2, column=0) #Add the ranking refresh button
-        
-        self.team_ranks_panel = tk.Frame(self.ranking_frame) #The panel for the team ranks
-        self.team_ranks_panel.grid(row=3, column=0) #Add the team ranks panel
-        
-        self.cat_weight_fields = {} #Set the weight map to empty
-        
-        for cat in self.get_numeric_categories(): #Construct weight-setting panel
-            entry_panel = tk.Frame(self.rank_box_frame, relief=tk.RAISED) #An empty panel to put the weight setter in
-            entry_panel.pack(side=tk.LEFT) #Add the panel
-            
-            label = tk.Label(entry_panel, text=cat) #The label for the category
-            label.pack(side=tk.TOP) #Add the label to the entry panel
-            entry = tk.Entry(entry_panel) #The textbox for entering the weight
-            
-            default_weight = str(self.get_game().default_weights[cat]) #Get the default weight for the category
-            entry.insert(index=0, string=default_weight) #Add the default weight to the weight textbox
-            entry.pack(side=tk.TOP) #Add the textbox to the entry panel
-            
-            self.cat_weight_fields[cat] = entry
+        self.ranking_frame.config()
+#        def refresh_rankings():
+#            """Set up the rankings for each team"""
+#            
+#            self.team_ranks_panel.pack_forget() #Get rid of the old rankings
+#            self.team_ranks_panel = tk.Frame(self.ranking_frame) #Make a new ranks panel
+#            self.team_ranks_panel.grid(row=3, column=0) #Add the panel
+#            
+#            self.team_ranks_textbox = tk.Text(self.team_ranks_panel, width=24, wrap=tk.NONE) #The textbox with the ranking and score information
+#            self.team_ranks_textbox.pack(side=tk.TOP) #Add the team ranks textbox
+#            
+#            r_teams = self.get_teams()[:] #The teams to show ranks for
+#            r_teams.sort(key=lambda t:-self.score(t)) #Sort the teams by score in descending order
+#            
+#            for i in range(0, len(r_teams)): #Add the teams to the team ranks textbox one at a time
+#                team = r_teams[i] #Get the team to add
+#                num_string = str(i+1)
+#                num_string = num_string + ':' + (' ' * (4-len(num_string)))
+#                string = num_string + str(team) #The rank and the team
+#                string += ' ' * (11-len(string)) + 'with ' + '%.2f' % self.score(team) #The score of the team
+#                if i != len(r_teams) - 1: #Add newlines after every string but the last
+#                    string += '\n'
+#                self.team_ranks_textbox.insert(tk.INSERT, chars=string) #Add the string to the team ranks textbox
+#            
+#            self.team_ranks_textbox.config(state=tk.DISABLED, height=30) #Make it so the team ranks textbox can't be edited 
+#            
+#            self.do_easter_eggs() #Trigger any appropriate easter eggs
+#                
+#        for child in self.ranking_frame.winfo_children(): #Get rid of all the child widgets
+#            child.destroy()
+#        
+#        #namespace = {'get_conf_canv': get_conf_canv,
+#        #             'refresh_rankings': refresh_rankings}
+#        
+#        self.ranking_scroll = tk.Scrollbar(self.ranking_frame, orient=tk.HORIZONTAL) #Make a scrollbar for the weight setting
+#        
+#        self.rank_box_canvas = tk.Canvas(self.ranking_frame, relief=tk.RAISED, xscrollcommand=self.ranking_scroll.set) #Make a convas to put the weight setters in
+#                                                                                                                       #We need to do this because we're using a scrollbar and scrollbars are jank in tk
+#        
+#        self.rank_box_canvas.grid(row=0, column=0) #Add the rank box canvas
+#        self.ranking_scroll.grid(row=1, column=0, sticky=tk.N+tk.S+tk.E+tk.W) #Add the rank box scrollbar
+#        self.rank_box_frame = tk.Frame(self.rank_box_canvas, relief=tk.RAISED) #The frame to put the weight setters in
+#        self.rank_box_frame.grid(row=0, column=0) #Add the rank box frame
+#        self.rank_box_frame.bind('<Configure>', self.get_conf_canv(self.rank_box_canvas, width=1343, height=50)) #Set the config method to config the canvas to the right dimensions
+#        self.rank_box_canvas.create_window((0, 0), window=self.rank_box_frame, tags='self.rank_box_frame') #Make a place in the canvas for the frame
+#                                                                                                           #(Because tk scrollbars are jank)
+#        self.ranking_scroll.config(command=self.rank_box_canvas.xview) #Link the scrollbar to the rank box canvas
+#        #*************************************************************
+#        self.ranking_refresh_button = tk.Button(self.ranking_frame, text='Refresh Rankings', command=refresh_rankings) #The button to refresh the rankings
+#        self.ranking_refresh_button.grid(row=2, column=0) #Add the ranking refresh button
+#        
+#        self.team_ranks_panel = tk.Frame(self.ranking_frame) #The panel for the team ranks
+#        self.team_ranks_panel.grid(row=3, column=0) #Add the team ranks panel
+#        
+#        self.cat_weight_fields = {} #Set the weight map to empty
+#        
+#        for cat in self.get_numeric_categories(): #Construct weight-setting panel
+#            entry_panel = tk.Frame(self.rank_box_frame, relief=tk.RAISED) #An empty panel to put the weight setter in
+#            entry_panel.pack(side=tk.LEFT) #Add the panel
+#            
+#            label = tk.Label(entry_panel, text=cat) #The label for the category
+#            label.pack(side=tk.TOP) #Add the label to the entry panel
+#            entry = tk.Entry(entry_panel) #The textbox for entering the weight
+#            
+#            default_weight = str(self.get_game().default_weights[cat]) #Get the default weight for the category
+#            entry.insert(index=0, string=default_weight) #Add the default weight to the weight textbox
+#            entry.pack(side=tk.TOP) #Add the textbox to the entry panel
+#            
+#            self.cat_weight_fields[cat] = entry
     
-    def get_score(self, avs, weights=None, weight_func=None, verbose=False):
-        """
-        Return the score for a team with avs given a function from categories to weights.
-        
-        Parameters:
-            avs: The average scores for the team. A dict from categories to doubles.
-            weights: The weights for each category. A dict from categories to doubles.
-            weight_func: The weights for each category. A function from categories to doubles.
-            verbose: Whether to print debug info
-        """
-        if not weights is None:
-            weight_func = lambda a: weights[a] #Make a weight_func equivalent to weights
-        if weights is None and weight_func is None:
-            weight_func = lambda a:0 #If no weight info is passed, all weights are zero
-        
-        score = 0
-        for cat in self.get_numeric_categories():
-            if verbose: #Debug info
-                print(avs.get(cat, 0), float(weight_func(cat)))
-            score += avs.get(cat,0) * float(weight_func(cat)) #Add the average times the weight
-        return score
-            
-    def score(self, team, weight_func=None, weights=None):
-        """
-        The score for a team for the given weightings.
-        
-        Parameters:
-            team: The team to return the score for.
-        """
-        weight_func = weight_func if weight_func else self.get_weight
-        weight_func = (lambda a: weights[a]) if weights else weight_func
-        
-        avs = self.get_averages()[team]
-        score = self.get_score(avs, weight_func=weight_func)
-        return score
+#    def get_score(self, avs, weights=None, weight_func=None, verbose=False):
+#        """
+#        Return the score for a team with avs given a function from categories to weights.
+#        
+#        Parameters:
+#            avs: The average scores for the team. A dict from categories to doubles.
+#            weights: The weights for each category. A dict from categories to doubles.
+#            weight_func: The weights for each category. A function from categories to doubles.
+#            verbose: Whether to print debug info
+#        """
+#        if not weights is None:
+#            weight_func = lambda a: weights[a] #Make a weight_func equivalent to weights
+#        if weights is None and weight_func is None:
+#            weight_func = lambda a:0 #If no weight info is passed, all weights are zero
+#        
+#        score = 0
+#        for cat in self.get_numeric_categories():
+#            if verbose: #Debug info
+#                print(avs.get(cat, 0), float(weight_func(cat)))
+#            score += avs.get(cat,0) * float(weight_func(cat)) #Add the average times the weight
+#        return score
+#            
+#    def score(self, team, weight_func=None, weights=None):
+#        """
+#        The score for a team for the given weightings.
+#        
+#        Parameters:
+#            team: The team to return the score for.
+#        """
+#        weight_func = weight_func if weight_func else self.get_weight
+#        weight_func = (lambda a: weights[a]) if weights else weight_func
+#        
+#        avs = self.get_averages()[team]
+#        score = self.get_score(avs, weight_func=weight_func)
+#        return score
     
     def config_teams_frame(self):
         """Set up the frame that shows a list of teams in the current competition."""
@@ -220,29 +230,29 @@ class ZScoutFrame(tk.Frame):
         weights = {} #Collect the ranks
         for team in self.get_teams():
             weights[team] = self.score(team)
-        ee.do_rank_eggs(weights, self.get_default_weights())
+        ee.do_rank_eggs(weights, self.get_default_points())
         ee.do_gen_eggs()
     
-    def get_weight(self, cat):
-        """
-        Return the current weight for the given category.
-        
-        Parameters:
-            cat: The category to get the weight for.
-        """
-        string = self.cat_weight_fields[cat].get() #The string entered for the category weight
-        return float(string) if len(string) > 0 else 0 #Empty strings are counted as 0
-                                                           #slackers
-    
-    def get_default_weights(self):
-        """Return the default weights for the current game."""
-        weights = self.get_game().default_weights
-        teams = self.get_teams()
-        result = {}
-        for team in teams:
-#                result[team] = get_score(self.state.averages[team], weights=weights)
-            result[team] = self.score(team, weights=weights)
-        return result
+#    def get_weight(self, cat):
+#        """
+#        Return the current weight for the given category.
+#        
+#        Parameters:
+#            cat: The category to get the weight for.
+#        """
+#        string = self.cat_weight_fields[cat].get() #The string entered for the category weight
+#        return float(string) if len(string) > 0 else 0 #Empty strings are counted as 0
+#                                                           #slackers
+#    
+#    def get_default_weights(self):
+#        """Return the default weights for the current game."""
+#        weights = self.get_game().default_weights
+#        teams = self.get_teams()
+#        result = {}
+#        for team in teams:
+##                result[team] = get_score(self.state.averages[team], weights=weights)
+#            result[team] = self.score(team, weights=weights)
+#        return result
     
     def get_game(self):
         """Return the current game."""
@@ -300,250 +310,6 @@ class ZScoutFrame(tk.Frame):
             frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True) #Add the new frame to the gui
             self.active_frame = frame #Update the active frame
         #end frame methods
-
-#        def get_game():
-#            """Return the current game."""
-#            return self.game
-        
-        #scouting methods
-#        def set_comp_tkevent(*args):
-#            """
-#            Set the competition and update the comp_notice label.
-#            Called when a competition is chosen.
-#            """
-##            print('Setting event')
-#            self.comp_notice.set('Comp set to ' + self.comp_choose_var.get())
-#            set_comp()
-#        
-#        def year_from_comp(comp):
-#            """
-#            Return the year from the comp name.
-#            
-#            Parameters:
-#                comp: The comp name to get the year from.
-#            """
-#            return ''.join([c for c in comp if c in '0123456789'])
-#        
-#        def set_comp(startup=False):
-#            """
-#            Set the current competition to the one specified in the comp_choose field, set relevant variables, and get team contribution data.
-#            
-#            Parameters:
-#                startup: Whether the gui is just starting up.
-#            """
-##            self.comp = self.comp_choose.get()
-#            
-#            if not startup:
-#                #If starting up, we should use the competition last opened in a previous run
-#                
-#                #If not starting up, then the comp was selected with the dropdown menu
-#                #we should use the competition entered in the comp text field
-#                self.state.comp = self.comp_choose_var.get()
-#            
-#            comp = self.state.comp #Makes the next line of code shorter
-#            year = year_from_comp(comp)
-#            
-#            if year: #Don't do anything with an empty year
-##                self.m_wid = 1200 #Twice the max width of graph data panels
-##                                  #Don't ask why, I don't know
-#                
-#                #Get scouting
-#                self.game = sdg.get_game(folder=self.state.comp) #The folders are named after comp codes
-#                
-#                #Get the raw data, just as the scouters entered it
-#                raw_scouting = sdg.get_raw_scouting_data(folder=self.state.comp)
-#                
-#                #Get the processed data
-#                raw_scouting = get_game().process_scouting(raw_scouting) 
-#                
-#                #Get contrs and averages
-#                #Histograms for the scores a team gets in a match for each category:
-#                self.state.contrs = gms.contrs(raw_scouting, get_game())
-#                #The average a team scores in a match for each category:
-#                self.state.averages = gms.averages_from_contrs(self.state.contrs) 
-#                
-#                #Get categories
-#                #Access the first team in raw_scouting, access its first match, and get the keys
-#                self.state.teams = list(self.state.contrs.keys()) #The teams are the keys
-#                
-##                self.state.teams.sort(key=lambda s: int(s))
-#                self.state.teams.sort(key=int)
-#                
-#                first_team = self.state.teams[0]
-#                scouting_cats = raw_scouting[first_team][0][1].keys()
-#                
-#                #All the categories both in the game categories and the scouting categories
-#                self.state.categories = gms.get_cats(scouting_cats, get_game().categories)
-#                #All the number categories (pretty much everything except comments)
-#                self.state.numeric_cats = gms.get_cats(scouting_cats, get_game().numeric_categories, numeric=True)
-#                
-#                #Get teams
-#                config_teams_frame()
-#                config_ranking_frame()
-#                
-#                self.state.save()
-                
-#        def config_teams_frame():
-#            """Set up the frame that shows a list of teams in the current competition."""
-#            ### Setup Variables
-##            self.state.teams.sort(key=lambda t: int(t))
-#            teams_in_row = 10
-#            left_padding_size = 10
-#            teams_displayed = 10
-#
-#            # Reset Panel
-#            self.teams_text.config(state=tk.NORMAL)
-#            self.teams_text.delete('1.0', tk.END)
-#            self.teams_text.insert(tk.INSERT, '\n')
-#
-#            # Center-align 'Teams:'
-#            teams_list_title = 'Teams:\n'
-#            half_title_len = (len(teams_list_title) - 1) // 2
-#            title_padding = (left_padding_size + 3 * teams_in_row - half_title_len) * ' '
-#            self.teams_text.insert(tk.INSERT, title_padding + teams_list_title)
-#
-#            num_teams = len(self.get_teams())
-#            rows = math.ceil(num_teams / teams_in_row)
-#
-#            # Display teams
-#            for i in range(rows):
-#                if (i + 1) * teams_in_row > num_teams: # change the number of teams to the leftover
-#                    teams_displayed = num_teams % teams_in_row
-#                format_code = left_padding_size * " " + "{: <6}" * teams_displayed+ "\n"
-##                print("starting team:", i * teams_in_row, i * teams_in_row + teams_displayed)
-#                team_list = self.get_teams()[i * teams_in_row:i * teams_in_row + teams_displayed]
-#                self.teams_text.insert(tk.INSERT, format_code.format(*team_list))
-#            self.teams_text.config(state=tk.DISABLED)
-        
-#        def get_weight(cat):
-#            """
-#            Return the current weight for the given category.
-#            
-#            Parameters:
-#                cat: The category to get the weight for.
-#            """
-#            string = self.cat_weight_fields[cat].get() #The string entered for the category weight
-#            return float(string) if len(string) > 0 else 0 #Empty strings are counted as 0
-#                                                           #slackers
-#        
-#        def get_default_weights():
-#            """Return the default weights for the current game."""
-#            weights = get_game().default_weights
-#            teams = self.get_teams()
-#            result = {}
-#            for team in teams:
-##                result[team] = get_score(self.state.averages[team], weights=weights)
-#                result[team] = score(team, weights=weights)
-#            return result
-        
-#        def get_score(avs, weights=None, weight_func=None, verbose=False):
-#            """
-#            Return the score for a team with avs given a function from categories to weights.
-#            
-#            Parameters:
-#                avs: The average scores for the team. A dict from categories to doubles.
-#                weights: The weights for each category. A dict from categories to doubles.
-#                weight_func: The weights for each category. A function from categories to doubles.
-#                verbose: Whether to print debug info
-#            """
-#            if not weights is None:
-#                weight_func = lambda a: weights[a] #Make a weight_func equivalent to weights
-#            if weights is None and weight_func is None:
-#                weight_func = lambda a:0 #If no weight info is passed, all weights are zero
-#            
-#            score = 0
-#            for cat in self.get_numeric_categories():
-#                if verbose: #Debug info
-#                    print(avs.get(cat, 0), float(weight_func(cat)))
-#                score += avs.get(cat,0) * float(weight_func(cat)) #Add the average times the weight
-#            return score
-#            
-#        def score(team, weight_func=None, weights=None):
-#            """
-#            The score for a team for the given weightings.
-#            
-#            Parameters:
-#                team: The team to return the score for.
-#            """
-#            weight_func = weight_func if weight_func else get_weight
-#            weight_func = (lambda a: weights[a]) if weights else weight_func
-#            
-#            avs = self.get_averages()[team]
-#            score = get_score(avs, weight_func=weight_func)
-#            return score
-        
-#        def config_ranking_frame():
-#            """Set up the frame that displays scores and ranks for the teams"""
-#            
-#            def refresh_rankings():
-#                """Set up the rankings for each team"""
-#                
-#                self.team_ranks_panel.pack_forget() #Get rid of the old rankings
-#                self.team_ranks_panel = tk.Frame(self.ranking_frame) #Make a new ranks panel
-#                self.team_ranks_panel.grid(row=3, column=0) #Add the panel
-#                
-#                self.team_ranks_textbox = tk.Text(self.team_ranks_panel, width=24, wrap=tk.NONE) #The textbox with the ranking and score information
-#                self.team_ranks_textbox.pack(side=tk.TOP) #Add the team ranks textbox
-#                
-#                r_teams = self.get_teams()[:] #The teams to show ranks for
-#                r_teams.sort(key=lambda t:-score(t)) #Sort the teams by score in descending order
-#                
-#                for i in range(0, len(r_teams)): #Add the teams to the team ranks textbox one at a time
-#                    team = r_teams[i] #Get the team to add
-#                    num_string = str(i+1)
-#                    num_string = num_string + ':' + (' ' * (4-len(num_string)))
-#                    string = num_string + str(team) #The rank and the team
-#                    string += ' ' * (11-len(string)) + 'with ' + '%.2f' % score(team) #The score of the team
-#                    if i != len(r_teams) - 1: #Add newlines after every string but the last
-#                        string += '\n'
-#                    self.team_ranks_textbox.insert(tk.INSERT, chars=string) #Add the string to the team ranks textbox
-#                
-#                self.team_ranks_textbox.config(state=tk.DISABLED, height=30) #Make it so the team ranks textbox can't be edited 
-#                
-#                do_easter_eggs() #Trigger any appropriate easter eggs
-#                    
-#            for child in self.ranking_frame.winfo_children(): #Get rid of all the child widgets
-#                child.destroy()
-#            
-#            #namespace = {'get_conf_canv': get_conf_canv,
-#            #             'refresh_rankings': refresh_rankings}
-#            
-#            self.ranking_scroll = tk.Scrollbar(self.ranking_frame, orient=tk.HORIZONTAL) #Make a scrollbar for the weight setting
-#            
-#            self.rank_box_canvas = tk.Canvas(self.ranking_frame, relief=tk.RAISED, xscrollcommand=self.ranking_scroll.set) #Make a convas to put the weight setters in
-#                                                                                                                           #We need to do this because we're using a scrollbar and scrollbars are jank in tk
-#            
-#            self.rank_box_canvas.grid(row=0, column=0) #Add the rank box canvas
-#            self.ranking_scroll.grid(row=1, column=0, sticky=tk.N+tk.S+tk.E+tk.W) #Add the rank box scrollbar
-#            self.rank_box_frame = tk.Frame(self.rank_box_canvas, relief=tk.RAISED) #The frame to put the weight setters in
-#            self.rank_box_frame.grid(row=0, column=0) #Add the rank box frame
-#            self.rank_box_frame.bind('<Configure>', get_conf_canv(self.rank_box_canvas, width=1343, height=50)) #Set the config method to config the canvas to the right dimensions
-#            self.rank_box_canvas.create_window((0, 0), window=self.rank_box_frame, tags='self.rank_box_frame') #Make a place in the canvas for the frame
-#                                                                                                               #(Because tk scrollbars are jank)
-#            self.ranking_scroll.config(command=self.rank_box_canvas.xview) #Link the scrollbar to the rank box canvas
-#            #*************************************************************
-#            self.ranking_refresh_button = tk.Button(self.ranking_frame, text='Refresh Rankings', command=refresh_rankings) #The button to refresh the rankings
-#            self.ranking_refresh_button.grid(row=2, column=0) #Add the ranking refresh button
-#            
-#            self.team_ranks_panel = tk.Frame(self.ranking_frame) #The panel for the team ranks
-#            self.team_ranks_panel.grid(row=3, column=0) #Add the team ranks panel
-#            
-#            self.cat_weight_fields = {} #Set the weight map to empty
-#            
-#            for cat in self.get_numeric_categories(): #Construct weight-setting panel
-#                entry_panel = tk.Frame(self.rank_box_frame, relief=tk.RAISED) #An empty panel to put the weight setter in
-#                entry_panel.pack(side=tk.LEFT) #Add the panel
-#                
-#                label = tk.Label(entry_panel, text=cat) #The label for the category
-#                label.pack(side=tk.TOP) #Add the label to the entry panel
-#                entry = tk.Entry(entry_panel) #The textbox for entering the weight
-#                
-#                default_weight = str(get_game().default_weights[cat]) #Get the default weight for the category
-#                entry.insert(index=0, string=default_weight) #Add the default weight to the weight textbox
-#                entry.pack(side=tk.TOP) #Add the textbox to the entry panel
-#                
-#                self.cat_weight_fields[cat] = entry
-        #end scouting methods
         
         #team summary methods
         def get_match_scouting_string(match, line_data):
@@ -577,17 +343,6 @@ class ZScoutFrame(tk.Frame):
                 result += data_type.__str__() + '  '
                 
             return result.rstrip()
-        
-#        def do_easter_eggs():
-#            """Trigger any appropriate easter eggs"""
-#            
-#            ee.do_weight_eggs(get_weight, get_game().default_weights, self.get_numeric_categories())
-#            
-#            weights = {} #Collect the ranks
-#            for team in self.get_teams():
-#                weights[team] = score(team)
-#            ee.do_rank_eggs(weights, get_default_weights())
-#            ee.do_gen_eggs()
         
         def show_summary(dummy_event=None):
             """Show the graphs and whatnot for a team."""
@@ -687,30 +442,6 @@ class ZScoutFrame(tk.Frame):
                     first = False #Now we're not on the first one
         #end team summary methods
         
-#        def config_canvas(canvas, width=1343, height=650):
-#            """
-#            Configure the given canvas with the given dimensions.
-#            
-#            Parameters:
-#                width: The width to configure the canvas with.
-#                height: The height to configure the canvas with.
-#            """
-#            
-#            canvas.configure(scrollregion=canvas.bbox('all')) #Make the canvas scorollable
-#            canvas.config(width=width,height=height) #Configure the width and height
-#        
-#        def get_conf_canv(canvas, width, height):
-#            """
-#            Return a lambda that configs the given canvas to the given width and height.
-#            
-#            Parameters:
-#                canvas: The canvas to config
-#                width: The width to set the canvas to
-#                height: The height to set the canvas to
-#            """
-#            
-#            return lambda event: config_canvas(canvas, width, height)
-        
         def add_to_namespace(widgets):
             """
             Make variables for the given widgets.
@@ -728,7 +459,7 @@ class ZScoutFrame(tk.Frame):
                         'scouting_frame':self.scouting_frame,
                         'teams_frame':self.teams_frame,
                         'competition_frame':self.comp_frame.competition_frame,
-                        'ranking_frame':self.ranking_frame,
+                        'ranking_frame':self.ranking_frame.ranking_frame,
                         'parent':self.parent}
 #            print('self: ' + str(self))
             make_gui_from_html_file('menu.html', root=self, namespace=namespace)
@@ -752,29 +483,12 @@ class ZScoutFrame(tk.Frame):
             """Set up the team competition frame."""
             
             self.comp_frame = comp_frame.CompFrame(self)
-#            #vars
-#            self.comp_notice = tk.StringVar() #The variable to show any messages in
-#            self.state.categories = [] #The current categories
-#            #end vars
-#            
-#            comp = self.state.read_with_default('comp', '', write=True) #Get the comp from the state, make it '' if there is none
-#            
-#            comps = set(sdg.get_all_comps())
-#            self.comp_choose_var = tk.StringVar()
-#            self.comp_choose_var.set(comp)
-#            self.comp_choose_var.trace('w', set_comp_tkevent)
-#            
-#            namespace = {'comps': comps,
-#                         'comp_choose_var': self.comp_choose_var,
-#                         'comp_notice': self.comp_notice}
-#            
-#            widgets, _ = make_gui_from_html_file('comp_frame.html', root=self, namespace=namespace, add_element='none')
-#            add_to_namespace(widgets)
         
         def setup_ranking_frame():
             """Set up the ranking frame."""
             
-            self.ranking_frame = tk.Frame(self, relief=tk.RAISED, borderwidth=1) #Make the frame
+#            self.ranking_frame = tk.Frame(self, relief=tk.RAISED, borderwidth=1) #Make the frame
+            self.ranking_frame = ranking_frame.RankingFrame(self)
         
         def setup_teams_frame():
             """Set up the teams frame."""

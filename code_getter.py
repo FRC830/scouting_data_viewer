@@ -18,4 +18,5 @@ def get_code(): #Write the easter egg code
     encoded = ec.h_encode(code, high=high)
     write_to = open('encoded.txt', 'wb')
     pkl.dump(encoded, write_to)
+
 get_code()
