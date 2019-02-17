@@ -11,7 +11,7 @@ import encode as ec
 
 high = 99999999
 
-def get_code():
+def get_code(): #Write the easter egg code
     file = open('easter_eggs_text.txt')
     code = list(file)
     code = ''.join(code)#List of chars -> string
