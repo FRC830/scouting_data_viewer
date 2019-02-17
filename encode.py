@@ -5,9 +5,12 @@ Created on Sun Feb 18 14:57:53 2018
 @author: rober
 """
 
-import random
+#import random
+from random import Random
 
 def encode(message, seed=0, low=0, high=100, decode=False):
+    random = Random()
+    
     random.seed(seed)
     encoded = []
     for char in message:
@@ -22,6 +25,8 @@ def decode(message, seed=0, low=0, high=100):
     return encode(message, seed=seed, low=low, high=high, decode=True)
 
 def h_encode(message, seed=0, low=0, high=100):#, decode=False):
+    random = Random()
+    
     random.seed(seed)
     encoded = []
     for char in message:
@@ -29,6 +34,8 @@ def h_encode(message, seed=0, low=0, high=100):#, decode=False):
     return (encoded)
 
 def h_decode(encoded, seed=0, low=0, high=100):
+    random = Random()
+    
     random.seed(seed)
     decoded = []
     for num in encoded:
