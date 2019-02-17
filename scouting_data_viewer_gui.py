@@ -21,10 +21,6 @@ import ranking_frame
 
 import easter_eggs as ee
 
-#from html_to_tk import make_gui_from_html_file
-
-GRAPH_WIDTH = 600
-
 class ZScoutFrame(tk.Frame):
     """The frame the ZScout Gui is in."""
            
