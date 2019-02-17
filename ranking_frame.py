@@ -10,8 +10,10 @@ import tkinter as tk
 class RankingFrame:
     def __init__(self, parent):
         self.parent = parent
-        
-        self.ranking_frame = tk.Frame(parent, relief=tk.RAISED, borderwidth = 1)
+        self.setup_gui()
+    
+    def setup_gui(self):
+        self.ranking_frame = tk.Frame(self.parent, relief=tk.RAISED, borderwidth = 1)
         
         self.ranking_scroll = tk.Scrollbar(self.ranking_frame, orient=tk.HORIZONTAL)
         self.ranking_scroll.grid(row=1, column=0)
@@ -22,7 +24,7 @@ class RankingFrame:
         self.rank_box_frame = tk.Frame(self.ranking_frame, relief=tk.RAISED)
         self.rank_box_frame.grid(row=0, column=0)
         
-        self.rank_box_frame.bind('<Configure>', parent.get_conf_canv(self.rank_box_canvas, width=1343, height=50))
+        self.rank_box_frame.bind('<Configure>', self.parent.get_conf_canv(self.rank_box_canvas, width=1343, height=50))
         self.rank_box_canvas.create_window((0, 0), window=self.rank_box_frame, tags='rank_box_frame')
         self.ranking_scroll.config(command=self.rank_box_canvas.xview)
         
@@ -31,9 +33,6 @@ class RankingFrame:
         
         self.team_ranks_panel = tk.Frame(self.ranking_frame)
         self.team_ranks_panel.grid(row=3, column=0)
-    
-#    def score(self, team):
-#        return self.parent.score(team)
     
     def get_game(self):
         return self.parent.get_game()

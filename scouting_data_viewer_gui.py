@@ -8,12 +8,13 @@ Created on Sun Jan 21 13:36:04 2018
 """The module that contains the main application."""
 
 import tkinter as tk
-import math
+#import math
 import os
 
 import save_data as sd
 
 import team_summary_frame
+import teams_frame
 import comp_frame
 import ranking_frame
 
@@ -89,35 +90,7 @@ class ZScoutFrame(tk.Frame):
     
     def config_teams_frame(self):
         """Set up the frame that shows a list of teams in the current competition."""
-        ### Setup Variables
-#            self.state.teams.sort(key=lambda t: int(t))
-        teams_in_row = 10
-        left_padding_size = 10
-        teams_displayed = 10
-
-        # Reset Panel
-        self.teams_text.config(state=tk.NORMAL)
-        self.teams_text.delete('1.0', tk.END)
-        self.teams_text.insert(tk.INSERT, '\n')
-
-        # Center-align 'Teams:'
-        teams_list_title = 'Teams:\n'
-        half_title_len = (len(teams_list_title) - 1) // 2
-        title_padding = (left_padding_size + 3 * teams_in_row - half_title_len) * ' '
-        self.teams_text.insert(tk.INSERT, title_padding + teams_list_title)
-
-        num_teams = len(self.get_teams())
-        rows = math.ceil(num_teams / teams_in_row)
-
-        # Display teams
-        for i in range(rows):
-            if (i + 1) * teams_in_row > num_teams: # change the number of teams to the leftover
-                teams_displayed = num_teams % teams_in_row
-            format_code = left_padding_size * " " + "{: <6}" * teams_displayed+ "\n"
-#                print("starting team:", i * teams_in_row, i * teams_in_row + teams_displayed)
-            team_list = self.get_teams()[i * teams_in_row:i * teams_in_row + teams_displayed]
-            self.teams_text.insert(tk.INSERT, format_code.format(*team_list))
-        self.teams_text.config(state=tk.DISABLED)
+        self.teams_frame.config()
     
     def do_easter_eggs(self):
         """Trigger any appropriate easter eggs"""
@@ -201,8 +174,8 @@ class ZScoutFrame(tk.Frame):
         def setup_menu():
             """Set up the menu frame menu."""
             namespace = {'get_go_to_frame':get_go_to_frame,
-                        'scouting_frame':self.team_summary_frame.scouting_frame,#self.scouting_frame,
-                        'teams_frame':self.teams_frame,
+                        'scouting_frame':self.team_summary_frame.scouting_frame,
+                        'teams_frame':self.teams_frame.teams_frame,
                         'competition_frame':self.comp_frame.competition_frame,
                         'ranking_frame':self.ranking_frame.ranking_frame,
                         'parent':self.parent}
@@ -226,16 +199,10 @@ class ZScoutFrame(tk.Frame):
         
         def setup_teams_frame():
             """Set up the teams frame."""
-            
-            self.teams_frame = tk.Frame(self, relief=tk.RAISED, borderwidth=1) #The teams frame
-            self.teams_text = tk.Text(self.teams_frame, wrap=tk.NONE, width=1200) #The text to show the teams in
-            self.teams_text.pack(side=tk.TOP, padx=0, pady=5) #Add the teams text
+            self.teams_frame = teams_frame.TeamsFrame(self)
         
         self.parent.title('Scouting Viewer') #Set the title of the gui
         self.pack(fill=tk.BOTH, expand=True) #Add the frame
-        
-        #The only place where self.year is accessed is right after it's set
-        #So setting it anywhere else is pointless
         
         #Set up all the frames
         setup_team_summary_frame()
@@ -244,7 +211,6 @@ class ZScoutFrame(tk.Frame):
         setup_teams_frame()
         setup_menu()
         
-#        set_comp(startup=True)
         self.comp_frame.set_comp(startup=True)
 
 def main():
