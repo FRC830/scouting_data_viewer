@@ -42,7 +42,7 @@ def get_game(folder, year=None):
     dirname = os.path.dirname(os.path.realpath(__file__))
     directory = os.path.join(dirname, 'scouting', folder, 'gamedef')
     try:
-        for file_name in os.listdir(directory): #There should only be one .py file, but I don't know its name
+        for file_name in os.listdir(directory): #There should only be one .py file, but we don't know its name
 #            The game should be defined in this file
             if not '__pycache__' in file_name:
                 file = open(directory + '\\' + file_name, 'r') #Open the file
@@ -56,7 +56,7 @@ def get_game(folder, year=None):
         print('getting game from year')
         if year == None:
             #The first four letters of the folder will *probably* be the year
-            year = folder[:4] #TODO make into robust regex for year 10,000 AD
+            year = ''.join([c for c in folder if c in '0123456789'])
         return games.GAMES_FROM_YEARS[year]
 
 #These lines are here because at one competition we shared scouting data with team 3322 and they had a different format

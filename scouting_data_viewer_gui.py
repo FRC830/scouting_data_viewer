@@ -8,10 +8,6 @@ Created on Sun Jan 21 13:36:04 2018
 """The module that contains the main application."""
 
 import tkinter as tk
-#import math
-import os
-
-import save_data as sd
 
 import menu
 import team_summary_frame
@@ -34,28 +30,22 @@ class ZScoutFrame(tk.Frame):
         
         tk.Frame.__init__(self, parent, background='white')
         self.parent = parent
-        self.dir_path = os.path.dirname(os.path.realpath(__file__))
             
         self.init_gui()
     
     def get_categories(self):
-#        return self.state.categories
         return self.competition_frame.get_scouting_data().categories
     
     def get_numeric_categories(self):
-#        return self.state.numeric_cats
         return self.competition_frame.get_scouting_data().numeric_cats
     
     def get_contr(self, team, category):
-#        return self.state.contrs[team][category]
         return self.competition_frame.get_scouting_data().contrs[team][category]
     
     def get_averages(self):
-#        return self.state.averages
         return self.competition_frame.get_scouting_data().averages
     
     def get_teams(self):
-#        return self.state.teams
         return self.competition_frame.get_scouting_data().teams
     
     def get_comp(self):
