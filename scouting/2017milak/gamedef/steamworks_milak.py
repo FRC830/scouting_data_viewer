@@ -5,7 +5,8 @@ Created on Tue Feb 20 20:13:31 2018
 @author: rober
 """
 
-import games as gms
+import games
+import steamworks
 
 steamworks_cats = ['crossed_baseline',
                    'auton_lowgoal',
@@ -35,7 +36,7 @@ steamworks_weights = {'auton_lowgoal':1,
                        'teleop_gears':20,
                        'hanging':50}
 
-STEAMWORKS = gms.Game(steamworks_cats, steamworks_cats[:-1], None, gms.steamworks_process_scouting, steamworks_weights)
+STEAMWORKS = games.Game(steamworks_cats, steamworks_cats[:-1], None, steamworks.steamworks_process_scouting, steamworks_weights)
 
 def get_game():
     return STEAMWORKS
