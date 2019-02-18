@@ -45,7 +45,7 @@ def get_game(folder, year=None):
         for file_name in os.listdir(directory): #There should only be one .py file, but we don't know its name
 #            The game should be defined in this file
             if not '__pycache__' in file_name:
-                file = open(directory + '\\' + file_name, 'r') #Open the file
+                file = open(os.path.join(directory, file_name), 'r') #Open the file
                 module = imp.load_module(file_name,
                                          file,
                                          directory,

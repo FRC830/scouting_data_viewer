@@ -216,6 +216,12 @@ def combine_scouting_from_sources(scouting, source_order):
 
 GAMES_FROM_YEARS = {}
 
+import os
+import sys
+dirname = os.path.dirname(os.path.realpath(__file__))
+directory = os.path.join(dirname, 'games')
+sys.path.append(directory)
+
 import steamworks
 import powerup
 import deepspace

@@ -9,6 +9,12 @@ Created on Sun Jan 21 13:36:04 2018
 
 import tkinter as tk
 
+import os
+import sys
+dirname = os.path.dirname(os.path.realpath(__file__))
+directory = os.path.join(dirname, 'gui_frames')
+sys.path.append(directory)
+
 import menu
 import team_summary_frame
 import teams_frame
@@ -113,41 +119,22 @@ class ZScoutFrame(tk.Frame):
     def init_gui(self):
         """Initialize the user interface."""
         
-        def setup_menu():
-            """Set up the menu frame menu."""
-            self.menubar = menu.Menubar(self)
+        self.team_summary_frame = team_summary_frame.TeamSummaryFrame(self)
+        self.active_frame = self.team_summary_frame.scouting_frame #This frame is the frame to start from
+        self.team_summary_frame.scouting_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
         
-        def setup_team_summary_frame():
-            """Set up the team summary frame."""
-            
-            self.team_summary_frame = team_summary_frame.TeamSummaryFrame(self)
-            
-            self.active_frame = self.team_summary_frame.scouting_frame #This frame is the frame to start from
-            self.team_summary_frame.scouting_frame.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+        self.competition_frame = comp_frame.CompFrame(self)
         
-        def setup_comp_frame():
-            """Set up the team competition frame."""
-            self.competition_frame = comp_frame.CompFrame(self)
+        self.ranking_frame = ranking_frame.RankingFrame(self)
         
-        def setup_ranking_frame():
-            """Set up the ranking frame."""
-            self.ranking_frame = ranking_frame.RankingFrame(self)
-        
-        def setup_teams_frame():
-            """Set up the teams frame."""
-            self.teams_frame = teams_frame.TeamsFrame(self)
+        self.teams_frame = teams_frame.TeamsFrame(self)
         
         self.parent.title('Scouting Viewer') #Set the title of the gui
         self.pack(fill=tk.BOTH, expand=True) #Add the frame
         
-        #Set up all the frames
-        setup_team_summary_frame()
-        setup_comp_frame()
-        setup_ranking_frame()
-        setup_teams_frame()
-        setup_menu()
-        
         self.competition_frame.set_comp(startup=True)
+        
+        self.menubar = menu.Menubar(self)
 
 def main():
     """Run the scouting data viewer."""
