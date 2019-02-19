@@ -23,7 +23,7 @@ import ranking_frame
 
 import easter_eggs as ee
 
-class ZScoutFrame(tk.Frame):
+class ScoutingDataViewerFrame(tk.Frame):
     """The frame the ZScout Gui is in."""
            
     def __init__(self, parent):
@@ -144,7 +144,7 @@ def main():
     root = tk.Tk() #Make the root
     
     root.state('zoomed')
-    tk.app = ZScoutFrame(root) #Make the main frame
+    tk.app = ScoutingDataViewerFrame(root) #Make the main frame
     root.mainloop() #Start
 
 if __name__ == '__main__':
