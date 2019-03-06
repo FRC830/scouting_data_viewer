@@ -40,6 +40,10 @@ class ScoutingDataViewerFrame(tk.Frame):
         self.init_gui()
     
     def get_categories(self):
+#        result = self.competition_frame.get_scouting_data().categories
+#        print('categories:')
+#        print(result)
+#        print('')
         return self.competition_frame.get_scouting_data().categories
     
     def get_numeric_categories(self):

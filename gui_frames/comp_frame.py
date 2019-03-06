@@ -20,15 +20,9 @@ class CompFrame:
     def __init__(self, parent):
         
         self.parent = parent
-        
-#        dirname = os.path.dirname(os.path.realpath(__file__))
         self.state = SaveData('comp_frame_state')
         
         self.comp_notice = tk.StringVar() #The variable to show any messages in
-        
-#        self.parent.state.categories = [] #The current categories
-        #end vars
-        
         comp = self.state.read_with_default('comp', '', write=True) #Get the comp from the state, make it '' if there is none
         
         self.comps = set(sdg.get_all_comps())
@@ -53,7 +47,6 @@ class CompFrame:
         Set the competition and update the comp_notice label.
         Called when a competition is chosen.
         """
-        #            print('Setting event')
         self.comp_notice.set('Comp set to ' + self.comp_choose_var.get())
         self.set_comp()
         
@@ -64,8 +57,6 @@ class CompFrame:
         Parameters:
             startup: Whether the gui is just starting up.
         """
-#            self.comp = self.comp_choose.get()
-        
         if not startup:
             #If starting up, we should use the competition last opened in a previous run
             

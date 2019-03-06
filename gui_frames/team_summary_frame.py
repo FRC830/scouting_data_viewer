@@ -96,9 +96,10 @@ class TeamSummaryFrame:
                 
             for line_data_type in line_data_types: #Add the info for each data type
                 data = line_data.get(line_data_type, '') #Retrieve the info, use an empty string if none
+                data_str = str(data).replace('\n', ' ')
                 length = len(line_data_type) #The length of the category string
-                inner_length = length - len(data.__str__()) #The whitespace around the data
-                result += ' '*math.floor(inner_length /2) + data.__str__() + ' '*math.ceil(inner_length / 2) + ' '*2 #Center-align the info
+                inner_length = length - len(data_str) #The whitespace around the data
+                result += ' '*math.floor(inner_length /2) + data_str + ' '*math.ceil(inner_length / 2) + ' '*2 #Center-align the info
             
             return result.rstrip()
     

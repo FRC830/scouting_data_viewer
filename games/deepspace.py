@@ -101,7 +101,9 @@ deepspace_name_dict = {'auton_ci_ball_cargo':'sandstorm_balls_in_cargo_ship',
                        'fouls':'fouls',
                        'tech_fouls':'tech_fouls',
                        
-                       'helping_robot_climb':'endgame_helped_climb'}
+                       'helping_robot_climb':'endgame_helped_climb',
+                       
+                       'comments':'comments'}
 
 deepspace_rankings = {'cross_line_from_l1':3,
                       'cross_line_from_l2_or_l3':6,
