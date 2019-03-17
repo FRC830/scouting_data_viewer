@@ -12,9 +12,10 @@ import scouting_data_getters as sdg
 from save_data import SaveData
 #import games
 from scouting_data import ScoutingData
+from scouting_data import get_scouting_datas
 
 def year_from_comp(comp):
-    return [c for c in comp if c in '0123456789']
+    return ''.join(filter(lambda c: not c in '0123456789', comp))
 
 class CompFrame:
     def __init__(self, parent):
@@ -67,7 +68,8 @@ class CompFrame:
         if not self.state.comp:
             return
         
-        self.state.scouting_data = ScoutingData(self.state.comp)
+#        self.state.scouting_data = ScoutingData(self.state.comp)
+        self.state.scouting_datas = get_scouting_datas(self.state.comp)
         
         #Get teams
         self.parent.config_teams_frame()
@@ -76,4 +78,7 @@ class CompFrame:
         self.state.save()
     
     def get_scouting_data(self):
-        return self.state.scouting_data
+        return [data for data in self.state.scouting_datas if data.game.game_id=='matches'][0]
+    
+    def get_scouting_datas(self):
+        return self.state.scouting_datas

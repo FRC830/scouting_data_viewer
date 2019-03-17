@@ -39,39 +39,48 @@ class ScoutingDataViewerFrame(tk.Frame):
             
         self.init_gui()
     
-    def get_categories(self):
-#        result = self.competition_frame.get_scouting_data().categories
-#        print('categories:')
-#        print(result)
-#        print('')
-        return self.competition_frame.get_scouting_data().categories
+    def get_scouting_data(self):
+        return self.competition_frame.get_scouting_data()
     
-    def get_numeric_categories(self):
-        return self.competition_frame.get_scouting_data().numeric_cats
+    def get_scouting_datas(self):
+        return self.competition_frame.get_scouting_datas()
     
-    def get_contr(self, team, category):
-        return self.competition_frame.get_scouting_data().contrs[team][category]
+#    def get_categories(self):
+#        return self.competition_frame.get_scouting_data().categories
+#    
+#    def get_numeric_categories(self):
+#        return self.competition_frame.get_scouting_data().numeric_cats
+#    
+#    def get_contr(self, team, category):
+#        return self.competition_frame.get_scouting_data().contrs[team][category]
+#    
+#    def get_averages(self):
+#        return self.competition_frame.get_scouting_data().averages
+#    
+#    def get_teams(self):
+#        return self.competition_frame.get_scouting_data().teams
+#    
+#    def get_comp(self):
+#        return self.competition_frame.get_scouting_data().comp
+#    
+#    def get_raw_scouting(self):
+#        return self.competition_frame.get_scouting_data().raw_scouting
+#    
+#    def get_game(self):
+#        """Return the current game."""
+#        return self.competition_frame.get_scouting_data().game
     
-    def get_averages(self):
-        return self.competition_frame.get_scouting_data().averages
-    
-    def get_teams(self):
-        return self.competition_frame.get_scouting_data().teams
-    
-    def get_comp(self):
-        return self.competition_frame.get_scouting_data().comp
-    
-    def get_raw_scouting(self):
-        return self.competition_frame.get_scouting_data().raw_scouting
-    
-    def get_weight(self, cat):
-        return self.ranking_frame.get_weight(cat)
-    
-    def score(self, team):
-        return self.ranking_frame.score(team)
-    
-    def get_default_points(self):
-        return self.ranking_frame.get_default_points()
+#    def get_weight(self, cat):
+#        return self.ranking_frame.get_weight(cat)
+#    
+#    def score(self, team):
+#        return self.ranking_frame.score(team)
+#    
+#    def get_default_points(self):
+#        return self.ranking_frame.get_default_points()
+        
+#    def get_game_datas(self):
+#        return self.self #TODO real implementation
     
     def config_ranking_frame(self):
         """Set up the frame that displays scores and ranks for the teams"""
@@ -91,10 +100,6 @@ class ScoutingDataViewerFrame(tk.Frame):
             weights[team] = self.score(team)
         ee.do_rank_eggs(weights, self.get_default_points())
         ee.do_gen_eggs()
-    
-    def get_game(self):
-        """Return the current game."""
-        return self.competition_frame.get_scouting_data().game
     
     def config_canvas(self, canvas, width=1343, height=650):
         """

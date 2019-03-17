@@ -18,7 +18,6 @@ class TeamSummaryFrame:
     def __init__(self, parent):
         self.parent = parent
         
-#        dirname = os.path.dirname(os.path.realpath(__file__))
         self.state = SaveData('team_summary_frame_state')
         self.state.non_override_write('summaries', {})
         
@@ -57,26 +56,29 @@ class TeamSummaryFrame:
     def get_conf_canv(self, canvas, width, height):
         return self.parent.get_conf_canv(canvas, width, height)
     
+    def get_scouting_data(self):
+        return self.parent.get_scouting_data()
+    
     def get_comp(self):
-        return self.parent.get_comp()
+        return self.parent.get_scouting_data().comp
     
     def do_easter_eggs(self):
         return self.parent.do_easter_eggs()
     
     def get_categories(self):
-        return self.parent.get_categories()
+        return self.parent.get_scouting_data().game.categories
     
     def get_contr(self, team, category):
-        return self.parent.get_contr(team, category)
+        return self.parent.get_scouting_data().contrs[team][category]
     
     def get_raw_scouting(self):
-        return self.parent.get_raw_scouting()
+        return self.parent.get_scouting_data().raw_scouting
     
     def get_averages(self):
-        return self.parent.get_averages()
+        return self.parent.get_scouting_data().averages
     
     def get_numeric_categories(self):
-        return self.parent.get_numeric_categories()
+        return self.parent.get_scouting_data().game.numeric_categories
     
     def get_match_scouting_string(self, match, line_data):
             """
@@ -115,7 +117,7 @@ class TeamSummaryFrame:
         """Show the graphs and whatnot for a team."""
         team = self.team_summary_team_field.get().strip() #Get the team from the team textbox    
         self.team_summary_inner_frame.pack_forget() #Get rid of the old frame
-        key = self.get_comp(), team #The key for caching data
+        key = tuple(self.get_categories()), team #The key for caching data
         
         def save_summary(summary):
             """
@@ -132,7 +134,7 @@ class TeamSummaryFrame:
         
         prev_summary = self.state.summaries.get(key, '') #The summary when the gui was last closed
         
-        raw_scouting = self.get_raw_scouting()#self.state.read_with_default('raw_scouting', val={})
+        raw_scouting = self.get_scouting_data().raw_scouting#self.state.read_with_default('raw_scouting', val={})
         raw_team_scouting = raw_scouting.get(team, []) #Scouting for this team
         
         if raw_team_scouting:
@@ -149,14 +151,6 @@ class TeamSummaryFrame:
             
             scouting_text_pane = tk.Text(self.team_summary_canvas, wrap=tk.NONE) #The text pane with the scouting data in it
             scouting_text_pane.grid(row=0, column=0) #Add the scouting text pane
-            
-#            namespace = {'save_summary': save_summary,
-#                         'prev_summary': prev_summary,
-#                         'get_conf_canv': get_conf_canv,
-#                         'scouting_text_pane': scouting_text_pane}
-#            
-#            widgets, _ = make_gui_from_html_file('team_summary_inner_frame.html', root=self.team_summary_canvas_frame, namespace=namespace)
-#            scouting_text_pane = widgets['scouting_text_pane']
             
             #********************************************************
             self.team_summary_inner_frame = tk.Frame(self.team_summary_canvas_frame, relief=tk.RAISED, borderwidth=1) #The frame for the team summary

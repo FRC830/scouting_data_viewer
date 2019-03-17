@@ -13,17 +13,20 @@ class Game:
                  numeric_categories,
                  get_scouting_from_match,
                  process_scouting=lambda s:s,
-                 default_weights={}):
+                 default_weights=None,
+                 game_id='matches'):
         
         self.categories = categories
         self.numeric_categories = numeric_categories
         self.get_scouting_from_match = get_scouting_from_match
         self.process_scouting = process_scouting
         
-        self.default_weights = default_weights.copy()
+        self.default_weights = default_weights.copy() if default_weights else {}
         for category in self.numeric_categories:
             if not category in self.default_weights:
                 self.default_weights[category] = 0
+        
+        self.game_id = game_id
 
 def put_in_histogram(scouted_amounts):
     """

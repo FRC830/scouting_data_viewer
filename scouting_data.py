@@ -11,14 +11,21 @@ import games
 def year_from_comp(comp):
     return [c for c in comp if c in '0123456789']
 
+def get_scouting_datas(comp):
+    found_games = sdg.get_games(folder=comp)
+    return [ScoutingData(comp, game.game_id) for game in found_games]
+
 class ScoutingData:
-    def __init__(self, comp):
+    def __init__(self, comp, game_id='matches'):
         year = year_from_comp(comp)
         if not year:
             raise ValueError('comp has no year: ' + comp)
         
         self.comp = comp
-        self.game = sdg.get_game(folder=self.comp) #The folders are named after comp codes
+        found_games = sdg.get_games(folder=self.comp)
+        
+        self.game = [game for game in found_games if game.game_id == game_id][0]
+#        self.game = sdg.get_game(folder=self.comp) #The folders are named after comp codes
         
         #Get the raw data, just as the scouters entered it
         self.raw_scouting = sdg.get_raw_scouting_data(folder=self.comp)

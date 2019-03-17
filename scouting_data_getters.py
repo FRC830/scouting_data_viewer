@@ -36,7 +36,7 @@ def get_game(folder, year=None):
     Return the game in the given folder.
     
     Parameters:
-        folder: The folder to game the game from.
+        folder: The folder to get the game from.
         year: The year to get a game for.
     """
     dirname = os.path.dirname(os.path.realpath(__file__))
@@ -59,6 +59,36 @@ def get_game(folder, year=None):
             year = ''.join([c for c in folder if c in '0123456789'])
         return games.GAMES_FROM_YEARS[year]
 
+def get_games(folder, year=None):
+    """
+    Return a tuple of all the games for a given folder. Return the a list containing the game for the year if none are found.
+    
+    Parameters:
+        folder: The folder to get the game from.
+        year: The year to get the game for.
+    """
+    dirname = os.path.dirname(os.path.realpath(__file__))
+    directory = os.path.join(dirname, 'scouting', folder, 'gamedef')
+    try:
+        result = []
+        for file_name in os.listdir(directory): #There should only be one .py file, but we don't know its name
+#            The game should be defined in this file
+            if not '__pycache__' in file_name:
+                file = open(os.path.join(directory, file_name), 'r') #Open the file
+                module = imp.load_module(file_name,
+                                         file,
+                                         directory,
+                                         details=('', 'r', imp.PY_SOURCE)) #Load the python code in the file as a module
+                game = module.get_game() #The module is supposed to have this method
+                result.append(game)
+        return tuple(result)
+    except FileNotFoundError:
+        print('getting game from year')
+        if year == None:
+            #The first four letters of the folder will *probably* be the year
+            year = ''.join([c for c in folder if c in '0123456789'])
+        return tuple([games.GAMES_FROM_YEARS[year]])
+
 #These lines are here because at one competition we shared scouting data with team 3322 and they had a different format
 #I could make this more robust and easily changeable
 match_num_from_source = {'RAT':'match_id', '3322':'Match Number'}
@@ -66,20 +96,15 @@ team_num_from_source = {'RAT':'team_id', '3322':'Team Number'}
 
 def get_all_comps():
     """Return all the comps we have data for."""
-#    if platform == "darwin" or platform == "linux":
-#        directory = os.path.dirname(os.path.realpath(__file__)) + '/scouting'
-#    elif platform == "win32":
-#        directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting'
     directory = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'scouting')
     result = []
     for name in os.listdir(directory):
         if os.path.isdir(os.path.join(directory, name)):
             if not 'test' in name:
                 result.append(name)
-#    print("running v2...")
     return result
 
-def get_raw_scouting_data(folder):
+def get_raw_scouting_data(folder, game_id='matches'):
     """
     Return the raw scouting data in the folder in a dict from teams to lists of tuples of match numbers and dicts from names to amounts.
     
@@ -89,8 +114,11 @@ def get_raw_scouting_data(folder):
     
     result = {}
     dirname = os.path.dirname(os.path.realpath(__file__))
-#    directory = os.path.dirname(os.path.realpath(__file__)) + '\\scouting\\' + folder #The full name of the directory to search in.
-    directory = os.path.join(dirname, 'scouting', folder)
+    directory = os.path.join(dirname, 'scouting', folder, game_id)
+    
+    if not os.path.exists(directory):
+        directory = os.path.join(dirname, 'scouting', folder)
+        print('using main folder for match data instead of \matches')
     
     if not os.path.exists(directory):
         raise ValueError('No such folder: ' + folder)

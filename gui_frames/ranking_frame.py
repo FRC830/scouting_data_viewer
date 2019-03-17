@@ -35,16 +35,19 @@ class RankingFrame:
         self.team_ranks_panel.grid(row=3, column=0)
     
     def get_game(self):
-        return self.parent.get_game()
+        return self.parent.get_scouting_data().game
     
     def get_teams(self):
-        return self.parent.get_teams()
+        return self.parent.get_scouting_data().teams
     
     def get_numeric_categories(self):
-        return self.parent.get_numeric_categories()
+        return self.parent.get_scouting_data().game.numeric_categories
     
     def get_averages(self):
-        return self.parent.get_averages()
+        return self.parent.get_scouting_data().averages
+    
+    def get_scouting_data(self):
+        return self.parent_get_scouting_data()
     
     def get_conf_canv(self, canvas, width, height):
         return self.parent.get_conf_canv(canvas, width, height)

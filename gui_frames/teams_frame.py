@@ -21,7 +21,7 @@ class TeamsFrame:
         self.teams_text.pack(side=tk.TOP, padx=0, pady=5) #Add the teams text
     
     def get_teams(self):
-        return self.parent.get_teams()
+        return self.parent.get_scouting_data().teams
     
     def config(self):
         teams_in_row = 10
